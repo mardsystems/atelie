@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atelie.ApplicationCore\Atelie.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Atelie.ApplicationModel\Atelie.ApplicationModel.csproj" />
+    <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj" />
+    <ProjectReference Include="..\Atelie.EntityFrameworkCore\Atelie.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cadastro\Materiais\" />
+  </ItemGroup>
+
+</Project>

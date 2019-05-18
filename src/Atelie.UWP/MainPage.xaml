@@ -1,0 +1,86 @@
+﻿<Page
+    x:Class="Atelie.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Atelie"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="NavigationViewHeaderTemplate">
+            <local:PageHeader
+                Title="{Binding}"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                BackgroundColorOpacity="1" />
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <local:DeviceFamilyTrigger DeviceFamily="Windows.Xbox" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="XboxContentSafeRect.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+        </VisualStateManager.VisualStateGroups>
+
+        <Rectangle
+            x:Name="XboxContentSafeRect"
+            Width="48"
+            Fill="{ThemeResource NavigationViewDefaultPaneBackground}"
+            Visibility="Collapsed" Canvas.ZIndex="0" />
+
+        <Border Grid.Column="1" x:Name="AppTitleBar"
+                IsHitTestVisible="True"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Canvas.ZIndex="1">
+            <TextBlock x:Name="AppTitle"
+                       Text="XAML Controls Gallery"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
+        </Border>
+
+        <mux:NavigationView
+            Canvas.ZIndex="0"
+            x:Name="NavigationViewControl"
+            Grid.Column="1"
+            AlwaysShowHeader="True"
+            Header=" "
+            HeaderTemplate="{StaticResource NavigationViewHeaderTemplate}"
+            IsTabStop="False"
+            PaneOpening="NavigationViewControl_PaneOpened"
+            PaneClosing="NavigationViewControl_PaneClosing"
+            ItemInvoked="OnNavigationViewItemInvoked">
+            <mux:NavigationView.AutoSuggestBox>
+                <AutoSuggestBox
+                    x:Name="controlsSearchBox"
+                    Style="{StaticResource AutoSuggestBoxStyle}"
+                    VerticalAlignment="Center"
+                    x:FieldModifier="public"
+                    PlaceholderText="Search"
+                    QueryIcon="Find"
+                    QuerySubmitted="OnControlsSearchBoxQuerySubmitted"
+                    RequestedTheme="Light"
+                    TextChanged="OnControlsSearchBoxTextChanged">
+                </AutoSuggestBox>
+            </mux:NavigationView.AutoSuggestBox>
+
+            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" />
+        </mux:NavigationView>
+    </Grid>
+</Page>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Atelie</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Operacoes\" />
+    <Folder Include="Decisao\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="4.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj" />
+    <ProjectReference Include="..\Atelie.UseCaseModel\Atelie.UseCaseModel.csproj" />
+    <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

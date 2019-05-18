@@ -1,0 +1,63 @@
+﻿<Window x:Class="Atelie.Cadastro.Materiais.Fabricantes.FabricantesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Atelie.Cadastro.Materiais.Fabricantes"
+        xmlns:fabricantes="clr-namespace:Atelie.Cadastro.Materiais.Fabricantes;assembly=Atelie.UI"
+        mc:Ignorable="d"
+        Title="Fabricantes" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="fabricanteViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type fabricantes:FabricanteViewModel}, CreateList=True}"/>
+        <CollectionViewSource x:Key="fabricanteViewModelComponentesFabricadosViewSource" Source="{Binding ComponentesFabricados, Source={StaticResource fabricanteViewModelViewSource}}"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Sistema"/>
+        </Menu>
+        <ToolBar VerticalAlignment="Top" Grid.Row="1">
+            <Button Content="Novo Fabricante..."/>
+        </ToolBar>
+        <Grid Grid.Row="2" DataContext="{StaticResource fabricanteViewModelViewSource}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="fabricanteViewModelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="marcaColumn" Binding="{Binding Marca}" Header="Marca" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="nomeColumn" Binding="{Binding Nome}" Header="Nome" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="siteColumn" Binding="{Binding Site}" Header="Site" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="stateColumn" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <GroupBox Grid.Column="2" Header="Componentes Fabricados" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" VerticalAlignment="Top" Width="373">
+                <DataGrid x:Name="componentesFabricadosDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource fabricanteViewModelComponentesFabricadosViewSource}}" Margin="10,10,-2,-12" RowDetailsVisibilityMode="VisibleWhenSelected">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="componenteIdColumn" Binding="{Binding ComponenteId}" Header="Componente Id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="componenteNomeColumn" Binding="{Binding ComponenteNome}" Header="Componente Nome" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="componenteUnidadePadraoSiglaColumn" Binding="{Binding ComponenteUnidadePadraoSigla}" Header="Componente Unidade Padrao Sigla" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="fabricanteIdColumn" Binding="{Binding FabricanteId}" Header="Fabricante Id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="fabricanteMarcaColumn" Binding="{Binding FabricanteMarca}" Header="Fabricante Marca" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="fabricanteNomeColumn" Binding="{Binding FabricanteNome}" Header="Fabricante Nome" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="fabricanteSiteColumn" Binding="{Binding FabricanteSite}" Header="Fabricante Site" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+        <StatusBar Grid.Row="3" VerticalAlignment="Bottom">
+            <Label Content="Pronto."/>
+        </StatusBar>
+    </Grid>
+</Window>

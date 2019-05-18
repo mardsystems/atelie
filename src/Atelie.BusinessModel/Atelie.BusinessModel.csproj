@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Atelie</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Cadastro\Materiais\Cores\**" />
+    <Compile Remove="Cadastro\Modelos\Producao\Fases\**" />
+    <EmbeddedResource Remove="Cadastro\Materiais\Cores\**" />
+    <EmbeddedResource Remove="Cadastro\Modelos\Producao\Fases\**" />
+    <None Remove="Cadastro\Materiais\Cores\**" />
+    <None Remove="Cadastro\Modelos\Producao\Fases\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Cadastro\Materiais\Fabricantes\PeriodoDeUnidadeDeFabricacao.cs" />
+    <Compile Remove="Cadastro\Modelos\Producao\DisponibilidadeDeTipoDeRecurso.cs" />
+    <Compile Remove="Cadastro\Modelos\Producao\Ferramentas\DisponibilidadeDeFerramentaDeProducao.cs" />
+    <Compile Remove="Cadastro\Unidades\UnidadeDeFabricacao.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Atelie</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SimpleInjector.Packaging" Version="4.6.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Atelie.ApplicationModel\Atelie.ApplicationModel.csproj" />
+    <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj" />
+    <ProjectReference Include="..\Atelie.Net.Http\Atelie.Net.Http.csproj" />
+    <ProjectReference Include="..\Atelie.UseCaseModel\Atelie.UseCaseModel.csproj" />
+    <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>
