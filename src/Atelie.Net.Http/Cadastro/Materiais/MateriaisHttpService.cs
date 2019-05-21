@@ -79,7 +79,9 @@ namespace Atelie.Cadastro.Materiais
             }
             else
             {
-                observable = Observable.Empty<IMaterial[]>();
+                var empty = new IMaterial[] { };
+
+                observable = Observable.Return(empty);
             }
 
             return observable;

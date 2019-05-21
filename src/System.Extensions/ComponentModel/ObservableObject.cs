@@ -57,6 +57,8 @@ namespace System.ComponentModel
             {
                 State = ObjectState.Modified;
             }
+
+            changed.Invoke(this, new PropertyChangedEventArgs("State"));
         }
 
         public ObjectState State { get; internal protected set; }

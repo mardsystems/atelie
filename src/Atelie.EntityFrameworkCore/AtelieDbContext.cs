@@ -2,11 +2,14 @@
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Cadastro.Materiais.Fornecedores;
+using Atelie.Cadastro.Modelos;
+using Atelie.Cadastro.Modelos.Investimentos;
+using Atelie.Cadastro.Modelos.Producao;
+using Atelie.Cadastro.Modelos.Producao.Ferramentas;
 using Atelie.Cadastro.Unidades;
 using Atelie.Comum;
+using Atelie.Decisoes.Comerciais;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 namespace Atelie
 {
@@ -33,6 +36,12 @@ namespace Atelie
         public DbSet<FabricacaoDeComponente> FabricacoesDeComponentes { get; set; }
 
         public DbSet<DisponibilidadeDeMeioDePagamento> DisponibilidadesDeMeiosDePagamento { get; set; }
+
+        public DbSet<Modelo> Modelos { get; set; }
+
+        public DbSet<Investimento> Investimentos { get; set; }
+
+        public DbSet<PlanoComercial> PlanosComerciais { get; set; }
 
         public AtelieDbContext(DbContextOptions options)
             : base(options)
@@ -160,12 +169,46 @@ namespace Atelie
             modelBuilder.Entity<Material>()
                 .Property(p => p.CustoPadrao)
                 .HasColumnType("DECIMAL (18, 2)");
+
+            //
+
+            modelBuilder.Entity<AplicacaoDeInvestimento>()
+                .HasKey(p => new { p.ModeloCodigo, p.InvestimentoId });
+
+            modelBuilder.Entity<Modelo>()
+                .HasKey(p => p.Codigo);
+
+            modelBuilder.Entity<TamanhoDeModelo>()
+                .HasKey(p => p.Sigla);
+
+            modelBuilder.Entity<NecessidadeDeFerramentaDeProducao>()
+                .HasKey(p => new { p.EtapaDeProducaoId, p.FerramentaId });
+
+            modelBuilder.Entity<NecessidadeDeMaterial>()
+                .HasKey(p => new { p.ModeloCodigo, p.MaterialId });
+
+            modelBuilder.Entity<NecessidadeDeTipoDeRecurso>()
+                .HasKey(p => new { p.EtapaId, p.TipoDeRecursoId });
+
+            modelBuilder.Entity<PlanoComercial>()
+                .OwnsMany(p => p.CustosFixos);
+
+            modelBuilder.Entity<PlanoComercial>()
+                .OwnsMany(p => p.CustosVariaveis);
+
+            modelBuilder.Entity<ItemDePlanoComercial>()
+                .OwnsOne(p => p.CustoDeProducao);
+
+            modelBuilder.Entity<CustoFixo>()
+                .HasKey(p => p.Descricao);
+
+            modelBuilder.Entity<CustoVariavel>()
+                .HasKey(p => p.Descricao);
+
             //
 
 
-
             // Seed.
-
 
 
             //

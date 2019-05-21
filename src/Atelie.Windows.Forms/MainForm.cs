@@ -2,6 +2,7 @@
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Cadastro.Modelos;
+using Atelie.Decisoes.Comerciais;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,20 @@ namespace Atelie
             var modelosForm = new ModelosForm();
 
             modelosForm.Show();
+        }
+
+        private void PlanejamentoComercialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var consultaDePlanosComerciais = container.GetInstance<IConsultaDePlanosComerciais>();
+
+            var planejamentoComercial = container.GetInstance<IPlanejamentoComercial>();
+
+            var planosComerciaisForm = new PlanosComerciaisForm(
+                consultaDePlanosComerciais,
+                planejamentoComercial
+            );
+
+            planosComerciaisForm.Show();
         }
     }
 }

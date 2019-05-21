@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Operacoes\" />
-    <Folder Include="Decisao\" />
   </ItemGroup>
 
   <ItemGroup>

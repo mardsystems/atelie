@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Comum\" />
-    <Folder Include="Decisoes\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

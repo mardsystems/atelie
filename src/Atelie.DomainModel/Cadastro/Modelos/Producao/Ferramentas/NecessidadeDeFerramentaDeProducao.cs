@@ -11,5 +11,9 @@
         IEtapaDeProducao INecessidadeDeFerramentaDeProducao.EtapaDeProducao => EtapaDeProducao;
 
         IFerramentaDeProducao INecessidadeDeFerramentaDeProducao.Ferramenta => Ferramenta;
+
+        public int EtapaDeProducaoId { get; internal set; }
+
+        public int FerramentaId { get; internal set; }
     }
 }

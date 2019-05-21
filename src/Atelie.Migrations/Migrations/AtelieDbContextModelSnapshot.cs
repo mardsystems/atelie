@@ -693,6 +693,205 @@ namespace Atelie.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Investimentos.AplicacaoDeInvestimento", b =>
+                {
+                    b.Property<string>("ModeloCodigo");
+
+                    b.Property<int>("InvestimentoId");
+
+                    b.Property<decimal>("CustoProporcional");
+
+                    b.Property<string>("ModeloCodigo1");
+
+                    b.Property<int>("Peso");
+
+                    b.HasKey("ModeloCodigo", "InvestimentoId");
+
+                    b.HasIndex("InvestimentoId");
+
+                    b.HasIndex("ModeloCodigo1");
+
+                    b.ToTable("AplicacaoDeInvestimento");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Investimentos.Investimento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("CustoTotal");
+
+                    b.Property<decimal>("LivrosEObjetos");
+
+                    b.Property<decimal>("MaoDeObra");
+
+                    b.Property<decimal>("Materiais");
+
+                    b.Property<decimal>("Terceiros");
+
+                    b.Property<int>("Tipo");
+
+                    b.Property<decimal>("Viagens");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Investimentos");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Modelo", b =>
+                {
+                    b.Property<string>("Codigo")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.Property<decimal>("Preco");
+
+                    b.HasKey("Codigo");
+
+                    b.ToTable("Modelos");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.EtapaDeProducao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<string>("ModeloCodigo");
+
+                    b.Property<int>("Ordem");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModeloCodigo");
+
+                    b.ToTable("EtapaDeProducao");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.Ferramentas.FerramentaDeProducao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FerramentaDeProducao");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.Ferramentas.NecessidadeDeFerramentaDeProducao", b =>
+                {
+                    b.Property<int>("EtapaDeProducaoId");
+
+                    b.Property<int>("FerramentaId");
+
+                    b.Property<int>("Quantidade");
+
+                    b.HasKey("EtapaDeProducaoId", "FerramentaId");
+
+                    b.HasIndex("FerramentaId");
+
+                    b.ToTable("NecessidadeDeFerramentaDeProducao");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.NecessidadeDeMaterial", b =>
+                {
+                    b.Property<string>("ModeloCodigo");
+
+                    b.Property<int>("MaterialId");
+
+                    b.Property<double>("CustoPadrao");
+
+                    b.Property<double>("Quantidade");
+
+                    b.Property<string>("TamanhoDeModeloSigla");
+
+                    b.HasKey("ModeloCodigo", "MaterialId");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("TamanhoDeModeloSigla");
+
+                    b.ToTable("NecessidadeDeMaterial");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.NecessidadeDeTipoDeRecurso", b =>
+                {
+                    b.Property<int>("EtapaId");
+
+                    b.Property<int>("TipoDeRecursoId");
+
+                    b.Property<decimal?>("CustoPadrao");
+
+                    b.Property<int>("Quantidade");
+
+                    b.Property<string>("Tarefa");
+
+                    b.Property<double>("Tempo");
+
+                    b.HasKey("EtapaId", "TipoDeRecursoId");
+
+                    b.HasIndex("TipoDeRecursoId");
+
+                    b.ToTable("NecessidadeDeTipoDeRecurso");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.TamanhoDeModelo", b =>
+                {
+                    b.Property<string>("Sigla")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.Property<int>("Posicao");
+
+                    b.HasKey("Sigla");
+
+                    b.ToTable("TamanhoDeModelo");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Recursos.TipoDeRecurso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("CustoPadrao");
+
+                    b.Property<bool>("Interno");
+
+                    b.Property<double?>("MaximoDeHorasPorDia");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<int?>("UnidadeDeCustoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnidadeDeCustoId");
+
+                    b.ToTable("TipoDeRecurso");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Recursos.UnidadeDeCusto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnidadeDeCusto");
+                });
+
             modelBuilder.Entity("Atelie.Comum.Comercial.MeioDePagamento", b =>
                 {
                     b.Property<int>("Id")
@@ -741,6 +940,59 @@ namespace Atelie.Migrations
                     b.ToTable("Unidades");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Unidade");
+                });
+
+            modelBuilder.Entity("Atelie.Decisoes.Comerciais.ItemDePlanoComercial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Margem");
+
+                    b.Property<decimal>("MargemPercentual");
+
+                    b.Property<string>("ModeloCodigo");
+
+                    b.Property<string>("PlanoComercialId");
+
+                    b.Property<decimal>("PrecoDeVenda");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModeloCodigo");
+
+                    b.HasIndex("PlanoComercialId");
+
+                    b.ToTable("ItemDePlanoComercial");
+                });
+
+            modelBuilder.Entity("Atelie.Decisoes.Comerciais.PlanoComercial", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("CustoFixo");
+
+                    b.Property<decimal>("CustoFixoPercentual");
+
+                    b.Property<decimal>("CustoPercentual");
+
+                    b.Property<decimal>("CustoVariavel");
+
+                    b.Property<decimal>("Margem");
+
+                    b.Property<decimal>("MargemPercentual");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<decimal>("ReceitaBrutaMensal");
+
+                    b.Property<decimal>("TaxaDeMarcacao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlanosComerciais");
                 });
 
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Fornecedores.Fornecedor", b =>
@@ -925,6 +1177,75 @@ namespace Atelie.Migrations
                         .HasForeignKey("UnidadeSigla");
                 });
 
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Investimentos.AplicacaoDeInvestimento", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Modelos.Investimentos.Investimento", "Investimento")
+                        .WithMany()
+                        .HasForeignKey("InvestimentoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Modelos.Modelo", "Modelo")
+                        .WithMany("Investimentos")
+                        .HasForeignKey("ModeloCodigo1");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.EtapaDeProducao", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Modelos.Modelo")
+                        .WithMany("EtapasDeProducao")
+                        .HasForeignKey("ModeloCodigo");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.Ferramentas.NecessidadeDeFerramentaDeProducao", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Modelos.Producao.EtapaDeProducao", "EtapaDeProducao")
+                        .WithMany("FerramentasNecessarias")
+                        .HasForeignKey("EtapaDeProducaoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Modelos.Producao.Ferramentas.FerramentaDeProducao", "Ferramenta")
+                        .WithMany()
+                        .HasForeignKey("FerramentaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.NecessidadeDeMaterial", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Materiais.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Modelos.Modelo", "Modelo")
+                        .WithMany("MateriaisNecessarios")
+                        .HasForeignKey("ModeloCodigo")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Modelos.TamanhoDeModelo", "TamanhoDeModelo")
+                        .WithMany()
+                        .HasForeignKey("TamanhoDeModeloSigla");
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.NecessidadeDeTipoDeRecurso", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Modelos.Producao.EtapaDeProducao", "Etapa")
+                        .WithMany("TiposDeRecursoNecessarios")
+                        .HasForeignKey("EtapaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Recursos.TipoDeRecurso", "TipoDeRecurso")
+                        .WithMany()
+                        .HasForeignKey("TipoDeRecursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Atelie.Cadastro.Recursos.TipoDeRecurso", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Recursos.UnidadeDeCusto", "UnidadeDeCusto")
+                        .WithMany()
+                        .HasForeignKey("UnidadeDeCustoId");
+                });
+
             modelBuilder.Entity("Atelie.Comum.Pessoa", b =>
                 {
                     b.OwnsMany("Atelie.Comum.ContatoDeEmail", "ContatosDeEmail", b1 =>
@@ -1013,6 +1334,88 @@ namespace Atelie.Migrations
                                         .HasForeignKey("Atelie.Comum.Telefone", "ContatoDeTelefoneId")
                                         .OnDelete(DeleteBehavior.Cascade);
                                 });
+                        });
+                });
+
+            modelBuilder.Entity("Atelie.Decisoes.Comerciais.ItemDePlanoComercial", b =>
+                {
+                    b.HasOne("Atelie.Cadastro.Modelos.Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("ModeloCodigo");
+
+                    b.HasOne("Atelie.Decisoes.Comerciais.PlanoComercial", "PlanoComercial")
+                        .WithMany("Itens")
+                        .HasForeignKey("PlanoComercialId");
+
+                    b.OwnsOne("Atelie.Operacoes.Producao.CustoDeProducao", "CustoDeProducao", b1 =>
+                        {
+                            b1.Property<int>("ItemDePlanoComercialId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<decimal>("CustoDeComposicao");
+
+                            b1.Property<decimal>("CustoDeConfeccao");
+
+                            b1.HasKey("ItemDePlanoComercialId");
+
+                            b1.ToTable("ItemDePlanoComercial");
+
+                            b1.HasOne("Atelie.Decisoes.Comerciais.ItemDePlanoComercial")
+                                .WithOne("CustoDeProducao")
+                                .HasForeignKey("Atelie.Operacoes.Producao.CustoDeProducao", "ItemDePlanoComercialId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+                });
+
+            modelBuilder.Entity("Atelie.Decisoes.Comerciais.PlanoComercial", b =>
+                {
+                    b.OwnsMany("Atelie.Decisoes.Comerciais.CustoFixo", "CustosFixos", b1 =>
+                        {
+                            b1.Property<string>("Descricao")
+                                .ValueGeneratedOnAdd();
+
+                            b1.Property<string>("PlanoComercialId")
+                                .IsRequired();
+
+                            b1.Property<decimal>("Valor");
+
+                            b1.Property<decimal>("ValorPercentual");
+
+                            b1.HasKey("Descricao");
+
+                            b1.HasIndex("PlanoComercialId");
+
+                            b1.ToTable("CustoFixo");
+
+                            b1.HasOne("Atelie.Decisoes.Comerciais.PlanoComercial")
+                                .WithMany("CustosFixos")
+                                .HasForeignKey("PlanoComercialId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+
+                    b.OwnsMany("Atelie.Decisoes.Comerciais.CustoVariavel", "CustosVariaveis", b1 =>
+                        {
+                            b1.Property<string>("Descricao")
+                                .ValueGeneratedOnAdd();
+
+                            b1.Property<string>("PlanoComercialId")
+                                .IsRequired();
+
+                            b1.Property<decimal>("Valor");
+
+                            b1.Property<decimal>("ValorPercentual");
+
+                            b1.HasKey("Descricao");
+
+                            b1.HasIndex("PlanoComercialId");
+
+                            b1.ToTable("CustoVariavel");
+
+                            b1.HasOne("Atelie.Decisoes.Comerciais.PlanoComercial")
+                                .WithMany("CustosVariaveis")
+                                .HasForeignKey("PlanoComercialId")
+                                .OnDelete(DeleteBehavior.Cascade);
                         });
                 });
 #pragma warning restore 612, 618

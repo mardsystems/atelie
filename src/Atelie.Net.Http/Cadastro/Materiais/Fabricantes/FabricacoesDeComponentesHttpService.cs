@@ -124,7 +124,9 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             }
             else
             {
-                observable = Observable.Empty<IFabricacaoDeComponente[]>();
+                var empty = new IFabricacaoDeComponente[] { };
+
+                observable = Observable.Return(empty);
             }
 
             return observable;

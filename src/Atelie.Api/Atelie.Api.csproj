@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Decisoes\" />
     <Folder Include="Operacoes\" />
   </ItemGroup>
 

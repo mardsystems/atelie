@@ -80,7 +80,9 @@ namespace Atelie.Cadastro.Unidades
             }
             else
             {
-                observable = Observable.Empty<IUnidadeDeMedida[]>();
+                var empty = new IUnidadeDeMedida[] { };
+
+                observable = Observable.Return(empty);
             }
 
             return observable;

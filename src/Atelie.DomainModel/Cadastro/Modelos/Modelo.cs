@@ -13,11 +13,11 @@ namespace Atelie.Cadastro.Modelos
 
         public decimal Preco { get; internal set; }
 
-        public IEnumerable<NecessidadeDeMaterial> MateriaisNecessarios { get; internal set; }
+        public virtual IEnumerable<NecessidadeDeMaterial> MateriaisNecessarios { get; internal set; }
 
-        public ICollection<EtapaDeProducao> EtapasDeProducao { get; internal set; }
+        public virtual ICollection<EtapaDeProducao> EtapasDeProducao { get; internal set; }
 
-        public IEnumerable<AplicacaoDeInvestimento> Investimentos { get; internal set; }
+        public virtual IEnumerable<AplicacaoDeInvestimento> Investimentos { get; internal set; }
 
         INecessidadeDeMaterial[] IModelo.MateriaisNecessarios => MateriaisNecessarios.ToArray();
 
@@ -29,6 +29,15 @@ namespace Atelie.Cadastro.Modelos
         {
             Codigo = codigo;
 
+            MateriaisNecessarios = new HashSet<NecessidadeDeMaterial>();
+
+            EtapasDeProducao = new HashSet<EtapaDeProducao>();
+
+            Investimentos = new HashSet<AplicacaoDeInvestimento>();
+        }
+
+        public Modelo()
+        {
             MateriaisNecessarios = new HashSet<NecessidadeDeMaterial>();
 
             EtapasDeProducao = new HashSet<EtapaDeProducao>();

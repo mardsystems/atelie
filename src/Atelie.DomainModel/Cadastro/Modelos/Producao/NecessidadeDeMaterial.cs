@@ -1,7 +1,4 @@
 ﻿using Atelie.Cadastro.Materiais;
-using Atelie.Cadastro.Materiais.Fabricantes;
-using Atelie.Cadastro.Unidades;
-using Atelie.Comum;
 
 namespace Atelie.Cadastro.Modelos.Producao
 {
@@ -34,5 +31,9 @@ namespace Atelie.Cadastro.Modelos.Producao
         //ITamanho INecessidadeDeMaterial.TamanhoDeMaterial => TamanhoDeMaterial;
 
         //IUnidade INecessidadeDeMaterial.Unidade => Unidade;
+
+        public string ModeloCodigo { get; internal set; }
+
+        public int MaterialId { get; internal set; }
     }
 }

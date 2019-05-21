@@ -19,5 +19,9 @@ namespace Atelie.Cadastro.Modelos.Producao
         IEtapaDeProducao INecessidadeDeTipoDeRecurso.Etapa => Etapa;
 
         ITipoDeRecurso INecessidadeDeTipoDeRecurso.TipoDeRecurso => TipoDeRecurso;
+
+        public int EtapaId { get; internal set; }
+
+        public int TipoDeRecursoId { get; internal set; }
     }
 }

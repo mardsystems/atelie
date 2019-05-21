@@ -5,9 +5,29 @@ namespace Atelie.Decisoes.Comerciais
 {
     public interface IPlanoComercial
     {
-        int Id { get; }
+        string Id { get; }
 
         string Nome { get; }
+
+        decimal ReceitaBrutaMensal { get; }
+
+        decimal CustoFixo { get; }
+
+        decimal CustoFixoPercentual { get; }
+
+        decimal CustoVariavel { get; }
+
+        decimal CustoPercentual { get; }
+
+        decimal Margem { get; }
+
+        decimal MargemPercentual { get; }
+
+        decimal TaxaDeMarcacao { get; }
+
+        ICusto[] CustosFixos { get; }
+
+        ICusto[] CustosVariaveis { get; }
 
         IItemDePlanoComercial[] Itens { get; }
     }
@@ -18,55 +38,17 @@ namespace Atelie.Decisoes.Comerciais
 
         IModelo Modelo { get; }
 
-        IBenchmarks Benchmarks { get; }
-
         ICustoDeProducao CustoDeProducao { get; }
 
-        IPrecoDePrateleiraDesejado PrecoDePrateleiraDesejado { get; }
-
-        decimal PrecoDeAtacado { get; }
-
-        decimal PrecoDeAtacado2 { get; }
-
-        decimal MargemDoAtelieAtacado { get; }
-
-        decimal PrecoDeAtacado3 { get; }
-
-        decimal MargemDoAtelie { get; }
-
-        decimal MargemDoAtelie2 { get; }
-
-        IPrecoDeConsignacao PrecoDeConsignacao { get; }
-
-        decimal PrecoDeConsignacao2 { get; }
-
-        decimal MargemDoAtelieDeConsignacao { get; }
-
-        decimal PercentualDeRecomendacao { get; }
+        decimal PrecoDeVenda { get; }
     }
 
-    public interface IBenchmarks
+    public interface ICusto
     {
-        string Produto { get; }
+        string Descricao { get; }
 
-        decimal FaixaDePrecoDoProduto { get; }
-
-        decimal PrecoDeVarejo { get; }
-
-        decimal VolumeDeVendas1oAno { get; }
-
-        decimal VolumeDeVendas2oAno { get; }
-
-        decimal VolumeDeVendas3oAno { get; }
-    }
-
-    public interface IPrecoDePrateleiraDesejado
-    {
         decimal Valor { get; }
-    }
 
-    public interface IPrecoDeConsignacao
-    {
-        decimal Valor { get; }
+        decimal ValorPercentual { get; }
     }
 }

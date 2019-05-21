@@ -28,6 +28,7 @@
     <Compile Remove="Cadastro\Unidades\ConversaoDeUnidade.cs" />
     <Compile Remove="Cadastro\Unidades\Tamanho.cs" />
     <Compile Remove="Cadastro\Unidades\UnidadeDeFabricacao.cs" />
+    <Compile Remove="Decisoes\Comerciais\PlanoComercial2.cs" />
   </ItemGroup>
 
   <ItemGroup>

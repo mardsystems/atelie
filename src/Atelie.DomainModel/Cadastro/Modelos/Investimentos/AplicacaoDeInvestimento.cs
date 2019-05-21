@@ -13,5 +13,9 @@
         IModelo IAplicacaoDeInvestimento.Modelo => Modelo;
 
         IInvestimento IAplicacaoDeInvestimento.Investimento => Investimento;
+
+        public string ModeloCodigo { get; internal set; }
+
+        public int InvestimentoId { get; internal set; }
     }
 }
