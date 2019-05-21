@@ -46,6 +46,7 @@
             this.barraDeFerramentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barraDeStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialDataGridView = new System.Windows.Forms.DataGridView();
+            this.componentesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -65,13 +66,14 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.statusBarTimer = new System.Windows.Forms.Timer(this.components);
-            this.componentesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componenteUnidadePadraoSigla = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componenteDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Cor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tamanho = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnidadeSigla = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componenteDataGridViewLinkColumn = new System.Windows.Forms.DataGridViewLinkColumn();
             this.fabricanteDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.fabricanteDataGridViewLinkColumn = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -79,10 +81,10 @@
             this.fabricanteSiteDataGridViewLinkColumn = new System.Windows.Forms.DataGridViewLinkColumn();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.materialDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.componentesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).BeginInit();
             this.mainStatusStrip.SuspendLayout();
             this.materiaisToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.componentesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -206,9 +208,11 @@
             this.state,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn4,
             this.componenteUnidadePadraoSigla,
             this.componenteDataGridViewComboBoxColumn,
+            this.Cor,
+            this.Tamanho,
+            this.UnidadeSigla,
             this.componenteDataGridViewLinkColumn,
             this.fabricanteDataGridViewComboBoxColumn,
             this.fabricanteDataGridViewLinkColumn,
@@ -228,6 +232,10 @@
             this.materialDataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MaterialDataGridView_CellMouseDoubleClick);
             this.materialDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.MaterialDataGridView_DataError);
             this.materialDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.MaterialDataGridView_RowsAdded);
+            // 
+            // componentesBindingSource
+            // 
+            this.componentesBindingSource.DataSource = typeof(Atelie.Cadastro.Materiais.Componentes.ComponenteViewModel);
             // 
             // materialBindingSource
             // 
@@ -396,10 +404,6 @@
             this.statusBarTimer.Interval = 5000;
             this.statusBarTimer.Tick += new System.EventHandler(this.StatusBarTimer_Tick);
             // 
-            // componentesBindingSource
-            // 
-            this.componentesBindingSource.DataSource = typeof(Atelie.Cadastro.Materiais.Componentes.ComponenteViewModel);
-            // 
             // state
             // 
             this.state.DataPropertyName = "State";
@@ -422,12 +426,6 @@
             this.dataGridViewTextBoxColumn2.MinimumWidth = 200;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "CustoPadrao";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Custo Padrão";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
             // componenteUnidadePadraoSigla
             // 
             this.componenteUnidadePadraoSigla.DataPropertyName = "ComponenteUnidadePadraoSigla";
@@ -445,6 +443,24 @@
             this.componenteDataGridViewComboBoxColumn.Name = "componenteDataGridViewComboBoxColumn";
             this.componenteDataGridViewComboBoxColumn.ValueMember = "Id";
             this.componenteDataGridViewComboBoxColumn.Width = 120;
+            // 
+            // Cor
+            // 
+            this.Cor.DataPropertyName = "Cor";
+            this.Cor.HeaderText = "Cor";
+            this.Cor.Name = "Cor";
+            // 
+            // Tamanho
+            // 
+            this.Tamanho.DataPropertyName = "Tamanho";
+            this.Tamanho.HeaderText = "Tamanho";
+            this.Tamanho.Name = "Tamanho";
+            // 
+            // UnidadeSigla
+            // 
+            this.UnidadeSigla.DataPropertyName = "UnidadeSigla";
+            this.UnidadeSigla.HeaderText = "Unidade";
+            this.UnidadeSigla.Name = "UnidadeSigla";
             // 
             // componenteDataGridViewLinkColumn
             // 
@@ -512,12 +528,12 @@
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.materialDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.componentesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialBindingSource)).EndInit();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
             this.materiaisToolStrip.ResumeLayout(false);
             this.materiaisToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.componentesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -561,12 +577,15 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.BindingSource componentesBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn state;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn componenteUnidadePadraoSigla;
         private System.Windows.Forms.DataGridViewComboBoxColumn componenteDataGridViewComboBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tamanho;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnidadeSigla;
         private System.Windows.Forms.DataGridViewLinkColumn componenteDataGridViewLinkColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn fabricanteDataGridViewComboBoxColumn;
         private System.Windows.Forms.DataGridViewLinkColumn fabricanteDataGridViewLinkColumn;

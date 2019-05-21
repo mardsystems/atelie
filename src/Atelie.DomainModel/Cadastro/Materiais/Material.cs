@@ -64,6 +64,8 @@ namespace Atelie.Cadastro.Materiais
 
             Fornecedores = new HashSet<FornecimentoDeMaterial>();
 
+            UnidadeSigla = Unidade.Sigla;
+
             #endregion
         }
 
@@ -93,6 +95,8 @@ namespace Atelie.Cadastro.Materiais
         public int FabricanteId { get; internal set; }
 
         public int ComponenteId { get; internal set; }
+
+        public string UnidadeSigla { get; internal set; }
 
         #endregion
     }

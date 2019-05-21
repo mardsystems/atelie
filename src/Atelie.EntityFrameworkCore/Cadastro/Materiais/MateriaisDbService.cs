@@ -85,6 +85,7 @@ namespace Atelie.Cadastro.Materiais
                     .Include(p => p.Componente.ComponentePai)
                     .Include(p => p.Componente.UnidadePadrao)
                     .Include(p => p.Fabricante)
+                    .Include(p => p.Unidade)
                     .ToArrayAsync();
 
                 var observable = materiais.ToObservable();

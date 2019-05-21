@@ -53,6 +53,31 @@ namespace Atelie.Cadastro.Materiais
 
         public string FabricanteSite { get; set; }
 
+        string cor = string.Empty;
+        public string Cor
+        {
+            get { return cor; }
+            set { SetProperty(ref cor, value); }
+        }
+
+        double tamanho = 0;
+        public double Tamanho
+        {
+            get { return tamanho; }
+            set { SetProperty(ref tamanho, value); }
+        }
+
+        string unidadeSigla = string.Empty;
+        public string UnidadeSigla
+        {
+            get { return unidadeSigla; }
+            set
+            {
+
+                SetProperty(ref unidadeSigla, value);
+            }
+        }
+
         public static MaterialViewModel From(IMaterial material)
         {
             var viewModel = new MaterialViewModel
@@ -70,6 +95,9 @@ namespace Atelie.Cadastro.Materiais
                 FabricanteNome = material.Fabricante.Nome,
                 FabricanteMarca = material.Fabricante.Marca,
                 FabricanteSite = material.Fabricante.Site,
+                Cor = material.Cor,
+                Tamanho = material.Tamanho,
+                UnidadeSigla = material.Unidade.Sigla,
             };
 
             return viewModel;

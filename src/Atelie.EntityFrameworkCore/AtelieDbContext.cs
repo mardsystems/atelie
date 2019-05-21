@@ -356,15 +356,15 @@ namespace Atelie
             );
 
             modelBuilder.Entity<Material>().HasData(
-                new Material { Id = 1, Nome = "Linha Xik Poliester 2000J N. 120", FabricanteId = 10, ComponenteId = 18, Descricao = null },
-                new Material { Id = 2, Nome = "Linha Xik Poliester 5000J N. 120", FabricanteId = 10, ComponenteId = 18, Descricao = null },
-                new Material { Id = 3, Nome = "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", FabricanteId = 7, ComponenteId = 10, Descricao = null },
-                new Material { Id = 4, Nome = "Fio da marca Bonfio 300g", FabricanteId = 9, ComponenteId = 16, Descricao = null },
-                new Material { Id = 5, Nome = "Fio Soltex 300g da marca Coats Corrente", FabricanteId = 3, ComponenteId = 16, Descricao = null },
-                new Material { Id = 6, Nome = "Tecido artigo 1198/6", FabricanteId = 14, ComponenteId = 24, Descricao = null },
-                new Material { Id = 7, Nome = "Tecido artigo 1198/6 com defeito", FabricanteId = 14, ComponenteId = 24, Descricao = null },
-                new Material { Id = 8, Nome = "Sacos com aba - PEAD (polietileno de alta densidade)", FabricanteId = 16, ComponenteId = 22, Descricao = "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta)." },
-                new Material { Id = 9, Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", FabricanteId = 17, ComponenteId = 22, Descricao = null }
+                new Material { Id = 1, Nome = "Linha Xik Poliester 2000J N. 120", FabricanteId = 10, ComponenteId = 18, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 2, Nome = "Linha Xik Poliester 5000J N. 120", FabricanteId = 10, ComponenteId = 18, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 3, Nome = "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", FabricanteId = 7, ComponenteId = 10, UnidadeSigla = "unid", Descricao = null },
+                new Material { Id = 4, Nome = "Fio da marca Bonfio 300g", FabricanteId = 9, ComponenteId = 16, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 5, Nome = "Fio Soltex 300g da marca Coats Corrente", FabricanteId = 3, ComponenteId = 16, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 6, Nome = "Tecido artigo 1198/6", FabricanteId = 14, ComponenteId = 24, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 7, Nome = "Tecido artigo 1198/6 com defeito", FabricanteId = 14, ComponenteId = 24, UnidadeSigla = "m", Descricao = null },
+                new Material { Id = 8, Nome = "Sacos com aba - PEAD (polietileno de alta densidade)", FabricanteId = 16, ComponenteId = 22, UnidadeSigla = "unid", Descricao = "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta)." },
+                new Material { Id = 9, Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", FabricanteId = 17, ComponenteId = 22, UnidadeSigla = "unid", Descricao = null }
             );
 
             //modelBuilder.Entity<FornecimentoDeMaterial>().HasData(
