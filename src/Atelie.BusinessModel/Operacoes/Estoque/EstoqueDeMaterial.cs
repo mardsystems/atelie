@@ -7,6 +7,6 @@ namespace Atelie.Operacoes.Estoque
     {
         IMaterial Material { get; }
 
-        ICorDeFabricante Cor { get; }
+        //ICorDeFabricante Cor { get; }
     }
 }

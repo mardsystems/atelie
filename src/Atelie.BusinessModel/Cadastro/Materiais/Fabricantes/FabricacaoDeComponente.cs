@@ -8,6 +8,6 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         IComponente Componente { get; }
 
-        ICatalogo[] Catalogos { get; }
+        //ICatalogo[] Catalogos { get; }
     }
 }

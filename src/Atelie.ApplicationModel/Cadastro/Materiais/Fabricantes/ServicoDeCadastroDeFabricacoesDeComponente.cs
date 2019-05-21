@@ -139,39 +139,39 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             throw new NotImplementedException();
         }
 
-        public Task<IRespostaDeCadastroDeCatalogo> CadastraCatalogo(ISolicitacaoDeCadastroDeCatalogo solicitacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IRespostaDeCadastroDeCatalogo> CadastraCatalogo(ISolicitacaoDeCadastroDeCatalogo solicitacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IRespostaDeCadastroDeCatalogo> AtualizaCatalogo(int fabricanteId, int componenteId, string nome, ISolicitacaoDeCadastroDeCatalogo solicitacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IRespostaDeCadastroDeCatalogo> AtualizaCatalogo(int fabricanteId, int componenteId, string nome, ISolicitacaoDeCadastroDeCatalogo solicitacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task ExcluiCatalogo(int fabricanteId, int componenteId, string nome)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task ExcluiCatalogo(int fabricanteId, int componenteId, string nome)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IRespostaDeDefinicaoDeCorNoCatalogo> DefineCorNoCatalogo(ISolicitacaoDeDefinicaoDeCorNoCatalogo solicitacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IRespostaDeDefinicaoDeCorNoCatalogo> DefineCorNoCatalogo(ISolicitacaoDeDefinicaoDeCorNoCatalogo solicitacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task RemoveDefinicaoDeCorDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task RemoveDefinicaoDeCorDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo> DisponibilizaEmbalagemNoCatalogo(ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo solicitacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo> DisponibilizaEmbalagemNoCatalogo(ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo solicitacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task ExcluiDisponibilidadeDeEmbalagemDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task ExcluiDisponibilidadeDeEmbalagemDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

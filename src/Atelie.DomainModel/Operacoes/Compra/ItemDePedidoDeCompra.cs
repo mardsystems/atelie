@@ -10,7 +10,7 @@ namespace Atelie.Operacoes.Compra
 
         public virtual Material Material { get; internal set; }
 
-        public virtual CorDeFabricante Cor { get; internal set; }
+        //public virtual CorDeFabricante Cor { get; internal set; }
 
         public virtual Unidade Unidade { get; internal set; }
 
@@ -22,7 +22,7 @@ namespace Atelie.Operacoes.Compra
 
         IMaterial IItemDePedidoDeCompra.Material => Material;
 
-        ICorDeFabricante IItemDePedidoDeCompra.Cor => Cor;
+        //ICorDeFabricante IItemDePedidoDeCompra.Cor => Cor;
 
         IUnidade IItemDePedidoDeCompra.Unidade => Unidade;
     }

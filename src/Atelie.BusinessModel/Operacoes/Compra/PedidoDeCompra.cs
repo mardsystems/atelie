@@ -28,7 +28,7 @@ namespace Atelie.Operacoes.Compra
 
         IMaterial Material { get; }
 
-        ICorDeFabricante Cor { get; }
+        //ICorDeFabricante Cor { get; }
 
         /// <summary>
         /// Ver Tamanho.

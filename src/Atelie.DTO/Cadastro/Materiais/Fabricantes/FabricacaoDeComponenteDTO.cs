@@ -8,12 +8,12 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public ComponenteDTO Componente { get; set; }
 
-        public CatalogoDTO[] Catalogos { get; set; }
+        //public CatalogoDTO[] Catalogos { get; set; }
 
         IFabricante IFabricacaoDeComponente.Fabricante => Fabricante;
 
         IComponente IFabricacaoDeComponente.Componente => Componente;
 
-        ICatalogo[] IFabricacaoDeComponente.Catalogos => Catalogos;
+        //ICatalogo[] IFabricacaoDeComponente.Catalogos => Catalogos;
     }
 }

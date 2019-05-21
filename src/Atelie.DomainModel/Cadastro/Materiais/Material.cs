@@ -1,6 +1,10 @@
 ﻿using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
+using Atelie.Cadastro.Materiais.Fornecedores;
+using Atelie.Cadastro.Unidades;
+using System.Collections.Generic;
 using System.DomainModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais
@@ -19,11 +23,17 @@ namespace Atelie.Cadastro.Materiais
 
         public virtual Componente Componente { get; internal set; }
 
+        public string Cor { get; internal set; }
+
+        public double Tamanho { get; internal set; }
+
+        public UnidadeDeMedida Unidade { get; internal set; }
+
         //public Catalogo Catalogo { get; internal set; }
 
         //public Embalagem Embalagem { get; internal set; }
 
-        //public IEnumerable<FornecimentoDeMaterial> Fornecedores { get; internal set; }
+        public IEnumerable<FornecimentoDeMaterial> Fornecedores { get; internal set; }
 
         public Material(
             int id,
@@ -52,6 +62,8 @@ namespace Atelie.Cadastro.Materiais
 
             ComponenteId = Componente.Id;
 
+            Fornecedores = new HashSet<FornecimentoDeMaterial>();
+
             #endregion
         }
 
@@ -61,11 +73,13 @@ namespace Atelie.Cadastro.Materiais
 
         IComponente IMaterial.Componente => Componente;
 
+        IUnidadeDeMedida IMaterial.Unidade => Unidade;
+
         //ICatalogo IMaterial.Catalogo => Catalogo;
 
         //IEmbalagem IMaterial.Embalagem => Embalagem;
 
-        //IFornecimentoDeMaterial[] IMaterial.Fornecedores => Fornecedores.ToArray();
+        IFornecimentoDeMaterial[] IMaterial.Fornecedores => Fornecedores.ToArray();
 
         #endregion
 
@@ -73,7 +87,7 @@ namespace Atelie.Cadastro.Materiais
 
         public Material()
         {
-
+            Fornecedores = new HashSet<FornecimentoDeMaterial>();
         }
 
         public int FabricanteId { get; internal set; }

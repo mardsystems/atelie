@@ -1,4 +1,5 @@
 ﻿using Atelie.Cadastro.Materiais;
+using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using SimpleInjector;
 using System;

@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cadastro\Materiais\Fabricantes\CatalogoViewModel.cs" />
+    <Compile Remove="Cadastro\Materiais\Fabricantes\CorDeFabricanteViewModel.cs" />
+    <Compile Remove="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagemViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Operacoes\" />
     <Folder Include="Decisao\" />
   </ItemGroup>

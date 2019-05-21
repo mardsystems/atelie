@@ -56,7 +56,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atelie.Windows", "src\Ateli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atelie.UWP", "src\Atelie.UWP\Atelie.UWP.csproj", "{91CE85D6-A21E-47CC-8170-2EE2B1D60D0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atelie.Migrations", "src\Atelie.Migrations\Atelie.Migrations.csproj", "{C4753D04-7509-483B-9862-BA2FBEB845CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atelie.Migrations", "src\Atelie.Migrations\Atelie.Migrations.csproj", "{C4753D04-7509-483B-9862-BA2FBEB845CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

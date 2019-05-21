@@ -7,10 +7,10 @@ namespace Atelie.Operacoes.Estoque
     {
         public virtual Material Material { get; internal set; }
 
-        public virtual CorDeFabricante Cor { get; internal set; }
+        //public virtual CorDeFabricante Cor { get; internal set; }
 
         IMaterial IEstoqueDeMaterial.Material => Material;
 
-        ICorDeFabricante IEstoqueDeMaterial.Cor => Cor;
+        //ICorDeFabricante IEstoqueDeMaterial.Cor => Cor;
     }
 }

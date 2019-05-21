@@ -13,25 +13,25 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         Task ExcluiFabricacaoDeComponentePorFabricante(int fabricanteId);
 
-        //
+        ////
 
-        Task<IRespostaDeCadastroDeCatalogo> CadastraCatalogo(ISolicitacaoDeCadastroDeCatalogo solicitacao);
+        //Task<IRespostaDeCadastroDeCatalogo> CadastraCatalogo(ISolicitacaoDeCadastroDeCatalogo solicitacao);
 
-        Task<IRespostaDeCadastroDeCatalogo> AtualizaCatalogo(int fabricanteId, int componenteId, string nome, ISolicitacaoDeCadastroDeCatalogo solicitacao);
+        //Task<IRespostaDeCadastroDeCatalogo> AtualizaCatalogo(int fabricanteId, int componenteId, string nome, ISolicitacaoDeCadastroDeCatalogo solicitacao);
 
-        Task ExcluiCatalogo(int fabricanteId, int componenteId, string nome);
+        //Task ExcluiCatalogo(int fabricanteId, int componenteId, string nome);
 
-        //
+        ////
 
-        Task<IRespostaDeDefinicaoDeCorNoCatalogo> DefineCorNoCatalogo(ISolicitacaoDeDefinicaoDeCorNoCatalogo solicitacao);
+        //Task<IRespostaDeDefinicaoDeCorNoCatalogo> DefineCorNoCatalogo(ISolicitacaoDeDefinicaoDeCorNoCatalogo solicitacao);
 
-        Task RemoveDefinicaoDeCorDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome);
+        //Task RemoveDefinicaoDeCorDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome);
 
-        //
+        ////
 
-        Task<IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo> DisponibilizaEmbalagemNoCatalogo(ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo solicitacao);
+        //Task<IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo> DisponibilizaEmbalagemNoCatalogo(ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo solicitacao);
 
-        Task ExcluiDisponibilidadeDeEmbalagemDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome);
+        //Task ExcluiDisponibilidadeDeEmbalagemDoCatalogo(int fabricanteId, int componenteId, string catalogoNome, string embalagemNome);
     }
 
     //
@@ -60,125 +60,125 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
     }
 
-    //
+    ////
 
-    public interface ISolicitacaoDeCadastroDeCatalogo
-    {
-        int FabricanteId { get; }
+    //public interface ISolicitacaoDeCadastroDeCatalogo
+    //{
+    //    int FabricanteId { get; }
 
-        int ComponenteId { get; }
+    //    int ComponenteId { get; }
 
-        string Nome { get; }
-    }
+    //    string Nome { get; }
+    //}
 
-    public interface IRespostaDeCadastroDeCatalogo
-    {
+    //public interface IRespostaDeCadastroDeCatalogo
+    //{
 
-    }
+    //}
 
-    public class SolicitacaoDeCadastroDeCatalogo : ISolicitacaoDeCadastroDeCatalogo
-    {
-        public int FabricanteId { get; set; }
+    //public class SolicitacaoDeCadastroDeCatalogo : ISolicitacaoDeCadastroDeCatalogo
+    //{
+    //    public int FabricanteId { get; set; }
 
-        public int ComponenteId { get; set; }
+    //    public int ComponenteId { get; set; }
 
-        public string Nome { get; set; }
-    }
+    //    public string Nome { get; set; }
+    //}
 
-    public class RespostaDeCadastroDeCatalogo : IRespostaDeCadastroDeCatalogo
-    {
+    //public class RespostaDeCadastroDeCatalogo : IRespostaDeCadastroDeCatalogo
+    //{
 
-    }
+    //}
 
-    //
+    ////
 
-    public interface ISolicitacaoDeDefinicaoDeCorNoCatalogo : ISolicitacaoDeCadastroDeCor
-    {
-        int FabricanteId { get; }
+    //public interface ISolicitacaoDeDefinicaoDeCorNoCatalogo : ISolicitacaoDeCadastroDeCor
+    //{
+    //    int FabricanteId { get; }
 
-        int ComponenteId { get; }
+    //    int ComponenteId { get; }
 
-        string CatalogoNome { get; }
+    //    string CatalogoNome { get; }
 
-        string Categoria { get; }
+    //    string Categoria { get; }
 
-        string Localizacao { get; }
+    //    string Localizacao { get; }
 
-        decimal? CustoPadrao { get; }
+    //    decimal? CustoPadrao { get; }
 
-        string CorDeUsoInternoCodigo { get; }
-    }
+    //    string CorDeUsoInternoCodigo { get; }
+    //}
 
-    public interface IRespostaDeDefinicaoDeCorNoCatalogo : IRespostaDeCadastroDeCor
-    {
+    //public interface IRespostaDeDefinicaoDeCorNoCatalogo : IRespostaDeCadastroDeCor
+    //{
 
-    }
+    //}
 
-    public class SolicitacaoDeDefinicaoDeCorNoCatalogo : SolicitacaoDeCadastroDeCor, ISolicitacaoDeDefinicaoDeCorNoCatalogo
-    {
-        public int FabricanteId { get; set; }
+    //public class SolicitacaoDeDefinicaoDeCorNoCatalogo : SolicitacaoDeCadastroDeCor, ISolicitacaoDeDefinicaoDeCorNoCatalogo
+    //{
+    //    public int FabricanteId { get; set; }
 
-        public int ComponenteId { get; set; }
+    //    public int ComponenteId { get; set; }
 
-        public string CatalogoNome { get; set; }
+    //    public string CatalogoNome { get; set; }
 
-        public string Categoria { get; set; }
+    //    public string Categoria { get; set; }
 
-        public string Localizacao { get; set; }
+    //    public string Localizacao { get; set; }
 
-        public decimal? CustoPadrao { get; set; }
+    //    public decimal? CustoPadrao { get; set; }
 
-        public string CorDeUsoInternoCodigo { get; set; }
-    }
+    //    public string CorDeUsoInternoCodigo { get; set; }
+    //}
 
-    public class RespostaDeDefinicaoDeCorNoCatalogo : RespostaDeCadastroDeCor, IRespostaDeDefinicaoDeCorNoCatalogo
-    {
+    //public class RespostaDeDefinicaoDeCorNoCatalogo : RespostaDeCadastroDeCor, IRespostaDeDefinicaoDeCorNoCatalogo
+    //{
 
-    }
+    //}
 
-    //
+    ////
 
-    public interface ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo
-    {
-        int FabricanteId { get; }
+    //public interface ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo
+    //{
+    //    int FabricanteId { get; }
 
-        int ComponenteId { get; }
+    //    int ComponenteId { get; }
 
-        string CatalogoNome { get; }
+    //    string CatalogoNome { get; }
 
-        string EmbalagemNome { get; }
+    //    string EmbalagemNome { get; }
 
-        string UnidadeSigla { get; }
+    //    string UnidadeSigla { get; }
 
-        double Valor { get; }
+    //    double Valor { get; }
 
-        string UnidadeBaseSigla { get; }
-    }
+    //    string UnidadeBaseSigla { get; }
+    //}
 
-    public interface IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo
-    {
+    //public interface IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo
+    //{
 
-    }
+    //}
 
-    public class SolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo : ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo
-    {
-        public int FabricanteId { get; set; }
+    //public class SolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo : ISolicitacaoDeDisponibilizacaoDeEmbalagemNoCatalogo
+    //{
+    //    public int FabricanteId { get; set; }
 
-        public int ComponenteId { get; set; }
+    //    public int ComponenteId { get; set; }
 
-        public string CatalogoNome { get; set; }
+    //    public string CatalogoNome { get; set; }
 
-        public string EmbalagemNome { get; set; }
+    //    public string EmbalagemNome { get; set; }
 
-        public string UnidadeSigla { get; set; }
+    //    public string UnidadeSigla { get; set; }
 
-        public double Valor { get; set; }
+    //    public double Valor { get; set; }
 
-        public string UnidadeBaseSigla { get; set; }
-    }
+    //    public string UnidadeBaseSigla { get; set; }
+    //}
 
-    public class RespostaDeDisponibilizacaoDeEmbalagemNoCatalogo : IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo
-    {
+    //public class RespostaDeDisponibilizacaoDeEmbalagemNoCatalogo : IRespostaDeDisponibilizacaoDeEmbalagemNoCatalogo
+    //{
 
-    }
+    //}
 }

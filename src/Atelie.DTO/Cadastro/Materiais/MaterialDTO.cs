@@ -2,6 +2,7 @@
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Cadastro.Materiais.Fornecedores;
+using Atelie.Cadastro.Unidades;
 
 namespace Atelie.Cadastro.Materiais
 {
@@ -19,6 +20,12 @@ namespace Atelie.Cadastro.Materiais
 
         public ComponenteDTO Componente { get; set; }
 
+        public string Cor { get; set; }
+
+        public double Tamanho { get; set; }
+
+        public UnidadeDeMedidaDTO Unidade { get; set; }
+
         //public CatalogoDTO Catalogo { get; set; }
 
         //public EmbalagemDTO Embalagem { get; set; }
@@ -29,10 +36,12 @@ namespace Atelie.Cadastro.Materiais
 
         IComponente IMaterial.Componente => Componente;
 
+        IUnidadeDeMedida IMaterial.Unidade => Unidade;
+
         //ICatalogo IMaterial.Catalogo => Catalogo;
 
         //IEmbalagem IMaterial.Embalagem => Embalagem;
 
-        //IFornecimentoDeMaterial[] IMaterial.Fornecedores => Fornecedores;
+        IFornecimentoDeMaterial[] IMaterial.Fornecedores => Fornecedores;
     }
 }

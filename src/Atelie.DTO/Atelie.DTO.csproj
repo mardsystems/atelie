@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cadastro\Cores\**" />
+    <EmbeddedResource Remove="Cadastro\Cores\**" />
+    <None Remove="Cadastro\Cores\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Cadastro\Materiais\Fabricantes\CatalogoDTO.cs" />
+    <Compile Remove="Cadastro\Materiais\Fabricantes\CorDeFabricanteDTO.cs" />
+    <Compile Remove="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagemDTO.cs" />
+    <Compile Remove="Cadastro\Materiais\Fabricantes\EmbalagemDTO.cs" />
+    <Compile Remove="Cadastro\Unidades\TamanhoDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj" />
     <ProjectReference Include="..\Atelie.UseCaseModel\Atelie.UseCaseModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />

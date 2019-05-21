@@ -1,5 +1,4 @@
-﻿using Atelie.Cadastro.Cores;
-using Atelie.Cadastro.Materiais;
+﻿using Atelie.Cadastro.Materiais;
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Cadastro.Materiais.Fornecedores;
@@ -17,9 +16,9 @@ namespace Atelie
 
         public DbSet<Unidade> Unidades { get; set; }
 
-        public DbSet<Tamanho> Tamanhos { get; set; }
+        //public DbSet<Tamanho> Tamanhos { get; set; }
 
-        public DbSet<CorInterna> CoresInternas { get; set; }
+        //public DbSet<CorInterna> CoresInternas { get; set; }
 
         //public DbSet<CorDeFabricante> CoresDeFabricantes { get; set; }
 
@@ -87,22 +86,22 @@ namespace Atelie
 
             // Cadastro - Cores.
 
-            modelBuilder.Entity<CorInterna>()
-                .HasKey(p => p.Codigo);
+            //modelBuilder.Entity<CorInterna>()
+            //    .HasKey(p => p.Codigo);
 
             // Cadastro - Materiais - Fabricantes.
 
-            modelBuilder.Entity<CorDeFabricante>()
-                .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome, p.Codigo });
+            //modelBuilder.Entity<CorDeFabricante>()
+            //    .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome, p.Codigo });
 
-            modelBuilder.Entity<CorDeFabricante>()
-                .Property(p => p.CustoPadrao)
-                .HasColumnType("DECIMAL (18, 2)");
+            //modelBuilder.Entity<CorDeFabricante>()
+            //    .Property(p => p.CustoPadrao)
+            //    .HasColumnType("DECIMAL (18, 2)");
 
-            modelBuilder.Entity<CorDeFabricante>()
-                .HasOne(p => p.CorDeUsoInterno)
-                .WithMany()
-                .HasForeignKey(p => p.CorDeUsoInternoCodigo);
+            //modelBuilder.Entity<CorDeFabricante>()
+            //    .HasOne(p => p.CorDeUsoInterno)
+            //    .WithMany()
+            //    .HasForeignKey(p => p.CorDeUsoInternoCodigo);
 
             //modelBuilder.Entity<CorDeFabricante>()
             //    .HasOne(p => p.Catalogo)
@@ -123,28 +122,28 @@ namespace Atelie
                 .WithMany(p => p.ComponentesFabricados)
                 .HasForeignKey(p => p.FabricanteId);
 
-            modelBuilder.Entity<Catalogo>()
-                .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.Nome });
+            //modelBuilder.Entity<Catalogo>()
+            //    .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.Nome });
 
-            modelBuilder.Entity<Catalogo>()
-                .HasMany(p => p.Cores)
-                .WithOne(p => p.Catalogo)
-                .HasForeignKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome })
-                .IsRequired();
+            //modelBuilder.Entity<Catalogo>()
+            //    .HasMany(p => p.Cores)
+            //    .WithOne(p => p.Catalogo)
+            //    .HasForeignKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome })
+            //    .IsRequired();
 
-            modelBuilder.Entity<DisponibilidadeDeEmbalagem>()
-                .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome, p.EmbalagemNome });
+            //modelBuilder.Entity<DisponibilidadeDeEmbalagem>()
+            //    .HasKey(p => new { p.FabricanteId, p.ComponenteId, p.CatalogoNome, p.EmbalagemNome });
 
-            modelBuilder.Entity<DisponibilidadeDeEmbalagem>()
-                .OwnsOne(p => p.Embalagem);
+            //modelBuilder.Entity<DisponibilidadeDeEmbalagem>()
+            //    .OwnsOne(p => p.Embalagem);
 
             // Cadastro - Materiais - Fornecedores.
 
             modelBuilder.Entity<FornecimentoDeMaterial>()
                 .HasKey(p => new { p.FornecedorId, p.MaterialId });
 
-            modelBuilder.Entity<FornecimentoDeMaterial>()
-                .OwnsOne(p => p.TamanhoMinimoPorPedido);
+            //modelBuilder.Entity<FornecimentoDeMaterial>()
+            //    .OwnsOne(p => p.TamanhoMinimoPorPedido);
 
             modelBuilder.Entity<FornecimentoDeMaterial>()
                 .Property(p => p.UltimoPreco)
@@ -175,12 +174,12 @@ namespace Atelie
                 new UnidadeDeMedida { Sigla = "unid", NomeNoSingular = "Unidade", NomeNoPlural = "Unidades" },
                 new UnidadeDeMedida { Sigla = "m", NomeNoSingular = "Metro", NomeNoPlural = "Metros" },
                 new UnidadeDeMedida { Sigla = "J", NomeNoSingular = "Jarda", NomeNoPlural = "Jardas" },
-                new UnidadeDeMedida { Sigla = "cm", NomeNoSingular = "Centímetro", NomeNoPlural = "Centímetros" },
-                new UnidadeDeMedida { Sigla = "cx", NomeNoSingular = "Caixa", NomeNoPlural = "Caixas" },
-                new UnidadeDeMedida { Sigla = "cn", NomeNoSingular = "Cone", NomeNoPlural = "Cones" },
-                new UnidadeDeMedida { Sigla = "nv", NomeNoSingular = "Novelo", NomeNoPlural = "Novelos" },
-                new UnidadeDeMedida { Sigla = "pc", NomeNoSingular = "Pacote", NomeNoPlural = "Pacotes" },
-                new UnidadeDeMedida { Sigla = "bb", NomeNoSingular = "Bobina", NomeNoPlural = "Bobinas" }
+                new UnidadeDeMedida { Sigla = "cm", NomeNoSingular = "Centímetro", NomeNoPlural = "Centímetros" }
+                //new UnidadeDeMedida { Sigla = "cx", NomeNoSingular = "Caixa", NomeNoPlural = "Caixas" },
+                //new UnidadeDeMedida { Sigla = "cn", NomeNoSingular = "Cone", NomeNoPlural = "Cones" },
+                //new UnidadeDeMedida { Sigla = "nv", NomeNoSingular = "Novelo", NomeNoPlural = "Novelos" },
+                //new UnidadeDeMedida { Sigla = "pc", NomeNoSingular = "Pacote", NomeNoPlural = "Pacotes" },
+                //new UnidadeDeMedida { Sigla = "bb", NomeNoSingular = "Bobina", NomeNoPlural = "Bobinas" }
             );
 
             modelBuilder.Entity<Componente>().HasData(
@@ -248,98 +247,98 @@ namespace Atelie
                 new FabricacaoDeComponente { FabricanteId = 17, ComponenteId = 22 }
             );
 
-            modelBuilder.Entity<Catalogo>().HasData(
-                new Catalogo
-                {
-                    FabricanteId = 10,
-                    ComponenteId = 18,
-                    Nome = "Xik poliéster",
-                    Site = "http://setta.com.br/produto/xik-poliester",
-                    //Embalagens = new HashSet<DisponibilidadeDeEmbalagem>
-                    //{
-                    //    new DisponibilidadeDeEmbalagem { FabricanteId = 15, ComponenteId = 2, CatalogoNome = "Xik poliéster", EmbalagemNome = "Etiqueta 120 - Cones c/ 2000 Jardas", Embalagem = new Embalagem{ UnidadeSigla = "pc", Valor = 10, UnidadeBaseSigla = "cn"  } }
-                    //}
-                },
-                new Catalogo
-                {
-                    FabricanteId = 16,
-                    ComponenteId = 22,
-                    Nome = "Sacos com aba - PEDB (polietileno de baixa densidade)",
-                    Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "+30Cores", Nome = "+30Cores", }
-                    //},
-                },
-                new Catalogo
-                {
-                    FabricanteId = 16,
-                    ComponenteId = 22,
-                    Nome = "Sacos com aba - PEAD (polietileno de alta densidade)",
-                    Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "+30Cores", Nome = "+30Cores", }
-                    //}
-                },
-                new Catalogo
-                {
-                    FabricanteId = 16,
-                    ComponenteId = 22,
-                    Nome = "Sacos com aba - PP (polipropileno)",
-                    Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Padrão", Nome = "Padrão", },
-                    //}
-                },
-                new Catalogo
-                {
-                    FabricanteId = 16,
-                    ComponenteId = 22,
-                    Nome = "Sacos com aba - BOPP (polipropileno bi orientado)",
-                    Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Padrão", Nome = "Padrão", },
-                    //}
-                },
-                new Catalogo
-                {
-                    FabricanteId = 17,
-                    ComponenteId = 22,
-                    Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial",
-                    Site = null,
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 17, ComponenteId = 22, Codigo = "Transparente", Nome = "Plástico fosco transparente", },
-                    //}
-                },
-                new Catalogo
-                {
-                    FabricanteId = 17,
-                    ComponenteId = 22,
-                    Nome = "Sacola em plástico bolha transparente com alça de mão branca",
-                    Site = "https://www.publicoalvoembalagens.com.br/produtos/sacola-em-plastico-bolha-transparente-com-alca-de-mao-branca-/133",
-                    //Cores = new HashSet<CorDeFabricante>
-                    //{
-                    //    new CorDeFabricante { FabricanteId = 17, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
-                    //},
-                    //Embalagens = new HashSet<DisponibilidadeDeEmbalagem>
-                    //{
-                    //    new DisponibilidadeDeEmbalagem { FabricanteId = 15, ComponenteId = 2, CatalogoNome = "" }
-                    //}
-                }
-            );
+            //modelBuilder.Entity<Catalogo>().HasData(
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 10,
+            //        ComponenteId = 18,
+            //        Nome = "Xik poliéster",
+            //        Site = "http://setta.com.br/produto/xik-poliester",
+            //        //Embalagens = new HashSet<DisponibilidadeDeEmbalagem>
+            //        //{
+            //        //    new DisponibilidadeDeEmbalagem { FabricanteId = 15, ComponenteId = 2, CatalogoNome = "Xik poliéster", EmbalagemNome = "Etiqueta 120 - Cones c/ 2000 Jardas", Embalagem = new Embalagem{ UnidadeSigla = "pc", Valor = 10, UnidadeBaseSigla = "cn"  } }
+            //        //}
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 16,
+            //        ComponenteId = 22,
+            //        Nome = "Sacos com aba - PEDB (polietileno de baixa densidade)",
+            //        Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "+30Cores", Nome = "+30Cores", }
+            //        //},
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 16,
+            //        ComponenteId = 22,
+            //        Nome = "Sacos com aba - PEAD (polietileno de alta densidade)",
+            //        Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "+30Cores", Nome = "+30Cores", }
+            //        //}
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 16,
+            //        ComponenteId = 22,
+            //        Nome = "Sacos com aba - PP (polipropileno)",
+            //        Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Padrão", Nome = "Padrão", },
+            //        //}
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 16,
+            //        ComponenteId = 22,
+            //        Nome = "Sacos com aba - BOPP (polipropileno bi orientado)",
+            //        Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba",
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 16, ComponenteId = 22, Codigo = "Padrão", Nome = "Padrão", },
+            //        //}
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 17,
+            //        ComponenteId = 22,
+            //        Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial",
+            //        Site = null,
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 17, ComponenteId = 22, Codigo = "Transparente", Nome = "Plástico fosco transparente", },
+            //        //}
+            //    },
+            //    new Catalogo
+            //    {
+            //        FabricanteId = 17,
+            //        ComponenteId = 22,
+            //        Nome = "Sacola em plástico bolha transparente com alça de mão branca",
+            //        Site = "https://www.publicoalvoembalagens.com.br/produtos/sacola-em-plastico-bolha-transparente-com-alca-de-mao-branca-/133",
+            //        //Cores = new HashSet<CorDeFabricante>
+            //        //{
+            //        //    new CorDeFabricante { FabricanteId = 17, ComponenteId = 22, Codigo = "Transparente", Nome = "Transparente", },
+            //        //},
+            //        //Embalagens = new HashSet<DisponibilidadeDeEmbalagem>
+            //        //{
+            //        //    new DisponibilidadeDeEmbalagem { FabricanteId = 15, ComponenteId = 2, CatalogoNome = "" }
+            //        //}
+            //    }
+            //);
 
-            modelBuilder.Entity<CorDeFabricante>().HasData(
-                new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0011", CatalogoNome = "Xik poliéster", Nome = "Preto", },
-                new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0012", CatalogoNome = "Xik poliéster", Nome = "Marinho Forte", },
-                new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0421", CatalogoNome = "Xik poliéster", Nome = "Fuzil", },
-                new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0428", CatalogoNome = "Xik poliéster", Nome = "Fox", }
-            );
+            //modelBuilder.Entity<CorDeFabricante>().HasData(
+            //    new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0011", CatalogoNome = "Xik poliéster", Nome = "Preto", },
+            //    new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0012", CatalogoNome = "Xik poliéster", Nome = "Marinho Forte", },
+            //    new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0421", CatalogoNome = "Xik poliéster", Nome = "Fuzil", },
+            //    new CorDeFabricante { FabricanteId = 10, ComponenteId = 18, Codigo = "0428", CatalogoNome = "Xik poliéster", Nome = "Fox", }
+            //);
 
             modelBuilder.Entity<Fornecedor>().HasData(
                 new Fornecedor { Id = 1, Nome = "Werner", Site = "https://wernertecidos.com.br" },

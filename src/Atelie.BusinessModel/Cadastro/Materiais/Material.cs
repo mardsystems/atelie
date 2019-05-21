@@ -1,5 +1,7 @@
 ﻿using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
+using Atelie.Cadastro.Materiais.Fornecedores;
+using Atelie.Cadastro.Unidades;
 using System.BusinessModel;
 
 namespace Atelie.Cadastro.Materiais
@@ -12,7 +14,7 @@ namespace Atelie.Cadastro.Materiais
 
         string Descricao { get; }
 
-        decimal? CustoPadrao { get; }
+        //decimal? CustoPadrao { get; }
 
         IFabricante Fabricante { get; }
 
@@ -20,11 +22,17 @@ namespace Atelie.Cadastro.Materiais
 
         //ICatalogo Catalogo { get; }
 
+        string Cor { get; }
+
+        double Tamanho { get; }
+
+        IUnidadeDeMedida Unidade { get; }
+
         /// <summary>
         /// Ex.: Caixa de 2000 jardas - CX(2000J).
         /// </summary>
         //IEmbalagem Embalagem { get; }
 
-        //IFornecimentoDeMaterial[] Fornecedores { get; }
+        IFornecimentoDeMaterial[] Fornecedores { get; }
     }
 }

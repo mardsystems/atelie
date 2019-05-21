@@ -81,12 +81,13 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             try
             {
                 var fabricantes = db.Fabricantes
-                    .Include(p => p.ComponentesFabricados)
-                        .ThenInclude(p => p.Catalogos)
-                            .ThenInclude(p => p.Cores)
-                    .Include(p => p.ComponentesFabricados)
-                        .ThenInclude(p => p.Catalogos)
-                            .ThenInclude(p => p.Embalagens)
+                    //.Include(p => p.ComponentesFabricados)
+                    //    .ThenInclude(p => p.Catalogos)
+                    //        .ThenInclude(p => p.Cores)
+                    //            //.ThenInclude(p => p.CorDeUsoInternoCodigo)
+                    //.Include(p => p.ComponentesFabricados)
+                    //    .ThenInclude(p => p.Catalogos)
+                    //        .ThenInclude(p => p.Embalagens)
                     .Include(p => p.ComponentesFabricados)
                         .ThenInclude(p => p.Componente)
                             .ThenInclude(p => p.UnidadePadrao)

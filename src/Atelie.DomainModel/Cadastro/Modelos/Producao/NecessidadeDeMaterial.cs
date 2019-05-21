@@ -13,11 +13,11 @@ namespace Atelie.Cadastro.Modelos.Producao
 
         public virtual Material Material { get; internal set; }
 
-        public virtual CorDeFabricante Cor { get; internal set; }
+        //public virtual CorDeFabricante Cor { get; internal set; }
 
-        public virtual Tamanho TamanhoDeMaterial { get; internal set; }
+        //public virtual Tamanho TamanhoDeMaterial { get; internal set; }
 
-        public virtual Unidade Unidade { get; internal set; }
+        //public virtual Unidade Unidade { get; internal set; }
 
         public double Quantidade { get; internal set; }
 
@@ -29,10 +29,10 @@ namespace Atelie.Cadastro.Modelos.Producao
 
         IMaterial INecessidadeDeMaterial.Material => Material;
 
-        ICorDeFabricante INecessidadeDeMaterial.Cor => Cor;
+        //ICorDeFabricante INecessidadeDeMaterial.Cor => Cor;
 
-        ITamanho INecessidadeDeMaterial.TamanhoDeMaterial => TamanhoDeMaterial;
+        //ITamanho INecessidadeDeMaterial.TamanhoDeMaterial => TamanhoDeMaterial;
 
-        IUnidade INecessidadeDeMaterial.Unidade => Unidade;
+        //IUnidade INecessidadeDeMaterial.Unidade => Unidade;
     }
 }

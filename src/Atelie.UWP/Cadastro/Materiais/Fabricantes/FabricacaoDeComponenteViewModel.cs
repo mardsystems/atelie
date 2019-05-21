@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atelie.Cadastro.Materiais.Componentes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,29 +24,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public string FabricanteSite { get; set; }
 
-        public CatalogosBindingList Catalogos { get; set; }
-
-        public static FabricacaoDeComponenteViewModel From(IFabricante fabricante, IComponente componente, IFabricacaoDeComponente fabricacaoDeComponente)
-        {
-            var catalogos = fabricacaoDeComponente.Catalogos.Select(p => CatalogoViewModel.From(p, fabricacaoDeComponente, fabricante)).ToList();
-
-            var catalogosBindingList = new CatalogosBindingList(catalogos);
-
-            var viewModel = new FabricacaoDeComponenteViewModel
-            {
-                ComponenteId = componente.Id,
-                ComponenteNome = componente.Nome,
-                //ComponenteUnidadePadraoSigla = componente.UnidadePadrao.Sigla,
-                FabricanteId = fabricante.Id,
-                FabricanteNome = fabricante.Nome,
-                FabricanteMarca = fabricante.Marca,
-                FabricanteSite = fabricante.Site,
-                Catalogos = catalogosBindingList
-                //Periodo = fabricacaoDeComponente.Periodo,
-            };
-
-            return viewModel;
-        }
+        //public CatalogosBindingList Catalogos { get; set; }
 
         public static FabricacaoDeComponenteViewModel From(IFabricacaoDeComponente fabricacaoDeComponente)
         {
@@ -53,23 +32,20 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             //var catalogosBindingList = new CatalogosBindingList(catalogos);
 
-            var viewModel = From(fabricacaoDeComponente.Fabricante, fabricacaoDeComponente.Componente, fabricacaoDeComponente);
+            var viewModel = new FabricacaoDeComponenteViewModel
+            {
+                ComponenteId = fabricacaoDeComponente.Componente.Id,
+                ComponenteNome = fabricacaoDeComponente.Componente.Nome,
+                //ComponenteUnidadePadraoSigla = componente.UnidadePadrao.Sigla,
+                FabricanteId = fabricacaoDeComponente.Fabricante.Id,
+                FabricanteNome = fabricacaoDeComponente.Fabricante.Nome,
+                FabricanteMarca = fabricacaoDeComponente.Fabricante.Marca,
+                FabricanteSite = fabricacaoDeComponente.Fabricante.Site,
+                //Catalogos = catalogosBindingList
+                //Periodo = fabricacaoDeComponente.Periodo,
+            };
 
             return viewModel;
-        }
-
-        public static IList<FabricacaoDeComponenteViewModel> From(IFabricante fabricante, IComponente[] componentes, IFabricacaoDeComponente fabricacaoDeComponente)
-        {
-            var list = new List<FabricacaoDeComponenteViewModel>();
-
-            foreach (var componente in componentes)
-            {
-                var viewModel = From(fabricante, componente, fabricacaoDeComponente);
-
-                list.Add(viewModel);
-            }
-
-            return list;
         }
 
         public void BeginEdit()

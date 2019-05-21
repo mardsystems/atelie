@@ -24,13 +24,13 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public string FabricanteSite { get; set; }
 
-        public CatalogosBindingList Catalogos { get; set; }
+        //public CatalogosBindingList Catalogos { get; set; }
 
         public static FabricacaoDeComponenteViewModel From(IFabricacaoDeComponente fabricacaoDeComponente)
         {
-            var catalogos = fabricacaoDeComponente.Catalogos.Select(p => CatalogoViewModel.From(p)).ToList();
+            //var catalogos = fabricacaoDeComponente.Catalogos.Select(p => CatalogoViewModel.From(p)).ToList();
 
-            var catalogosBindingList = new CatalogosBindingList(catalogos);
+            //var catalogosBindingList = new CatalogosBindingList(catalogos);
 
             var viewModel = new FabricacaoDeComponenteViewModel
             {
@@ -41,7 +41,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
                 FabricanteNome = fabricacaoDeComponente.Fabricante.Nome,
                 FabricanteMarca = fabricacaoDeComponente.Fabricante.Marca,
                 FabricanteSite = fabricacaoDeComponente.Fabricante.Site,
-                Catalogos = catalogosBindingList
+                //Catalogos = catalogosBindingList
                 //Periodo = fabricacaoDeComponente.Periodo,
             };
 

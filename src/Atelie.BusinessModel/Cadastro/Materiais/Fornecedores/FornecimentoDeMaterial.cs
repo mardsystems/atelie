@@ -14,12 +14,12 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
         /// </summary>
         string NomeComercial { get; }
 
-        /// <summary>
-        /// Somente cores do catálogo deste material.
-        /// </summary>
-        ICorDeFabricante Cor { get; }
+        ///// <summary>
+        ///// Somente cores do catálogo deste material.
+        ///// </summary>
+        //ICorDeFabricante Cor { get; }
 
-        ITamanho TamanhoMinimoPorPedido { get; }
+        //ITamanho TamanhoMinimoPorPedido { get; }
 
         decimal? UltimoPreco { get; }
     }

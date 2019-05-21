@@ -13,17 +13,17 @@ namespace Atelie.Cadastro.Modelos.Producao
 
         IMaterial Material { get; }
 
-        ICorDeFabricante Cor { get; }
+        //ICorDeFabricante Cor { get; }
 
-        /// <summary>
-        /// Tamanho do material utilizado.
-        /// </summary>
-        ITamanho TamanhoDeMaterial { get; }
+        ///// <summary>
+        ///// Tamanho do material utilizado.
+        ///// </summary>
+        //double TamanhoDeMaterial { get; }
 
-        /// <summary>
-        /// Ver Tamanho.
-        /// </summary>
-        IUnidade Unidade { get; }
+        ///// <summary>
+        ///// Ver Tamanho.
+        ///// </summary>
+        //IUnidadeDeMedida Unidade { get; }
 
         /// <summary>
         /// Ver Tamanho.

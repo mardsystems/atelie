@@ -11,7 +11,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public virtual Componente Componente { get; internal set; }
 
-        public virtual ICollection<Catalogo> Catalogos { get; internal set; }
+        //public virtual ICollection<Catalogo> Catalogos { get; internal set; }
 
         public FabricacaoDeComponente(
             Fabricante fabricante,
@@ -22,7 +22,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             Componente = componente;
 
-            Catalogos = new HashSet<Catalogo>();
+            //Catalogos = new HashSet<Catalogo>();
 
             #region Infraestrutura
 
@@ -39,7 +39,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         IComponente IFabricacaoDeComponente.Componente => Componente;
 
-        ICatalogo[] IFabricacaoDeComponente.Catalogos => Catalogos.ToArray();
+        //ICatalogo[] IFabricacaoDeComponente.Catalogos => Catalogos.ToArray();
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public FabricacaoDeComponente()
         {
-            Catalogos = new HashSet<Catalogo>();
+            //Catalogos = new HashSet<Catalogo>();
         }
 
         public int FabricanteId { get; internal set; }

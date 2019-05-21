@@ -6,6 +6,6 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
     {
         IDisponibilidadeDeMeioDePagamento[] MeiosDePagamento { get; }
 
-        IFornecimentoDeMaterial[] MateriaisFornecidos { get; }
+        //IFornecimentoDeMaterial[] MateriaisFornecidos { get; }
     }
 }

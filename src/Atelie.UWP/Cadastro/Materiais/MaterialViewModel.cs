@@ -1,4 +1,5 @@
-﻿using Atelie.Cadastro.Materiais.Fabricantes;
+﻿using Atelie.Cadastro.Materiais.Componentes;
+using Atelie.Cadastro.Materiais.Fabricantes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,7 @@ namespace Atelie.Cadastro.Materiais
 
         public string Descricao { get; set; }
 
-        public decimal? CustoPadrao { get; set; }
+        //public decimal? CustoPadrao { get; set; }
 
         int componenteId = 0;
         public int ComponenteId
@@ -59,7 +60,7 @@ namespace Atelie.Cadastro.Materiais
                 Id = material.Id,
                 Nome = material.Nome,
                 Descricao = material.Descricao,
-                CustoPadrao = material.CustoPadrao,
+                //CustoPadrao = material.CustoPadrao,
                 ComponenteId = material.Componente.Id,
                 ComponenteNome = material.Componente.Nome,
                 ComponentePaiId = (material.Componente.ComponentePai == null ? new int?() : material.Componente.ComponentePai.Id),

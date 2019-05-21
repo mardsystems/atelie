@@ -10,17 +10,17 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
 
         public virtual IEnumerable<DisponibilidadeDeMeioDePagamento> MeiosDePagamento { get; internal set; }
 
-        public virtual IEnumerable<FornecimentoDeMaterial> MateriaisFornecidos { get; internal set; }
+        //public virtual IEnumerable<FornecimentoDeMaterial> MateriaisFornecidos { get; internal set; }
 
         IDisponibilidadeDeMeioDePagamento[] IFornecedor.MeiosDePagamento => MeiosDePagamento.ToArray();
 
-        IFornecimentoDeMaterial[] IFornecedor.MateriaisFornecidos => MateriaisFornecidos.ToArray();
+        //IFornecimentoDeMaterial[] IFornecedor.MateriaisFornecidos => MateriaisFornecidos.ToArray();
 
         public Fornecedor()
         {
             MeiosDePagamento = new HashSet<DisponibilidadeDeMeioDePagamento>();
 
-            MateriaisFornecidos = new HashSet<FornecimentoDeMaterial>();
+            //MateriaisFornecidos = new HashSet<FornecimentoDeMaterial>();
         }
     }
 }

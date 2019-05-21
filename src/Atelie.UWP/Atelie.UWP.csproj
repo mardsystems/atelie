@@ -124,9 +124,6 @@
     </Compile>
     <Compile Include="BooleanToValueConverter.cs" />
     <Compile Include="Cadastro\Materiais\Componentes\ComponenteViewModel.cs" />
-    <Compile Include="Cadastro\Materiais\Fabricantes\CatalogoViewModel.cs" />
-    <Compile Include="Cadastro\Materiais\Fabricantes\CorDeFabricanteViewModel.cs" />
-    <Compile Include="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagemViewModel.cs" />
     <Compile Include="Cadastro\Materiais\Fabricantes\FabricacaoDeComponenteViewModel.cs" />
     <Compile Include="Cadastro\Materiais\Fabricantes\FabricantesPage.xaml.cs">
       <DependentUpon>FabricantesPage.xaml</DependentUpon>

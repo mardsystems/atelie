@@ -82,7 +82,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.coresDataGridView = new System.Windows.Forms.DataGridView();
             this.catalogoDeCoresBbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -101,16 +100,17 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.mainImageList = new System.Windows.Forms.ImageList(this.components);
-            this.fabricanteIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componenteIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catalogoNomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoriaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localizacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.custoPadraoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.corDeUsoInternoCodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coresDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainStatusStrip.SuspendLayout();
             this.fabricantesToolStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -144,22 +144,22 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.coresDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoDeCoresBbindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.embalagensDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoDeEmbalagensBindingSource)).BeginInit();
             this.toolStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.coresDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // mainStatusStrip
             // 
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainToolStripStatusLabel});
-            this.mainStatusStrip.Location = new System.Drawing.Point(0, 539);
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 723);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(784, 22);
+            this.mainStatusStrip.Size = new System.Drawing.Size(1413, 22);
             this.mainStatusStrip.TabIndex = 0;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
@@ -186,7 +186,7 @@
             this.helpToolStripButton});
             this.fabricantesToolStrip.Location = new System.Drawing.Point(0, 24);
             this.fabricantesToolStrip.Name = "fabricantesToolStrip";
-            this.fabricantesToolStrip.Size = new System.Drawing.Size(784, 25);
+            this.fabricantesToolStrip.Size = new System.Drawing.Size(1413, 25);
             this.fabricantesToolStrip.TabIndex = 1;
             this.fabricantesToolStrip.Text = "toolStrip1";
             // 
@@ -296,7 +296,7 @@
             this.sistemaToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(784, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1413, 24);
             this.mainMenuStrip.TabIndex = 2;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -321,8 +321,8 @@
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.splitContainer3);
             this.mainSplitContainer.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.mainSplitContainer.Size = new System.Drawing.Size(784, 490);
-            this.mainSplitContainer.SplitterDistance = 441;
+            this.mainSplitContainer.Size = new System.Drawing.Size(1413, 674);
+            this.mainSplitContainer.SplitterDistance = 1070;
             this.mainSplitContainer.TabIndex = 3;
             // 
             // fabricantesDataGridView
@@ -342,7 +342,7 @@
             this.fabricantesDataGridView.Name = "fabricantesDataGridView";
             this.fabricantesDataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
             this.fabricantesDataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            this.fabricantesDataGridView.Size = new System.Drawing.Size(441, 490);
+            this.fabricantesDataGridView.Size = new System.Drawing.Size(1070, 674);
             this.fabricantesDataGridView.TabIndex = 0;
             this.fabricantesDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.FabricantesDataGridView_DataError);
             // 
@@ -394,8 +394,8 @@
             this.splitContainer3.Panel2.AutoScroll = true;
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer1);
             this.splitContainer3.Panel2.Controls.Add(this.comboBox1);
-            this.splitContainer3.Size = new System.Drawing.Size(333, 484);
-            this.splitContainer3.SplitterDistance = 146;
+            this.splitContainer3.Size = new System.Drawing.Size(333, 668);
+            this.splitContainer3.SplitterDistance = 201;
             this.splitContainer3.TabIndex = 3;
             // 
             // componentesFabricadosGroupBox
@@ -406,7 +406,7 @@
             this.componentesFabricadosGroupBox.Location = new System.Drawing.Point(0, 0);
             this.componentesFabricadosGroupBox.Name = "componentesFabricadosGroupBox";
             this.componentesFabricadosGroupBox.Padding = new System.Windows.Forms.Padding(5);
-            this.componentesFabricadosGroupBox.Size = new System.Drawing.Size(333, 146);
+            this.componentesFabricadosGroupBox.Size = new System.Drawing.Size(333, 201);
             this.componentesFabricadosGroupBox.TabIndex = 2;
             this.componentesFabricadosGroupBox.TabStop = false;
             this.componentesFabricadosGroupBox.Text = "Componentes Fabricados";
@@ -430,7 +430,7 @@
             this.componentesFabricadosDataGridView.Name = "componentesFabricadosDataGridView";
             this.componentesFabricadosDataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
             this.componentesFabricadosDataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            this.componentesFabricadosDataGridView.Size = new System.Drawing.Size(323, 98);
+            this.componentesFabricadosDataGridView.Size = new System.Drawing.Size(323, 153);
             this.componentesFabricadosDataGridView.TabIndex = 1;
             this.componentesFabricadosDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.ComponentesFabricadosDataGridView_DataError);
             // 
@@ -520,8 +520,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.catalogoSplitContainer);
-            this.splitContainer1.Size = new System.Drawing.Size(333, 313);
-            this.splitContainer1.SplitterDistance = 156;
+            this.splitContainer1.Size = new System.Drawing.Size(333, 442);
+            this.splitContainer1.SplitterDistance = 220;
             this.splitContainer1.TabIndex = 3;
             // 
             // catalogosDataGridView
@@ -539,7 +539,7 @@
             this.catalogosDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.catalogosDataGridView.Location = new System.Drawing.Point(0, 25);
             this.catalogosDataGridView.Name = "catalogosDataGridView";
-            this.catalogosDataGridView.Size = new System.Drawing.Size(333, 131);
+            this.catalogosDataGridView.Size = new System.Drawing.Size(333, 195);
             this.catalogosDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn17
@@ -569,7 +569,6 @@
             // 
             // catalogosBindingSource
             // 
-            this.catalogosBindingSource.DataMember = "Catalogos";
             this.catalogosBindingSource.DataSource = this.componentesFabricadosBindingSource;
             // 
             // toolStrip3
@@ -604,7 +603,7 @@
             // catalogoSplitContainer.Panel2
             // 
             this.catalogoSplitContainer.Panel2.Controls.Add(this.groupBox2);
-            this.catalogoSplitContainer.Size = new System.Drawing.Size(333, 153);
+            this.catalogoSplitContainer.Size = new System.Drawing.Size(333, 218);
             this.catalogoSplitContainer.SplitterDistance = 183;
             this.catalogoSplitContainer.TabIndex = 2;
             // 
@@ -615,7 +614,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(183, 153);
+            this.groupBox1.Size = new System.Drawing.Size(183, 218);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cores";
@@ -630,7 +629,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(177, 109);
+            this.tabControl1.Size = new System.Drawing.Size(177, 174);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -639,7 +638,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(131, 101);
+            this.tabPage1.Size = new System.Drawing.Size(150, 166);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -649,7 +648,7 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(125, 95);
+            this.listView1.Size = new System.Drawing.Size(144, 160);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -660,37 +659,13 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(131, 101);
+            this.tabPage2.Size = new System.Drawing.Size(150, 166);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // coresDataGridView
-            // 
-            this.coresDataGridView.AutoGenerateColumns = false;
-            this.coresDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.coresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.coresDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.fabricanteIdDataGridViewTextBoxColumn1,
-            this.componenteIdDataGridViewTextBoxColumn1,
-            this.catalogoNomeDataGridViewTextBoxColumn,
-            this.categoriaDataGridViewTextBoxColumn,
-            this.localizacaoDataGridViewTextBoxColumn,
-            this.custoPadraoDataGridViewTextBoxColumn,
-            this.corDeUsoInternoCodigoDataGridViewTextBoxColumn,
-            this.codigoDataGridViewTextBoxColumn,
-            this.nomeDataGridViewTextBoxColumn1,
-            this.stateDataGridViewTextBoxColumn1});
-            this.coresDataGridView.DataSource = this.catalogoDeCoresBbindingSource;
-            this.coresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.coresDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.coresDataGridView.Name = "coresDataGridView";
-            this.coresDataGridView.Size = new System.Drawing.Size(125, 95);
-            this.coresDataGridView.TabIndex = 0;
-            // 
             // catalogoDeCoresBbindingSource
             // 
-            this.catalogoDeCoresBbindingSource.DataMember = "Cores";
             this.catalogoDeCoresBbindingSource.DataSource = this.catalogosBindingSource;
             // 
             // toolStrip1
@@ -719,7 +694,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(146, 153);
+            this.groupBox2.Size = new System.Drawing.Size(146, 218);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Embalagens";
@@ -742,7 +717,7 @@
             this.embalagensDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.embalagensDataGridView.Location = new System.Drawing.Point(3, 41);
             this.embalagensDataGridView.Name = "embalagensDataGridView";
-            this.embalagensDataGridView.Size = new System.Drawing.Size(140, 109);
+            this.embalagensDataGridView.Size = new System.Drawing.Size(140, 174);
             this.embalagensDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn9
@@ -796,7 +771,6 @@
             // 
             // catalogoDeEmbalagensBindingSource
             // 
-            this.catalogoDeEmbalagensBindingSource.DataMember = "Embalagens";
             this.catalogoDeEmbalagensBindingSource.DataSource = this.catalogosBindingSource;
             // 
             // toolStrip2
@@ -836,72 +810,94 @@
             this.mainImageList.TransparentColor = System.Drawing.Color.Transparent;
             this.mainImageList.Images.SetKeyName(0, "Save");
             // 
-            // fabricanteIdDataGridViewTextBoxColumn1
+            // coresDataGridView
             // 
-            this.fabricanteIdDataGridViewTextBoxColumn1.DataPropertyName = "FabricanteId";
-            this.fabricanteIdDataGridViewTextBoxColumn1.HeaderText = "FabricanteId";
-            this.fabricanteIdDataGridViewTextBoxColumn1.Name = "fabricanteIdDataGridViewTextBoxColumn1";
+            this.coresDataGridView.AutoGenerateColumns = false;
+            this.coresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.coresDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22});
+            this.coresDataGridView.DataSource = this.catalogoDeCoresBbindingSource;
+            this.coresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coresDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.coresDataGridView.Name = "coresDataGridView";
+            this.coresDataGridView.Size = new System.Drawing.Size(144, 160);
+            this.coresDataGridView.TabIndex = 0;
             // 
-            // componenteIdDataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumn1
             // 
-            this.componenteIdDataGridViewTextBoxColumn1.DataPropertyName = "ComponenteId";
-            this.componenteIdDataGridViewTextBoxColumn1.HeaderText = "ComponenteId";
-            this.componenteIdDataGridViewTextBoxColumn1.Name = "componenteIdDataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "FabricanteId";
+            this.dataGridViewTextBoxColumn1.HeaderText = "FabricanteId";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // catalogoNomeDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn2
             // 
-            this.catalogoNomeDataGridViewTextBoxColumn.DataPropertyName = "CatalogoNome";
-            this.catalogoNomeDataGridViewTextBoxColumn.HeaderText = "CatalogoNome";
-            this.catalogoNomeDataGridViewTextBoxColumn.Name = "catalogoNomeDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ComponenteId";
+            this.dataGridViewTextBoxColumn2.HeaderText = "ComponenteId";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // categoriaDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn3
             // 
-            this.categoriaDataGridViewTextBoxColumn.DataPropertyName = "Categoria";
-            this.categoriaDataGridViewTextBoxColumn.HeaderText = "Categoria";
-            this.categoriaDataGridViewTextBoxColumn.Name = "categoriaDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "CatalogoNome";
+            this.dataGridViewTextBoxColumn3.HeaderText = "CatalogoNome";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // localizacaoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn4
             // 
-            this.localizacaoDataGridViewTextBoxColumn.DataPropertyName = "Localizacao";
-            this.localizacaoDataGridViewTextBoxColumn.HeaderText = "Localizacao";
-            this.localizacaoDataGridViewTextBoxColumn.Name = "localizacaoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Categoria";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Categoria";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // custoPadraoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn5
             // 
-            this.custoPadraoDataGridViewTextBoxColumn.DataPropertyName = "CustoPadrao";
-            this.custoPadraoDataGridViewTextBoxColumn.HeaderText = "CustoPadrao";
-            this.custoPadraoDataGridViewTextBoxColumn.Name = "custoPadraoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Localizacao";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Localizacao";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // corDeUsoInternoCodigoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn6
             // 
-            this.corDeUsoInternoCodigoDataGridViewTextBoxColumn.DataPropertyName = "CorDeUsoInternoCodigo";
-            this.corDeUsoInternoCodigoDataGridViewTextBoxColumn.HeaderText = "CorDeUsoInternoCodigo";
-            this.corDeUsoInternoCodigoDataGridViewTextBoxColumn.Name = "corDeUsoInternoCodigoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "CustoPadrao";
+            this.dataGridViewTextBoxColumn6.HeaderText = "CustoPadrao";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // codigoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn7
             // 
-            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "CorDeUsoInternoCodigo";
+            this.dataGridViewTextBoxColumn7.HeaderText = "CorDeUsoInternoCodigo";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // nomeDataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumn8
             // 
-            this.nomeDataGridViewTextBoxColumn1.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn1.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn1.Name = "nomeDataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Codigo";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Codigo";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
-            // stateDataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumn21
             // 
-            this.stateDataGridViewTextBoxColumn1.DataPropertyName = "State";
-            this.stateDataGridViewTextBoxColumn1.HeaderText = "State";
-            this.stateDataGridViewTextBoxColumn1.Name = "stateDataGridViewTextBoxColumn1";
-            this.stateDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Nome";
+            this.dataGridViewTextBoxColumn21.HeaderText = "Nome";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "State";
+            this.dataGridViewTextBoxColumn22.HeaderText = "State";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
             // 
             // FabricantesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1413, 745);
             this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.fabricantesToolStrip);
             this.Controls.Add(this.mainStatusStrip);
@@ -951,7 +947,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.coresDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoDeCoresBbindingSource)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -961,6 +956,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.catalogoDeEmbalagensBindingSource)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.coresDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1021,7 +1017,6 @@
         private System.Windows.Forms.BindingSource catalogosBindingSource;
         private System.Windows.Forms.BindingSource catalogoDeCoresBbindingSource;
         private System.Windows.Forms.BindingSource catalogoDeEmbalagensBindingSource;
-        private System.Windows.Forms.DataGridView coresDataGridView;
         private System.Windows.Forms.DataGridView embalagensDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
@@ -1039,15 +1034,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fabricanteIdDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componenteIdDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn catalogoNomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoriaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn localizacaoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn custoPadraoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn corDeUsoInternoCodigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridView coresDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
     }
 }

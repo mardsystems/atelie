@@ -58,6 +58,20 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             set { SetProperty(ref corDeUsoInternoCodigo, value); }
         }
 
+        string codigo = string.Empty;
+        public string Codigo
+        {
+            get { return codigo; }
+            set { SetProperty(ref codigo, value); }
+        }
+
+        string nome = string.Empty;
+        public string Nome
+        {
+            get { return nome; }
+            set { SetProperty(ref nome, value); }
+        }
+
         public FabricacoesDeComponentesBindingList ComponentesFabricados { get; set; }
 
         public CorDeFabricanteViewModel(
@@ -77,7 +91,9 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
                 Categoria = corDeFabricante.Categoria,
                 Localizacao = corDeFabricante.Localizacao,
                 CustoPadrao = corDeFabricante.CustoPadrao,
-                CorDeUsoInternoCodigo = corDeFabricante.CorDeUsoInterno.Codigo,
+                CorDeUsoInternoCodigo = (corDeFabricante.CorDeUsoInterno != null ? corDeFabricante.CorDeUsoInterno.Codigo : null),
+                Codigo = corDeFabricante.Codigo,
+                Nome = corDeFabricante.Nome,
             };
 
             return viewModel;

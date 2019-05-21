@@ -83,7 +83,7 @@ namespace Atelie.Cadastro.Materiais
 
                 nomeTextBox.Text = material.Nome;
 
-                custoPadraoTextBox.Text = material.CustoPadrao.ToString();
+                //custoPadraoTextBox.Text = material.CustoPadrao.ToString();
 
                 descricaoTextBox.Text = material.Descricao;
 

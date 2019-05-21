@@ -84,8 +84,8 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             try
             {
                 var fabricacoesDeComponentes = db.FabricacoesDeComponentes
-                    .Include(p => p.Catalogos)
-                        .ThenInclude(p => p.Cores)
+                    //.Include(p => p.Catalogos)
+                    //    .ThenInclude(p => p.Cores)
                     .ToArrayAsync();
 
                 var observable = fabricacoesDeComponentes.ToObservable();
@@ -106,8 +106,8 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             {
                 var fabricacoesDeComponentes = db.FabricacoesDeComponentes
                     .Where(p => p.FabricanteId == fabricanteId)
-                    .Include(p => p.Catalogos)
-                        .ThenInclude(p => p.Cores)
+                    //.Include(p => p.Catalogos)
+                    //    .ThenInclude(p => p.Cores)
                     .ToArrayAsync();
 
                 var observable = fabricacoesDeComponentes.ToObservable();
@@ -128,8 +128,8 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             {
                 var fabricacoesDeComponentes = db.FabricacoesDeComponentes
                     .Where(p => p.ComponenteId == componenteId)
-                    .Include(p => p.Catalogos)
-                        .ThenInclude(p => p.Cores)
+                    //.Include(p => p.Catalogos)
+                    //    .ThenInclude(p => p.Cores)
                     .ToArrayAsync();
 
                 var observable = fabricacoesDeComponentes.ToObservable();

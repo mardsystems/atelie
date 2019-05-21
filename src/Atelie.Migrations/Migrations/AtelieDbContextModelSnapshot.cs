@@ -19,22 +19,6 @@ namespace Atelie.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Atelie.Cadastro.Cores.CorInterna", b =>
-                {
-                    b.Property<string>("Codigo")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<string>("Nome");
-
-                    b.Property<string>("RGB");
-
-                    b.HasKey("Codigo");
-
-                    b.ToTable("CoresInternas");
-                });
-
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Componentes.Componente", b =>
                 {
                     b.Property<int>("Id")
@@ -350,160 +334,6 @@ namespace Atelie.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.Catalogo", b =>
-                {
-                    b.Property<int>("FabricanteId");
-
-                    b.Property<int>("ComponenteId");
-
-                    b.Property<string>("Nome");
-
-                    b.Property<string>("Site");
-
-                    b.HasKey("FabricanteId", "ComponenteId", "Nome");
-
-                    b.ToTable("Catalogo");
-
-                    b.HasData(
-                        new
-                        {
-                            FabricanteId = 10,
-                            ComponenteId = 18,
-                            Nome = "Xik poliéster",
-                            Site = "http://setta.com.br/produto/xik-poliester"
-                        },
-                        new
-                        {
-                            FabricanteId = 16,
-                            ComponenteId = 22,
-                            Nome = "Sacos com aba - PEDB (polietileno de baixa densidade)",
-                            Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba"
-                        },
-                        new
-                        {
-                            FabricanteId = 16,
-                            ComponenteId = 22,
-                            Nome = "Sacos com aba - PEAD (polietileno de alta densidade)",
-                            Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba"
-                        },
-                        new
-                        {
-                            FabricanteId = 16,
-                            ComponenteId = 22,
-                            Nome = "Sacos com aba - PP (polipropileno)",
-                            Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba"
-                        },
-                        new
-                        {
-                            FabricanteId = 16,
-                            ComponenteId = 22,
-                            Nome = "Sacos com aba - BOPP (polipropileno bi orientado)",
-                            Site = "http://helioplast.com.br/produtos/sacos-plasticos/com-aba"
-                        },
-                        new
-                        {
-                            FabricanteId = 17,
-                            ComponenteId = 22,
-                            Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial"
-                        },
-                        new
-                        {
-                            FabricanteId = 17,
-                            ComponenteId = 22,
-                            Nome = "Sacola em plástico bolha transparente com alça de mão branca",
-                            Site = "https://www.publicoalvoembalagens.com.br/produtos/sacola-em-plastico-bolha-transparente-com-alca-de-mao-branca-/133"
-                        });
-                });
-
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.CorDeFabricante", b =>
-                {
-                    b.Property<int>("FabricanteId");
-
-                    b.Property<int>("ComponenteId");
-
-                    b.Property<string>("CatalogoNome");
-
-                    b.Property<string>("Codigo");
-
-                    b.Property<string>("Categoria");
-
-                    b.Property<string>("CorDeUsoInternoCodigo");
-
-                    b.Property<decimal?>("CustoPadrao")
-                        .HasColumnType("DECIMAL (18, 2)");
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<string>("Localizacao");
-
-                    b.Property<string>("Nome");
-
-                    b.Property<string>("RGB");
-
-                    b.HasKey("FabricanteId", "ComponenteId", "CatalogoNome", "Codigo");
-
-                    b.HasIndex("CorDeUsoInternoCodigo");
-
-                    b.ToTable("CorDeFabricante");
-
-                    b.HasData(
-                        new
-                        {
-                            FabricanteId = 10,
-                            ComponenteId = 18,
-                            CatalogoNome = "Xik poliéster",
-                            Codigo = "0011",
-                            Nome = "Preto"
-                        },
-                        new
-                        {
-                            FabricanteId = 10,
-                            ComponenteId = 18,
-                            CatalogoNome = "Xik poliéster",
-                            Codigo = "0012",
-                            Nome = "Marinho Forte"
-                        },
-                        new
-                        {
-                            FabricanteId = 10,
-                            ComponenteId = 18,
-                            CatalogoNome = "Xik poliéster",
-                            Codigo = "0421",
-                            Nome = "Fuzil"
-                        },
-                        new
-                        {
-                            FabricanteId = 10,
-                            ComponenteId = 18,
-                            CatalogoNome = "Xik poliéster",
-                            Codigo = "0428",
-                            Nome = "Fox"
-                        });
-                });
-
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.DisponibilidadeDeEmbalagem", b =>
-                {
-                    b.Property<int>("FabricanteId");
-
-                    b.Property<int>("ComponenteId");
-
-                    b.Property<string>("CatalogoNome");
-
-                    b.Property<string>("EmbalagemNome");
-
-                    b.Property<int?>("CatalogoComponenteId");
-
-                    b.Property<int?>("CatalogoFabricanteId");
-
-                    b.Property<string>("CatalogoNome1");
-
-                    b.HasKey("FabricanteId", "ComponenteId", "CatalogoNome", "EmbalagemNome");
-
-                    b.HasIndex("CatalogoFabricanteId", "CatalogoComponenteId", "CatalogoNome1");
-
-                    b.ToTable("DisponibilidadeDeEmbalagem");
-                });
-
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.FabricacaoDeComponente", b =>
                 {
                     b.Property<int>("FabricanteId");
@@ -705,14 +535,6 @@ namespace Atelie.Migrations
 
                     b.Property<int>("MaterialId");
 
-                    b.Property<string>("CorCatalogoNome");
-
-                    b.Property<string>("CorCodigo");
-
-                    b.Property<int?>("CorComponenteId");
-
-                    b.Property<int?>("CorFabricanteId");
-
                     b.Property<string>("NomeComercial");
 
                     b.Property<decimal?>("UltimoPreco")
@@ -721,8 +543,6 @@ namespace Atelie.Migrations
                     b.HasKey("FornecedorId", "MaterialId");
 
                     b.HasIndex("MaterialId");
-
-                    b.HasIndex("CorFabricanteId", "CorComponenteId", "CorCatalogoNome", "CorCodigo");
 
                     b.ToTable("FornecimentosDeMateriais");
                 });
@@ -734,6 +554,8 @@ namespace Atelie.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ComponenteId");
+
+                    b.Property<string>("Cor");
 
                     b.Property<string>("CreateBy");
 
@@ -752,6 +574,10 @@ namespace Atelie.Migrations
 
                     b.Property<string>("Nome");
 
+                    b.Property<double>("Tamanho");
+
+                    b.Property<string>("UnidadeSigla");
+
                     b.Property<byte[]>("Version");
 
                     b.HasKey("Id");
@@ -759,6 +585,8 @@ namespace Atelie.Migrations
                     b.HasIndex("ComponenteId");
 
                     b.HasIndex("FabricanteId");
+
+                    b.HasIndex("UnidadeSigla");
 
                     b.ToTable("Materiais");
 
@@ -770,7 +598,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 10,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Linha Xik Poliester 2000J N. 120"
+                            Nome = "Linha Xik Poliester 2000J N. 120",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -779,7 +608,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 10,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Linha Xik Poliester 5000J N. 120"
+                            Nome = "Linha Xik Poliester 5000J N. 120",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -788,7 +618,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 7,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Entretela 2805/325 da marca Lainière, 1,50cmX25cm"
+                            Nome = "Entretela 2805/325 da marca Lainière, 1,50cmX25cm",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -797,7 +628,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 9,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Fio da marca Bonfio 300g"
+                            Nome = "Fio da marca Bonfio 300g",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -806,7 +638,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 3,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Fio Soltex 300g da marca Coats Corrente"
+                            Nome = "Fio Soltex 300g da marca Coats Corrente",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -815,7 +648,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 14,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Tecido artigo 1198/6"
+                            Nome = "Tecido artigo 1198/6",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -824,7 +658,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 14,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Tecido artigo 1198/6 com defeito"
+                            Nome = "Tecido artigo 1198/6 com defeito",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -834,7 +669,8 @@ namespace Atelie.Migrations
                             Descricao = "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta).",
                             FabricanteId = 16,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Sacos com aba - PEAD (polietileno de alta densidade)"
+                            Nome = "Sacos com aba - PEAD (polietileno de alta densidade)",
+                            Tamanho = 0.0
                         },
                         new
                         {
@@ -843,7 +679,8 @@ namespace Atelie.Migrations
                             CreateOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FabricanteId = 17,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial"
+                            Nome = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial",
+                            Tamanho = 0.0
                         });
                 });
 
@@ -1009,36 +846,6 @@ namespace Atelie.Migrations
                             Sigla = "cm",
                             NomeNoPlural = "Centímetros",
                             NomeNoSingular = "Centímetro"
-                        },
-                        new
-                        {
-                            Sigla = "cx",
-                            NomeNoPlural = "Caixas",
-                            NomeNoSingular = "Caixa"
-                        },
-                        new
-                        {
-                            Sigla = "cn",
-                            NomeNoPlural = "Cones",
-                            NomeNoSingular = "Cone"
-                        },
-                        new
-                        {
-                            Sigla = "nv",
-                            NomeNoPlural = "Novelos",
-                            NomeNoSingular = "Novelo"
-                        },
-                        new
-                        {
-                            Sigla = "pc",
-                            NomeNoPlural = "Pacotes",
-                            NomeNoSingular = "Pacote"
-                        },
-                        new
-                        {
-                            Sigla = "bb",
-                            NomeNoPlural = "Bobinas",
-                            NomeNoSingular = "Bobina"
                         });
                 });
 
@@ -1051,71 +858,6 @@ namespace Atelie.Migrations
                     b.HasOne("Atelie.Cadastro.Unidades.UnidadeDeMedida", "UnidadePadrao")
                         .WithMany()
                         .HasForeignKey("UnidadePadraoSigla");
-                });
-
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.Catalogo", b =>
-                {
-                    b.HasOne("Atelie.Cadastro.Materiais.Fabricantes.FabricacaoDeComponente", "FabricacaoDeComponente")
-                        .WithMany("Catalogos")
-                        .HasForeignKey("FabricanteId", "ComponenteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.CorDeFabricante", b =>
-                {
-                    b.HasOne("Atelie.Cadastro.Cores.CorInterna", "CorDeUsoInterno")
-                        .WithMany()
-                        .HasForeignKey("CorDeUsoInternoCodigo");
-
-                    b.HasOne("Atelie.Cadastro.Materiais.Fabricantes.Catalogo", "Catalogo")
-                        .WithMany("Cores")
-                        .HasForeignKey("FabricanteId", "ComponenteId", "CatalogoNome")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.DisponibilidadeDeEmbalagem", b =>
-                {
-                    b.HasOne("Atelie.Cadastro.Materiais.Fabricantes.Catalogo", "Catalogo")
-                        .WithMany("Embalagens")
-                        .HasForeignKey("CatalogoFabricanteId", "CatalogoComponenteId", "CatalogoNome1");
-
-                    b.OwnsOne("Atelie.Cadastro.Materiais.Fabricantes.Embalagem", "Embalagem", b1 =>
-                        {
-                            b1.Property<int>("DisponibilidadeDeEmbalagemFabricanteId");
-
-                            b1.Property<int>("DisponibilidadeDeEmbalagemComponenteId");
-
-                            b1.Property<string>("DisponibilidadeDeEmbalagemCatalogoNome");
-
-                            b1.Property<string>("DisponibilidadeDeEmbalagemEmbalagemNome");
-
-                            b1.Property<string>("UnidadeBaseSigla");
-
-                            b1.Property<string>("UnidadeSigla");
-
-                            b1.Property<double>("Valor");
-
-                            b1.HasKey("DisponibilidadeDeEmbalagemFabricanteId", "DisponibilidadeDeEmbalagemComponenteId", "DisponibilidadeDeEmbalagemCatalogoNome", "DisponibilidadeDeEmbalagemEmbalagemNome");
-
-                            b1.HasIndex("UnidadeBaseSigla");
-
-                            b1.HasIndex("UnidadeSigla");
-
-                            b1.ToTable("DisponibilidadeDeEmbalagem");
-
-                            b1.HasOne("Atelie.Comum.Unidade", "UnidadeBase")
-                                .WithMany()
-                                .HasForeignKey("UnidadeBaseSigla");
-
-                            b1.HasOne("Atelie.Comum.Unidade", "Unidade")
-                                .WithMany()
-                                .HasForeignKey("UnidadeSigla");
-
-                            b1.HasOne("Atelie.Cadastro.Materiais.Fabricantes.DisponibilidadeDeEmbalagem")
-                                .WithOne("Embalagem")
-                                .HasForeignKey("Atelie.Cadastro.Materiais.Fabricantes.Embalagem", "DisponibilidadeDeEmbalagemFabricanteId", "DisponibilidadeDeEmbalagemComponenteId", "DisponibilidadeDeEmbalagemCatalogoNome", "DisponibilidadeDeEmbalagemEmbalagemNome")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.FabricacaoDeComponente", b =>
@@ -1147,44 +889,14 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Fornecedores.FornecimentoDeMaterial", b =>
                 {
                     b.HasOne("Atelie.Cadastro.Materiais.Fornecedores.Fornecedor", "Fornecedor")
-                        .WithMany("MateriaisFornecidos")
+                        .WithMany()
                         .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Atelie.Cadastro.Materiais.Material", "Material")
-                        .WithMany()
+                        .WithMany("Fornecedores")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Atelie.Cadastro.Materiais.Fabricantes.CorDeFabricante", "Cor")
-                        .WithMany()
-                        .HasForeignKey("CorFabricanteId", "CorComponenteId", "CorCatalogoNome", "CorCodigo");
-
-                    b.OwnsOne("Atelie.Cadastro.Unidades.Tamanho", "TamanhoMinimoPorPedido", b1 =>
-                        {
-                            b1.Property<int>("FornecimentoDeMaterialFornecedorId");
-
-                            b1.Property<int>("FornecimentoDeMaterialMaterialId");
-
-                            b1.Property<double>("Quantidade");
-
-                            b1.Property<string>("UnidadeSigla");
-
-                            b1.HasKey("FornecimentoDeMaterialFornecedorId", "FornecimentoDeMaterialMaterialId");
-
-                            b1.HasIndex("UnidadeSigla");
-
-                            b1.ToTable("FornecimentosDeMateriais");
-
-                            b1.HasOne("Atelie.Comum.Unidade", "Unidade")
-                                .WithMany()
-                                .HasForeignKey("UnidadeSigla");
-
-                            b1.HasOne("Atelie.Cadastro.Materiais.Fornecedores.FornecimentoDeMaterial")
-                                .WithOne("TamanhoMinimoPorPedido")
-                                .HasForeignKey("Atelie.Cadastro.Unidades.Tamanho", "FornecimentoDeMaterialFornecedorId", "FornecimentoDeMaterialMaterialId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Material", b =>
@@ -1198,6 +910,10 @@ namespace Atelie.Migrations
                         .WithMany()
                         .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Atelie.Cadastro.Unidades.UnidadeDeMedida", "Unidade")
+                        .WithMany()
+                        .HasForeignKey("UnidadeSigla");
                 });
 
             modelBuilder.Entity("Atelie.Comum.Pessoa", b =>

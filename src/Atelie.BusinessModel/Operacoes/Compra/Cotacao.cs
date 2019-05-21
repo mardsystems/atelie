@@ -16,17 +16,17 @@ namespace Atelie.Operacoes.Compra
 
         IMaterial Material { get; }
 
-        ICorDeFabricante Cor { get; }
+        //ICorDeFabricante Cor { get; }
 
-        /// <summary>
-        /// Ver Tamanho.
-        /// </summary>
-        IUnidade Unidade { get; }
+        ///// <summary>
+        ///// Ver Tamanho.
+        ///// </summary>
+        //IUnidade Unidade { get; }
 
-        /// <summary>
-        /// Ver Tamanho.
-        /// </summary>
-        double Quantidade { get; }
+        ///// <summary>
+        ///// Ver Tamanho.
+        ///// </summary>
+        //double Quantidade { get; }
 
         decimal Valor { get; }
     }

@@ -41,7 +41,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         }
 
-        public static CatalogoViewModel From(ICatalogo catalogo, IFabricacaoDeComponente fabricacaoDeComponente, IFabricante fabricante)
+        public static CatalogoViewModel From(ICatalogo catalogo)
         {
             var cores = catalogo.Cores.Select(p => CorDeFabricanteViewModel.From(p)).ToList();
 
@@ -53,8 +53,8 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             var viewModel = new CatalogoViewModel
             {
-                FabricanteId = fabricante.Id,
-                ComponenteId = fabricacaoDeComponente.Componente.Id,
+                FabricanteId = catalogo.FabricacaoDeComponente.Fabricante.Id,
+                ComponenteId = catalogo.FabricacaoDeComponente.Componente.Id,
                 Nome = catalogo.Nome,
                 Cores = coresBindingList,
                 Embalagens = embalagensBindingList

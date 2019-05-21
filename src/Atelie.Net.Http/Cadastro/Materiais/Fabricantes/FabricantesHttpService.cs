@@ -83,15 +83,16 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
                         {
                             cf.Fabricante = f;
 
-                            foreach (var ct in cf.Catalogos)
-                            {
-                                ct.FabricacaoDeComponente = cf;
+                            //foreach (var ct in cf.Catalogos)
+                            //{
+                            //    ct.FabricacaoDeComponente = cf;
 
-                                foreach (var corf in ct.Cores)
-                                {
-                                    corf.Catalogo = ct;
-                                }
-                            }
+                            //    foreach (var corf in ct.Cores)
+                            //    {
+                            //        corf.Catalogo = ct;
+                            //        //corf.Categoria = cf.Componente;
+                            //    }
+                            //}
                         }
                     }
 

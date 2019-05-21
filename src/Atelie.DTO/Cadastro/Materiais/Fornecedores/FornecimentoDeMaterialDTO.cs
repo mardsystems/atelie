@@ -11,9 +11,9 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
 
         public string NomeComercial { get; set; }
 
-        public CorDeFabricanteDTO Cor { get; set; }
+        //public CorDeFabricanteDTO Cor { get; set; }
 
-        public TamanhoDTO TamanhoMinimoPorPedido { get; set; }
+        //public TamanhoDTO TamanhoMinimoPorPedido { get; set; }
 
         public decimal? UltimoPreco { get; set; }
 
@@ -21,8 +21,8 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
 
         IMaterial IFornecimentoDeMaterial.Material => Material;
 
-        ICorDeFabricante IFornecimentoDeMaterial.Cor => Cor;
+        //ICorDeFabricante IFornecimentoDeMaterial.Cor => Cor;
 
-        ITamanho IFornecimentoDeMaterial.TamanhoMinimoPorPedido => TamanhoMinimoPorPedido;
+        //ITamanho IFornecimentoDeMaterial.TamanhoMinimoPorPedido => TamanhoMinimoPorPedido;
     }
 }

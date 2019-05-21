@@ -41,7 +41,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
         public static FabricanteViewModel From(IFabricante fabricante)
         {
-            var componentesFabricados = fabricante.ComponentesFabricados.Select(p => FabricacaoDeComponenteViewModel.From(fabricante, p.Componente, p)).ToList();
+            var componentesFabricados = fabricante.ComponentesFabricados.Select(p => FabricacaoDeComponenteViewModel.From(p)).ToList();
 
             var componentesFabricadosBindingList = new FabricacoesDeComponentesBindingList(componentesFabricados);
 
