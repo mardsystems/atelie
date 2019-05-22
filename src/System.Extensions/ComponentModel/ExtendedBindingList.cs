@@ -22,18 +22,16 @@ namespace System.ComponentModel
 
         protected override object AddNewCore()
         {
-            var item = (T)base.AddNewCore();
+            var viewModel = (T)base.AddNewCore();
 
-            item.State = ObjectState.New;
+            OnAddNew(viewModel);
 
-            OnAddNew(item);
-
-            return item;
+            return viewModel;
         }
 
-        protected virtual void OnAddNew(T item)
+        protected virtual void OnAddNew(T viewModel)
         {
-
+            viewModel.State = ObjectState.New;
         }
 
         public virtual async Task SaveChanges()

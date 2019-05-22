@@ -8,46 +8,78 @@ namespace Atelie.Decisoes.Comerciais
 {
     public class PlanoComercial : IPlanoComercial
     {
-        public string Id { get; internal set; }
+        public string Id { get; set; }
 
-        public string Nome { get; internal set; }
+        public string Nome { get; set; }
 
-        public decimal ReceitaBrutaMensal { get; internal set; }
+        public decimal ReceitaBrutaMensal { get; set; }
 
-        public decimal CustoFixo { get; internal set; }
+        public decimal CustoFixo { get; set; }
 
-        public decimal CustoFixoPercentual { get; internal set; }
+        public decimal CustoFixoPercentual { get; set; }
 
-        public decimal CustoVariavel { get; internal set; }
+        public decimal CustoVariavel { get; set; }
 
-        public decimal CustoPercentual { get; internal set; }
+        public decimal CustoPercentual { get; set; }
 
-        public decimal Margem { get; internal set; }
+        public decimal Margem { get; set; }
 
-        public decimal MargemPercentual { get; internal set; }
+        public decimal MargemPercentual { get; set; }
 
-        public decimal TaxaDeMarcacao { get; internal set; }
+        public decimal TaxaDeMarcacao
+        {
+            get
+            {
+                return 100 / (100 - (CustoFixoPercentual + CustoVariavel + MargemPercentual));
+            }
+        }
 
-        public virtual ICollection<CustoFixo> CustosFixos { get; internal set; }
+        public virtual ICollection<CustoFixo> CustosFixos { get; set; }
 
-        public virtual ICollection<CustoVariavel> CustosVariaveis { get; internal set; }
+        public virtual ICollection<CustoVariavel> CustosVariaveis { get; set; }
 
-        public virtual ICollection<ItemDePlanoComercial> Itens { get; internal set; }
+        public virtual ICollection<ItemDePlanoComercial> Itens { get; set; }
 
         public PlanoComercial(
             string id,
-            string nome
+            string nome,
+            decimal rendaBrutaMensal,
+            decimal margem
         )
         {
             Id = id;
 
             Nome = nome;
 
+            ReceitaBrutaMensal = rendaBrutaMensal;
+
+            Margem = margem;
+
             CustosFixos = new HashSet<CustoFixo>();
 
             CustosVariaveis = new HashSet<CustoVariavel>();
 
             Itens = new HashSet<ItemDePlanoComercial>();
+        }
+
+        public void DefineNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public void DefineRendaBrutaMensal(decimal rendaBrutaMensal)
+        {
+            ReceitaBrutaMensal = rendaBrutaMensal;
+        }
+
+        public void DefineMargem(decimal margem)
+        {
+            Margem = margem;
+        }
+
+        public void DefineMargemPercentual(decimal margemPercentual)
+        {
+            MargemPercentual = margemPercentual;
         }
 
         #region IPlanoComercial
@@ -72,19 +104,15 @@ namespace Atelie.Decisoes.Comerciais
 
     public class ItemDePlanoComercial : IItemDePlanoComercial
     {
-        public int Id { get; internal set; }
+        public int Id { get; set; }
 
-        public virtual PlanoComercial PlanoComercial { get; internal set; }
+        public virtual PlanoComercial PlanoComercial { get; set; }
 
-        public virtual Modelo Modelo { get; internal set; }
+        public virtual Modelo Modelo { get; set; }
 
-        public virtual CustoDeProducao CustoDeProducao { get; internal set; }
+        public virtual CustoDeProducao CustoDeProducao { get; set; }
 
-        public decimal Margem { get; internal set; }
-
-        public decimal MargemPercentual { get; internal set; }
-
-        public decimal PrecoDeVenda { get; internal set; }
+        public decimal PrecoDeVenda { get; set; }
 
         #region IItemDePlanoComercial
 

@@ -7,7 +7,7 @@ namespace System.ComponentModel
     /// Observable object with INotifyPropertyChanged implemented
     /// </summary>
     public class ObservableObject : INotifyPropertyChanged
-    {
+    {        
         /// <summary>
         /// Sets the property.
         /// </summary>

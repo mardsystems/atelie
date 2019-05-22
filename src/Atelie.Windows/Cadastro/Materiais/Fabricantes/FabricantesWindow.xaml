@@ -20,10 +20,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu VerticalAlignment="Top">
-            <MenuItem Header="Sistema"/>
+            <MenuItem Header="Arquivo"/>
         </Menu>
         <ToolBar VerticalAlignment="Top" Grid.Row="1">
-            <Button Content="Novo Fabricante..."/>
+            <Button Content="Novo Plano Comercial..."/>
         </ToolBar>
         <Grid Grid.Row="2" DataContext="{StaticResource fabricanteViewModelViewSource}">
             <Grid.ColumnDefinitions>

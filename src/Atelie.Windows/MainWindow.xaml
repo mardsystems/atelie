@@ -21,8 +21,10 @@
                 <MenuItem Header="Operações">
                     <MenuItem Header="Compras"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Decisão">
-                    <MenuItem Header="Vendas"></MenuItem>
+                <MenuItem Header="Decisões">
+                    <MenuItem Header="Comerciais">
+                        <MenuItem Header="Planejamento Comercial" x:Name="planejamentoComercialMenuItem" Click="PlanejamentoComercialMenuItem_Click"></MenuItem>
+                    </MenuItem>
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Opções"></MenuItem>

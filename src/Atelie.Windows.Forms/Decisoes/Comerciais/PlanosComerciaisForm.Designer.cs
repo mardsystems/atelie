@@ -30,6 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanosComerciaisForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -65,7 +81,7 @@
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receitaBrutaMensalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RendaBrutaMensal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.custoFixoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.custoFixoPercentualDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.custoVariavelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,7 +91,7 @@
             this.taxaDeMarcacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.planoComercialIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modeloCodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modeloCodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.modeloNomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.custoDeProducaoValorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precoDeVendaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -222,8 +238,20 @@
             // 
             // itensDataGridView
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
+            this.itensDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.itensDataGridView.AutoGenerateColumns = false;
+            this.itensDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.itensDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itensDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(114)))), ((int)(((byte)(196)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itensDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.itensDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itensDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.planoComercialIdDataGridViewTextBoxColumn,
@@ -234,9 +262,20 @@
             this.stateDataGridViewTextBoxColumn1});
             this.itensDataGridView.DataSource = this.itensBindingSource;
             this.itensDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.itensDataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.itensDataGridView.EnableHeadersVisualStyles = false;
+            this.itensDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(169)))), ((int)(((byte)(219)))));
             this.itensDataGridView.Location = new System.Drawing.Point(3, 41);
             this.itensDataGridView.Name = "itensDataGridView";
+            this.itensDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itensDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.itensDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itensDataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
             this.itensDataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             this.itensDataGridView.Size = new System.Drawing.Size(406, 263);
@@ -291,13 +330,25 @@
             // 
             // planoComercialViewModelDataGridView
             // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(225)))), ((int)(((byte)(242)))));
+            this.planoComercialViewModelDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.planoComercialViewModelDataGridView.AutoGenerateColumns = false;
+            this.planoComercialViewModelDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.planoComercialViewModelDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.planoComercialViewModelDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(114)))), ((int)(((byte)(196)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.planoComercialViewModelDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.planoComercialViewModelDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.planoComercialViewModelDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nomeDataGridViewTextBoxColumn,
-            this.receitaBrutaMensalDataGridViewTextBoxColumn,
+            this.RendaBrutaMensal,
             this.custoFixoDataGridViewTextBoxColumn,
             this.custoFixoPercentualDataGridViewTextBoxColumn,
             this.custoVariavelDataGridViewTextBoxColumn,
@@ -308,11 +359,23 @@
             this.stateDataGridViewTextBoxColumn});
             this.planoComercialViewModelDataGridView.DataSource = this.planosComerciaisBindingSource;
             this.planoComercialViewModelDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.planoComercialViewModelDataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.planoComercialViewModelDataGridView.EnableHeadersVisualStyles = false;
+            this.planoComercialViewModelDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(169)))), ((int)(((byte)(219)))));
             this.planoComercialViewModelDataGridView.Location = new System.Drawing.Point(0, 0);
             this.planoComercialViewModelDataGridView.Name = "planoComercialViewModelDataGridView";
+            this.planoComercialViewModelDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.planoComercialViewModelDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.planoComercialViewModelDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.planoComercialViewModelDataGridView.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(220)))), ((int)(((byte)(244)))));
             this.planoComercialViewModelDataGridView.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.planoComercialViewModelDataGridView.RowTemplate.Height = 20;
             this.planoComercialViewModelDataGridView.Size = new System.Drawing.Size(368, 490);
             this.planoComercialViewModelDataGridView.TabIndex = 1;
             // 
@@ -462,6 +525,8 @@
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             this.idDataGridViewTextBoxColumn.HeaderText = "Id";
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 50;
             // 
             // nomeDataGridViewTextBoxColumn
             // 
@@ -469,52 +534,76 @@
             this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
             this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
             // 
-            // receitaBrutaMensalDataGridViewTextBoxColumn
+            // RendaBrutaMensal
             // 
-            this.receitaBrutaMensalDataGridViewTextBoxColumn.DataPropertyName = "ReceitaBrutaMensal";
-            this.receitaBrutaMensalDataGridViewTextBoxColumn.HeaderText = "ReceitaBrutaMensal";
-            this.receitaBrutaMensalDataGridViewTextBoxColumn.Name = "receitaBrutaMensalDataGridViewTextBoxColumn";
+            this.RendaBrutaMensal.DataPropertyName = "RendaBrutaMensal";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.RendaBrutaMensal.DefaultCellStyle = dataGridViewCellStyle8;
+            this.RendaBrutaMensal.HeaderText = "RBM (R$)";
+            this.RendaBrutaMensal.Name = "RendaBrutaMensal";
             // 
             // custoFixoDataGridViewTextBoxColumn
             // 
             this.custoFixoDataGridViewTextBoxColumn.DataPropertyName = "CustoFixo";
-            this.custoFixoDataGridViewTextBoxColumn.HeaderText = "CustoFixo";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.custoFixoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.custoFixoDataGridViewTextBoxColumn.HeaderText = "CF (R$)";
             this.custoFixoDataGridViewTextBoxColumn.Name = "custoFixoDataGridViewTextBoxColumn";
             // 
             // custoFixoPercentualDataGridViewTextBoxColumn
             // 
             this.custoFixoPercentualDataGridViewTextBoxColumn.DataPropertyName = "CustoFixoPercentual";
-            this.custoFixoPercentualDataGridViewTextBoxColumn.HeaderText = "CustoFixoPercentual";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.custoFixoPercentualDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.custoFixoPercentualDataGridViewTextBoxColumn.HeaderText = "CF (%)";
             this.custoFixoPercentualDataGridViewTextBoxColumn.Name = "custoFixoPercentualDataGridViewTextBoxColumn";
             // 
             // custoVariavelDataGridViewTextBoxColumn
             // 
             this.custoVariavelDataGridViewTextBoxColumn.DataPropertyName = "CustoVariavel";
-            this.custoVariavelDataGridViewTextBoxColumn.HeaderText = "CustoVariavel";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.custoVariavelDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.custoVariavelDataGridViewTextBoxColumn.HeaderText = "CV (R$)";
             this.custoVariavelDataGridViewTextBoxColumn.Name = "custoVariavelDataGridViewTextBoxColumn";
             // 
             // custoPercentualDataGridViewTextBoxColumn
             // 
             this.custoPercentualDataGridViewTextBoxColumn.DataPropertyName = "CustoPercentual";
-            this.custoPercentualDataGridViewTextBoxColumn.HeaderText = "CustoPercentual";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.custoPercentualDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            this.custoPercentualDataGridViewTextBoxColumn.HeaderText = "CV (%)";
             this.custoPercentualDataGridViewTextBoxColumn.Name = "custoPercentualDataGridViewTextBoxColumn";
             // 
             // margemDataGridViewTextBoxColumn
             // 
             this.margemDataGridViewTextBoxColumn.DataPropertyName = "Margem";
-            this.margemDataGridViewTextBoxColumn.HeaderText = "Margem";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.margemDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            this.margemDataGridViewTextBoxColumn.HeaderText = "M (R$)";
             this.margemDataGridViewTextBoxColumn.Name = "margemDataGridViewTextBoxColumn";
             // 
             // margemPercentualDataGridViewTextBoxColumn
             // 
             this.margemPercentualDataGridViewTextBoxColumn.DataPropertyName = "MargemPercentual";
-            this.margemPercentualDataGridViewTextBoxColumn.HeaderText = "MargemPercentual";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.margemPercentualDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            this.margemPercentualDataGridViewTextBoxColumn.HeaderText = "M (%)";
             this.margemPercentualDataGridViewTextBoxColumn.Name = "margemPercentualDataGridViewTextBoxColumn";
             // 
             // taxaDeMarcacaoDataGridViewTextBoxColumn
             // 
             this.taxaDeMarcacaoDataGridViewTextBoxColumn.DataPropertyName = "TaxaDeMarcacao";
-            this.taxaDeMarcacaoDataGridViewTextBoxColumn.HeaderText = "TaxaDeMarcacao";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.taxaDeMarcacaoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            this.taxaDeMarcacaoDataGridViewTextBoxColumn.HeaderText = "TM";
             this.taxaDeMarcacaoDataGridViewTextBoxColumn.Name = "taxaDeMarcacaoDataGridViewTextBoxColumn";
             // 
             // stateDataGridViewTextBoxColumn
@@ -527,31 +616,46 @@
             // planoComercialIdDataGridViewTextBoxColumn
             // 
             this.planoComercialIdDataGridViewTextBoxColumn.DataPropertyName = "PlanoComercialId";
-            this.planoComercialIdDataGridViewTextBoxColumn.HeaderText = "PlanoComercialId";
+            this.planoComercialIdDataGridViewTextBoxColumn.HeaderText = "PCI";
             this.planoComercialIdDataGridViewTextBoxColumn.Name = "planoComercialIdDataGridViewTextBoxColumn";
+            this.planoComercialIdDataGridViewTextBoxColumn.Width = 50;
             // 
             // modeloCodigoDataGridViewTextBoxColumn
             // 
             this.modeloCodigoDataGridViewTextBoxColumn.DataPropertyName = "ModeloCodigo";
-            this.modeloCodigoDataGridViewTextBoxColumn.HeaderText = "ModeloCodigo";
+            this.modeloCodigoDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.modeloCodigoDataGridViewTextBoxColumn.HeaderText = "Modelo";
             this.modeloCodigoDataGridViewTextBoxColumn.Name = "modeloCodigoDataGridViewTextBoxColumn";
+            this.modeloCodigoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.modeloCodigoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // modeloNomeDataGridViewTextBoxColumn
             // 
             this.modeloNomeDataGridViewTextBoxColumn.DataPropertyName = "ModeloNome";
-            this.modeloNomeDataGridViewTextBoxColumn.HeaderText = "ModeloNome";
+            this.modeloNomeDataGridViewTextBoxColumn.HeaderText = "Modelo Nome";
             this.modeloNomeDataGridViewTextBoxColumn.Name = "modeloNomeDataGridViewTextBoxColumn";
+            this.modeloNomeDataGridViewTextBoxColumn.Width = 150;
             // 
             // custoDeProducaoValorDataGridViewTextBoxColumn
             // 
             this.custoDeProducaoValorDataGridViewTextBoxColumn.DataPropertyName = "CustoDeProducaoValor";
-            this.custoDeProducaoValorDataGridViewTextBoxColumn.HeaderText = "CustoDeProducaoValor";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.custoDeProducaoValorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.custoDeProducaoValorDataGridViewTextBoxColumn.HeaderText = "CP (R$)";
             this.custoDeProducaoValorDataGridViewTextBoxColumn.Name = "custoDeProducaoValorDataGridViewTextBoxColumn";
             // 
             // precoDeVendaDataGridViewTextBoxColumn
             // 
             this.precoDeVendaDataGridViewTextBoxColumn.DataPropertyName = "PrecoDeVenda";
-            this.precoDeVendaDataGridViewTextBoxColumn.HeaderText = "PrecoDeVenda";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.precoDeVendaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.precoDeVendaDataGridViewTextBoxColumn.HeaderText = "PV (R$)";
             this.precoDeVendaDataGridViewTextBoxColumn.Name = "precoDeVendaDataGridViewTextBoxColumn";
             // 
             // stateDataGridViewTextBoxColumn1
@@ -648,15 +752,9 @@
         private System.Windows.Forms.BindingSource itensBindingSource;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn planoComercialIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modeloCodigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modeloNomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn custoDeProducaoValorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precoDeVendaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receitaBrutaMensalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RendaBrutaMensal;
         private System.Windows.Forms.DataGridViewTextBoxColumn custoFixoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn custoFixoPercentualDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn custoVariavelDataGridViewTextBoxColumn;
@@ -665,5 +763,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn margemPercentualDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taxaDeMarcacaoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn planoComercialIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn modeloCodigoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modeloNomeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custoDeProducaoValorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precoDeVendaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn1;
     }
 }

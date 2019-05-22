@@ -71,7 +71,7 @@ namespace Atelie.Decisoes.Comerciais
 
             if (response.IsSuccessStatusCode)
             {
-                var planosComerciais = response.Content.ReadAsAsync<PlanoComercialDTO[]>();
+                var planosComerciais = response.Content.ReadAsAsync<PlanoComercial[]>();
 
                 observable = planosComerciais.ToObservable();
             }

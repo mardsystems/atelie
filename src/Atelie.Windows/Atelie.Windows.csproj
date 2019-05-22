@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Decisoes\Comerciais\PlanosComerciaisWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +80,9 @@
     </Compile>
     <Compile Include="Cadastro\Materiais\MateriaisWindow.xaml.cs">
       <DependentUpon>MateriaisWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Decisoes\Comerciais\PlanosComerciaisWindow.xaml.cs">
+      <DependentUpon>PlanosComerciaisWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -101,6 +108,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Atelie.Cadastro.Materiais.Fabricantes.FabricanteViewModel.datasource" />
+    <None Include="Properties\DataSources\Atelie.Decisoes.Comerciais.PlanoComercialViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,7 +118,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Decisao\" />
     <Folder Include="Operacoes\" />
   </ItemGroup>
   <ItemGroup>

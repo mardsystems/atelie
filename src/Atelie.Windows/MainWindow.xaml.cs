@@ -1,6 +1,7 @@
 ﻿using Atelie.Cadastro.Materiais;
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
+using Atelie.Decisoes.Comerciais;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,20 @@ namespace Atelie.Windows
             );
 
             fabricantesWindow.Show();
+        }
+
+        private void PlanejamentoComercialMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var consultaDePlanosComerciais = container.GetInstance<IConsultaDePlanosComerciais>();
+
+            var planejamentoComercial = container.GetInstance<IPlanejamentoComercial>();
+
+            var planosComerciaisForm = new PlanosComerciaisWindow(
+                consultaDePlanosComerciais,
+                planejamentoComercial
+            );
+
+            planosComerciaisForm.Show();
         }
     }
 }

@@ -46,10 +46,6 @@ namespace Atelie.Decisoes.Comerciais
 
         public CustoDeProducaoDTO CustoDeProducao { get; set; }
 
-        public decimal Margem { get; set; }
-
-        public decimal MargemPercentual { get; set; }
-
         public decimal PrecoDeVenda { get; set; }
 
         IPlanoComercial IItemDePlanoComercial.PlanoComercial => PlanoComercial;

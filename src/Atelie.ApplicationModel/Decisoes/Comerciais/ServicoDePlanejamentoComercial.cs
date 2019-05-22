@@ -35,7 +35,9 @@ namespace Atelie.Decisoes.Comerciais
 
                 var planoComercial = new PlanoComercial(
                     solicitacao.Id,
-                    solicitacao.Nome
+                    solicitacao.Nome,
+                    solicitacao.ReceitaBrutaMensal,
+                    solicitacao.Margem
                 //solicitacao.Descricao,
                 //solicitacao.CustoPadrao,
                 //fabricante,

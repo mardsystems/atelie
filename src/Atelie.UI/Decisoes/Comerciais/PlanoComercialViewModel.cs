@@ -10,76 +10,108 @@ namespace Atelie.Decisoes.Comerciais
 {
     public class PlanoComercialViewModel : ObservableObject, INotifyPropertyChanged //, IEditableObject
     {
+        protected internal PlanoComercial model;
+
         //public PlanosComerciaisBindingList BindingList { get; internal set; }
 
-        string id = string.Empty;
         public string Id
         {
-            get { return id; }
-            set { SetProperty(ref id, value); }
+            get { return model.Id; }
+            //set
+            //{
+            //    OnPropertyChanged();
+            //}
         }
 
-        string nome = string.Empty;
         public string Nome
         {
-            get { return nome; }
-            set { SetProperty(ref nome, value); }
+            get { return model.Nome; }
+            set
+            {
+                model.DefineNome(value);
+
+                OnPropertyChanged();
+            }
         }
 
-        decimal receitaBrutaMensal = 0;
-        public decimal ReceitaBrutaMensal
+        public decimal RendaBrutaMensal
         {
-            get { return receitaBrutaMensal; }
-            set { SetProperty(ref receitaBrutaMensal, value); }
+            get { return model.ReceitaBrutaMensal; }
+            set
+            {
+                model.DefineRendaBrutaMensal(value);
+
+                OnPropertyChanged();
+            }
         }
 
-        decimal custoFixo = 0;
         public decimal CustoFixo
         {
-            get { return custoFixo; }
-            set { SetProperty(ref custoFixo, value); }
+            get { return model.CustoFixo; }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
 
-        decimal custoFixoPercentual = 0;
         public decimal CustoFixoPercentual
         {
-            get { return custoFixoPercentual; }
-            set { SetProperty(ref custoFixoPercentual, value); }
+            get { return model.CustoFixoPercentual; }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
 
-        decimal custoVariavel = 0;
         public decimal CustoVariavel
         {
-            get { return custoVariavel; }
-            set { SetProperty(ref custoVariavel, value); }
+            get { return model.CustoVariavel; }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
 
-        decimal custoPercentual = 0;
         public decimal CustoPercentual
         {
-            get { return custoPercentual; }
-            set { SetProperty(ref custoPercentual, value); }
+            get { return model.CustoPercentual; }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
 
-        decimal margem = 0;
         public decimal Margem
         {
-            get { return margem; }
-            set { SetProperty(ref margem, value); }
+            get { return model.Margem; }
+            set
+            {
+                model.DefineMargem(value);
+
+                OnPropertyChanged();
+            }
         }
 
-        decimal margemPercentual = 0;
         public decimal MargemPercentual
         {
-            get { return margemPercentual; }
-            set { SetProperty(ref margemPercentual, value); }
+            get { return model.MargemPercentual; }
+            set
+            {
+                model.DefineMargemPercentual(value);
+
+                OnPropertyChanged();
+
+                OnPropertyChanged("TaxaDeMarcacao");
+            }
         }
 
-        decimal taxaDeMarcacao = 0;
         public decimal TaxaDeMarcacao
         {
-            get { return taxaDeMarcacao; }
-            set { SetProperty(ref taxaDeMarcacao, value); }
+            get { return model.TaxaDeMarcacao; }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
 
         public ItensDePlanoComercialBindingList Itens { get; set; }
@@ -92,9 +124,10 @@ namespace Atelie.Decisoes.Comerciais
 
             var viewModel = new PlanoComercialViewModel
             {
-                Id = planoComercial.Id,
+                model = planoComercial as PlanoComercial,
+                //Id = planoComercial.Id,
                 Nome = planoComercial.Nome,
-                ReceitaBrutaMensal = planoComercial.ReceitaBrutaMensal,
+                RendaBrutaMensal = planoComercial.ReceitaBrutaMensal,
                 CustoFixo = planoComercial.CustoFixo,
                 CustoFixoPercentual = planoComercial.CustoFixoPercentual,
                 CustoVariavel = planoComercial.CustoVariavel,
@@ -104,6 +137,8 @@ namespace Atelie.Decisoes.Comerciais
                 TaxaDeMarcacao = planoComercial.TaxaDeMarcacao,
                 Itens = itensDePlanoComercialBindingList
             };
+
+            itensDePlanoComercialBindingList.planoComercial = viewModel;
 
             return viewModel;
         }
@@ -206,11 +241,38 @@ namespace Atelie.Decisoes.Comerciais
 
         }
 
-        protected override void OnAddNew(PlanoComercialViewModel item)
+        //protected override object AddNewCore()
+        //{
+        //    var model = new PlanoComercial(
+        //        Guid.NewGuid().ToString(),
+        //        null,
+        //        6000,
+        //        20
+        //    );
+
+        //    var viewModel = PlanoComercialViewModel.From(model);
+
+        //    OnAddNew(viewModel);
+
+        //    return viewModel;
+        //}
+
+        protected override void OnAddNew(PlanoComercialViewModel viewModel)
         {
             //item.BindingList = this;
 
-            base.OnAddNew(item);
+            var model = new PlanoComercial(
+                            Guid.NewGuid().ToString(),
+                            null,
+                            6000,
+                            20
+                        );
+
+            viewModel.model = model;
+
+            //viewModel.Itens.planoComercial = viewModel;
+
+            base.OnAddNew(viewModel);
         }
 
         public override async Task SaveChanges()
@@ -287,10 +349,19 @@ namespace Atelie.Decisoes.Comerciais
 
     public class ItensDePlanoComercialBindingList : ExtendedBindingList<ItemDePlanoComercialViewModel>
     {
+        protected internal PlanoComercialViewModel planoComercial;
+
         public ItensDePlanoComercialBindingList(IList<ItemDePlanoComercialViewModel> list)
             : base(list)
         {
 
+        }
+
+        protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
+        {
+            viewModel.PlanoComercialId = planoComercial.Id;
+
+            base.OnAddNew(viewModel);
         }
     }
 
