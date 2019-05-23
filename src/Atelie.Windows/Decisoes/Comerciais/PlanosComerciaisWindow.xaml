@@ -4,11 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Atelie.Decisoes.Comerciais"
-        xmlns:local1="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI" x:Class="Atelie.Decisoes.Comerciais.PlanosComerciaisWindow"
+        xmlns:planos="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI" x:Class="Atelie.Decisoes.Comerciais.PlanosComerciaisWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="PlanosComerciaisWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Planos Comerciais" Height="795" Width="1193" Loaded="Window_Loaded"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"    
+    >
     <Window.Resources>
-        <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type local1:PlanoComercialViewModel}, CreateList=True}"/>
+        <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
         <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
     </Window.Resources>
     <Grid>
@@ -18,20 +27,24 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Sistema"/>
         </Menu>
         <ToolBar VerticalAlignment="Top" Grid.Row="1">
             <Button Content="Novo Fabricante..."/>
+            <Button x:Name="saveButton" Content="Salvar" Click="SaveButton_Click"/>
         </ToolBar>
-        <Grid Grid.Row="2" DataContext="{StaticResource planoComercialViewModelViewSource}">
+        <Grid Grid.Row="2" DataContext="{StaticResource planoComercialViewModelViewSource}" Margin="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="planoComercialViewModelDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14" SelectionUnit="Cell">
-                <DataGrid.Style>
+            <DataGrid x:Name="planoComercialViewModelDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14">
+                <!--<DataGrid.Style>
                     <Style TargetType="{x:Type DataGrid}">
                         <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
                     </Style>
@@ -42,30 +55,42 @@
                         <Setter Property="Background" Value="#FF4472C4" />
                         <Setter Property="Foreground" Value="White"/>
                     </Style>
-                </DataGrid.ColumnHeaderStyle>
+                </DataGrid.ColumnHeaderStyle>-->
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>
                     <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome}"/>
-                    <DataGridTextColumn x:Name="custoFixoColumn" Header="Custo Fixo" Binding="{Binding CustoFixo}"/>
-                    <DataGridTextColumn x:Name="custoFixoPercentualColumn" Header="Custo Fixo Percentual" Binding="{Binding CustoFixoPercentual}"/>
-                    <DataGridTextColumn x:Name="custoPercentualColumn" Header="Custo Percentual" Binding="{Binding CustoPercentual}"/>
-                    <DataGridTextColumn x:Name="custoVariavelColumn" Header="Custo Variavel" Binding="{Binding CustoVariavel}"/>
-                    <DataGridTextColumn x:Name="margemColumn" Header="Margem" Binding="{Binding Margem}"/>
-                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="Margem Percentual" Binding="{Binding MargemPercentual}"/>
-                    <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="Renda Bruta Mensal" Binding="{Binding RendaBrutaMensal}"/>
+                    <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="RBM (R$)" Binding="{Binding RendaBrutaMensal}"/>
+                    <DataGridTextColumn x:Name="custoFixoColumn" Header="CF (R$)" Binding="{Binding CustoFixo}"/>
+                    <DataGridTextColumn x:Name="custoFixoPercentualColumn" Header="CF (%)" Binding="{Binding CustoFixoPercentual}"/>
+                    <DataGridTextColumn x:Name="custoVariavelColumn" Header="CV (R$)" Binding="{Binding CustoVariavel}"/>
+                    <DataGridTextColumn x:Name="custoPercentualColumn" Header="CV (%)" Binding="{Binding CustoPercentual}"/>
+                    <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Binding="{Binding Margem}"/>
+                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Binding="{Binding MargemPercentual}"/>
+                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao}"/>
                     <DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>
-                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="Taxa De Marcacao" Binding="{Binding TaxaDeMarcacao}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <GroupBox Grid.Column="2" Header="Componentes Fabricados" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" VerticalAlignment="Top" Width="373">
-                <DataGrid x:Name="itensDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}" Margin="10,10,-2,-12" RowDetailsVisibilityMode="VisibleWhenSelected" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14">
+            <GroupBox Grid.Column="2" Header="Tabela de Preços">
+                <DataGrid x:Name="itensDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <!--<DataGrid.Style>
+                        <Style TargetType="{x:Type DataGrid}">
+                            <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
+                        </Style>
+                    </DataGrid.Style>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontWeight"  Value="Bold" />
+                            <Setter Property="Background" Value="#FF4472C4" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>-->
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="custoDeProducaoValorColumn" Binding="{Binding CustoDeProducaoValor}" Header="Custo De Producao Valor" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="modeloCodigoColumn" Binding="{Binding ModeloCodigo}" Header="Modelo Codigo" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="custoDeProducaoValorColumn" Binding="{Binding CustoDeProducaoValor}" Header="CP (R$)" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="modeloCodigoColumn" Binding="{Binding ModeloCodigo}" Header="Modelo" Width="SizeToHeader"/>
                         <DataGridTextColumn x:Name="modeloNomeColumn" Binding="{Binding ModeloNome}" Header="Modelo Nome" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="Plano Comercial Id" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda}" Header="Preco De Venda" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda}" Header="PV (R$)" Width="SizeToHeader"/>
                         <DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>
                     </DataGrid.Columns>
                 </DataGrid>

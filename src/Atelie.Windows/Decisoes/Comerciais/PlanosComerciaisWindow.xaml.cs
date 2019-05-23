@@ -42,7 +42,7 @@ namespace Atelie.Decisoes.Comerciais
 
             var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
 
-            var bindingList = new PlanosComerciaisBindingList(
+            var observableCollection = new PlanosComerciaisObservableCollection(
                 consultaDePlanosComerciais,
                 planejamentoComercial,
                 list
@@ -50,11 +50,11 @@ namespace Atelie.Decisoes.Comerciais
 
             //planosComerciaisBindingSource.DataSource = bindingList;
 
-            bindingList.StatusChanged += SetStatusBar;
+            observableCollection.StatusChanged += SetStatusBar;
 
-            System.Windows.Data.CollectionViewSource planoComercialViewModelViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            planoComercialViewModelViewSource.Source = bindingList;
+            CollectionViewSource planoComercialViewModelViewSource = ((CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
+
+            planoComercialViewModelViewSource.Source = observableCollection;
         }
 
         private void SetStatusBar(string value)
@@ -64,13 +64,13 @@ namespace Atelie.Decisoes.Comerciais
             //statusBarTimer.Enabled = true;
         }
 
-        private async void SaveToolStripButton_Click(object sender, EventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Data.CollectionViewSource planoComercialViewModelViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
+            CollectionViewSource planoComercialViewModelViewSource = ((CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
 
-            var bindingList = (PlanosComerciaisBindingList)planoComercialViewModelViewSource.Source;
+            var observableCollection = (PlanosComerciaisObservableCollection)planoComercialViewModelViewSource.Source;
 
-            await bindingList.SaveChanges();
+            await observableCollection.SaveChanges();
         }
     }
 }

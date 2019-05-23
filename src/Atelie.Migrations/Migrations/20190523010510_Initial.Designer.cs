@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atelie.Migrations
 {
     [DbContext(typeof(AtelieDbContext))]
-    [Migration("20190521214202_PlanoComercial")]
-    partial class PlanoComercial
+    [Migration("20190523010510_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -950,10 +950,6 @@ namespace Atelie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Margem");
-
-                    b.Property<decimal>("MargemPercentual");
-
                     b.Property<string>("ModeloCodigo");
 
                     b.Property<string>("PlanoComercialId");
@@ -988,9 +984,7 @@ namespace Atelie.Migrations
 
                     b.Property<string>("Nome");
 
-                    b.Property<decimal>("ReceitaBrutaMensal");
-
-                    b.Property<decimal>("TaxaDeMarcacao");
+                    b.Property<decimal>("RendaBrutaMensal");
 
                     b.HasKey("Id");
 

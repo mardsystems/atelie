@@ -9,7 +9,7 @@ namespace Atelie.Decisoes.Comerciais
 
         string Nome { get; }
 
-        decimal ReceitaBrutaMensal { get; }
+        decimal RendaBrutaMensal { get; }
 
         decimal CustoFixo { get; }
 

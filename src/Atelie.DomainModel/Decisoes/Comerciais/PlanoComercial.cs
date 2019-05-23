@@ -12,7 +12,7 @@ namespace Atelie.Decisoes.Comerciais
 
         public string Nome { get; set; }
 
-        public decimal ReceitaBrutaMensal { get; set; }
+        public decimal RendaBrutaMensal { get; set; }
 
         public decimal CustoFixo { get; set; }
 
@@ -51,7 +51,7 @@ namespace Atelie.Decisoes.Comerciais
 
             Nome = nome;
 
-            ReceitaBrutaMensal = rendaBrutaMensal;
+            RendaBrutaMensal = rendaBrutaMensal;
 
             Margem = margem;
 
@@ -69,7 +69,7 @@ namespace Atelie.Decisoes.Comerciais
 
         public void DefineRendaBrutaMensal(decimal rendaBrutaMensal)
         {
-            ReceitaBrutaMensal = rendaBrutaMensal;
+            RendaBrutaMensal = rendaBrutaMensal;
         }
 
         public void DefineMargem(decimal margem)
@@ -112,7 +112,30 @@ namespace Atelie.Decisoes.Comerciais
 
         public virtual CustoDeProducao CustoDeProducao { get; set; }
 
-        public decimal PrecoDeVenda { get; set; }
+        public decimal PrecoDeVenda
+        {
+            get
+            {
+                return CustoDeProducao.Valor * PlanoComercial.TaxaDeMarcacao;
+            }
+        }
+
+        public ItemDePlanoComercial(
+            int id,
+            PlanoComercial planoComercial
+        )
+        {
+            Id = id;
+
+            PlanoComercial = planoComercial;
+
+            CustoDeProducao = new CustoDeProducao();
+        }
+
+        public void DefineCustoDeProducao(decimal valor)
+        {
+            CustoDeProducao = new CustoDeProducao(valor);
+        }
 
         #region IItemDePlanoComercial
 
@@ -123,6 +146,11 @@ namespace Atelie.Decisoes.Comerciais
         ICustoDeProducao IItemDePlanoComercial.CustoDeProducao => CustoDeProducao;
 
         #endregion
+
+        public ItemDePlanoComercial()
+        {
+
+        }
     }
 
     public class CustoFixo : ICusto

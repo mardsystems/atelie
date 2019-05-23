@@ -22,11 +22,11 @@ namespace Atelie.Decisoes.Comerciais
 
                 await db.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: Tratar erros de persistência aqui.
 
-                throw new ApplicationException();
+                throw new ApplicationException($"Erro ao adicionar planoComercial '{planoComercial.Id}'.", ex);
             }
         }
 

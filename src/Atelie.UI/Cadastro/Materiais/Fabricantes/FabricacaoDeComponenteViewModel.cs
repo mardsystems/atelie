@@ -158,12 +158,97 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
         }
     }
 
-    public class FabricacoesDeComponentesObservableCollection : ObservableCollection<FabricacaoDeComponenteViewModel>
+    public class FabricacoesDeComponentesObservableCollection : ExtendedObservableCollection<FabricacaoDeComponenteViewModel>
     {
+        private readonly ICadastroDeFabricacoesDeComponentes cadastroDeFabricacoesDeComponentes;
+
+        public FabricacoesDeComponentesObservableCollection(
+            ICadastroDeFabricacoesDeComponentes cadastroDeFabricacoesDeComponentes,
+            IList<FabricacaoDeComponenteViewModel> list
+        )
+            : base(list)
+        {
+            this.cadastroDeFabricacoesDeComponentes = cadastroDeFabricacoesDeComponentes;
+        }
+
         public FabricacoesDeComponentesObservableCollection(IList<FabricacaoDeComponenteViewModel> list)
             : base(list)
         {
 
+        }
+
+        protected override void OnAddNew(FabricacaoDeComponenteViewModel item)
+        {
+            //item.BindingList = this;
+
+            base.OnAddNew(item);
+        }
+
+        public override async Task SaveChanges()
+        {
+            var newItems = GetItemsBy(ObjectState.New);
+
+            foreach (var newItem in newItems)
+            {
+                var solicitacaoDeCadastroDeFabricacaoDeComponente = new SolicitacaoDeCadastroDeFabricacaoDeComponente
+                {
+                    FabricanteId = newItem.FabricanteId,
+                    ComponenteId = newItem.ComponenteId,
+                };
+
+                try
+                {
+                    var resposta = await cadastroDeFabricacoesDeComponentes.CadastraFabricacaoDeComponente(solicitacaoDeCadastroDeFabricacaoDeComponente);
+
+                    SetStatus($"Nova fabricação do fabricante '{newItem.FabricanteId}' e componente '{newItem.ComponenteId}' cadastrado com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
+
+            //
+
+            var modifiedItems = GetItemsBy(ObjectState.Modified);
+
+            foreach (var modifiedItem in modifiedItems)
+            {
+                var solicitacaoDeCadastroDeFabricacaoDeComponente = new SolicitacaoDeCadastroDeFabricacaoDeComponente
+                {
+                    FabricanteId = modifiedItem.FabricanteId,
+                    ComponenteId = modifiedItem.ComponenteId,
+                };
+
+                try
+                {
+                    var resposta = await cadastroDeFabricacoesDeComponentes.AtualizaFabricacaoDeComponente(modifiedItem.FabricanteId, modifiedItem.ComponenteId, solicitacaoDeCadastroDeFabricacaoDeComponente);
+
+                    SetStatus($"Fabricação do fabricante '{modifiedItem.FabricanteId}' e componente '{modifiedItem.ComponenteId}' atualizado com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
+
+            //
+
+            var deletedItems = GetItemsBy(ObjectState.Deleted);
+
+            foreach (var deletedItem in deletedItems)
+            {
+                try
+                {
+                    await cadastroDeFabricacoesDeComponentes.ExcluiFabricacaoDeComponente(deletedItem.FabricanteId, deletedItem.ComponenteId);
+
+                    SetStatus($"Fabricação do fabricante '{deletedItem.FabricanteId}' e componente '{deletedItem.ComponenteId}' excluído com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
         }
     }
 }

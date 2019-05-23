@@ -30,7 +30,6 @@
                 <MenuItem Header="Opções"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Sair"></MenuItem>
-                <Separator></Separator>
             </MenuItem>
         </Menu>
 

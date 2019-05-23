@@ -948,10 +948,6 @@ namespace Atelie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Margem");
-
-                    b.Property<decimal>("MargemPercentual");
-
                     b.Property<string>("ModeloCodigo");
 
                     b.Property<string>("PlanoComercialId");
@@ -986,9 +982,7 @@ namespace Atelie.Migrations
 
                     b.Property<string>("Nome");
 
-                    b.Property<decimal>("ReceitaBrutaMensal");
-
-                    b.Property<decimal>("TaxaDeMarcacao");
+                    b.Property<decimal>("RendaBrutaMensal");
 
                     b.HasKey("Id");
 

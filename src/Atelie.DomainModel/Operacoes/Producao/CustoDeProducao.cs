@@ -15,5 +15,17 @@ namespace Atelie.Operacoes.Producao
         /// O valor deve ser arrendodado para zero na unidade simples.
         /// </summary>
         public decimal x10 { get { return Math.Round(Valor * 10, 0); } }
+
+        public CustoDeProducao()
+        {
+
+        }
+
+        public CustoDeProducao(decimal valor)
+        {
+            CustoDeComposicao = valor / 2;
+
+            CustoDeConfeccao = valor / 2;
+        }
     }
 }

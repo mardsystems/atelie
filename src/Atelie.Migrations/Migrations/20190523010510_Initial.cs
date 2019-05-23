@@ -24,6 +24,38 @@ namespace Atelie.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FerramentaDeProducao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FerramentaDeProducao", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Investimentos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Tipo = table.Column<int>(nullable: false),
+                    LivrosEObjetos = table.Column<decimal>(nullable: false),
+                    Viagens = table.Column<decimal>(nullable: false),
+                    Materiais = table.Column<decimal>(nullable: false),
+                    MaoDeObra = table.Column<decimal>(nullable: false),
+                    Terceiros = table.Column<decimal>(nullable: false),
+                    CustoTotal = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Investimentos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MeioDePagamento",
                 columns: table => new
                 {
@@ -34,6 +66,19 @@ namespace Atelie.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MeioDePagamento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Modelos",
+                columns: table => new
+                {
+                    Codigo = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    Preco = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Modelos", x => x.Codigo);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,6 +98,51 @@ namespace Atelie.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PlanosComerciais",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    RendaBrutaMensal = table.Column<decimal>(nullable: false),
+                    CustoFixo = table.Column<decimal>(nullable: false),
+                    CustoFixoPercentual = table.Column<decimal>(nullable: false),
+                    CustoVariavel = table.Column<decimal>(nullable: false),
+                    CustoPercentual = table.Column<decimal>(nullable: false),
+                    Margem = table.Column<decimal>(nullable: false),
+                    MargemPercentual = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlanosComerciais", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TamanhoDeModelo",
+                columns: table => new
+                {
+                    Sigla = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    Posicao = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TamanhoDeModelo", x => x.Sigla);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnidadeDeCusto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnidadeDeCusto", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Unidades",
                 columns: table => new
                 {
@@ -64,6 +154,54 @@ namespace Atelie.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Unidades", x => x.Sigla);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AplicacaoDeInvestimento",
+                columns: table => new
+                {
+                    ModeloCodigo = table.Column<string>(nullable: false),
+                    InvestimentoId = table.Column<int>(nullable: false),
+                    ModeloCodigo1 = table.Column<string>(nullable: true),
+                    Peso = table.Column<int>(nullable: false),
+                    CustoProporcional = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AplicacaoDeInvestimento", x => new { x.ModeloCodigo, x.InvestimentoId });
+                    table.ForeignKey(
+                        name: "FK_AplicacaoDeInvestimento_Investimentos_InvestimentoId",
+                        column: x => x.InvestimentoId,
+                        principalTable: "Investimentos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AplicacaoDeInvestimento_Modelos_ModeloCodigo1",
+                        column: x => x.ModeloCodigo1,
+                        principalTable: "Modelos",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EtapaDeProducao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ordem = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(nullable: true),
+                    ModeloCodigo = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EtapaDeProducao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EtapaDeProducao_Modelos_ModeloCodigo",
+                        column: x => x.ModeloCodigo,
+                        principalTable: "Modelos",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -137,6 +275,98 @@ namespace Atelie.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustoFixo",
+                columns: table => new
+                {
+                    Descricao = table.Column<string>(nullable: false),
+                    Valor = table.Column<decimal>(nullable: false),
+                    ValorPercentual = table.Column<decimal>(nullable: false),
+                    PlanoComercialId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustoFixo", x => x.Descricao);
+                    table.ForeignKey(
+                        name: "FK_CustoFixo_PlanosComerciais_PlanoComercialId",
+                        column: x => x.PlanoComercialId,
+                        principalTable: "PlanosComerciais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustoVariavel",
+                columns: table => new
+                {
+                    Descricao = table.Column<string>(nullable: false),
+                    Valor = table.Column<decimal>(nullable: false),
+                    ValorPercentual = table.Column<decimal>(nullable: false),
+                    PlanoComercialId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustoVariavel", x => x.Descricao);
+                    table.ForeignKey(
+                        name: "FK_CustoVariavel_PlanosComerciais_PlanoComercialId",
+                        column: x => x.PlanoComercialId,
+                        principalTable: "PlanosComerciais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemDePlanoComercial",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PlanoComercialId = table.Column<string>(nullable: true),
+                    ModeloCodigo = table.Column<string>(nullable: true),
+                    CustoDeProducao_CustoDeComposicao = table.Column<decimal>(nullable: false),
+                    CustoDeProducao_CustoDeConfeccao = table.Column<decimal>(nullable: false),
+                    PrecoDeVenda = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemDePlanoComercial", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemDePlanoComercial_Modelos_ModeloCodigo",
+                        column: x => x.ModeloCodigo,
+                        principalTable: "Modelos",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ItemDePlanoComercial_PlanosComerciais_PlanoComercialId",
+                        column: x => x.PlanoComercialId,
+                        principalTable: "PlanosComerciais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoDeRecurso",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: true),
+                    Interno = table.Column<bool>(nullable: false),
+                    CustoPadrao = table.Column<decimal>(nullable: true),
+                    MaximoDeHorasPorDia = table.Column<double>(nullable: true),
+                    UnidadeDeCustoId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoDeRecurso", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TipoDeRecurso_UnidadeDeCusto_UnidadeDeCustoId",
+                        column: x => x.UnidadeDeCustoId,
+                        principalTable: "UnidadeDeCusto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Componentes",
                 columns: table => new
                 {
@@ -166,6 +396,59 @@ namespace Atelie.Migrations
                         principalTable: "Unidades",
                         principalColumn: "Sigla",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NecessidadeDeFerramentaDeProducao",
+                columns: table => new
+                {
+                    EtapaDeProducaoId = table.Column<int>(nullable: false),
+                    FerramentaId = table.Column<int>(nullable: false),
+                    Quantidade = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NecessidadeDeFerramentaDeProducao", x => new { x.EtapaDeProducaoId, x.FerramentaId });
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeFerramentaDeProducao_EtapaDeProducao_EtapaDeProducaoId",
+                        column: x => x.EtapaDeProducaoId,
+                        principalTable: "EtapaDeProducao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeFerramentaDeProducao_FerramentaDeProducao_FerramentaId",
+                        column: x => x.FerramentaId,
+                        principalTable: "FerramentaDeProducao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NecessidadeDeTipoDeRecurso",
+                columns: table => new
+                {
+                    EtapaId = table.Column<int>(nullable: false),
+                    TipoDeRecursoId = table.Column<int>(nullable: false),
+                    Tarefa = table.Column<string>(nullable: true),
+                    Quantidade = table.Column<int>(nullable: false),
+                    Tempo = table.Column<double>(nullable: false),
+                    CustoPadrao = table.Column<decimal>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NecessidadeDeTipoDeRecurso", x => new { x.EtapaId, x.TipoDeRecursoId });
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeTipoDeRecurso_EtapaDeProducao_EtapaId",
+                        column: x => x.EtapaId,
+                        principalTable: "EtapaDeProducao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeTipoDeRecurso_TipoDeRecurso_TipoDeRecursoId",
+                        column: x => x.TipoDeRecursoId,
+                        principalTable: "TipoDeRecurso",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,9 +491,9 @@ namespace Atelie.Migrations
                     CustoPadrao = table.Column<decimal>(type: "DECIMAL (18, 2)", nullable: true),
                     Cor = table.Column<string>(nullable: true),
                     Tamanho = table.Column<double>(nullable: false),
-                    UnidadeSigla = table.Column<string>(nullable: true),
                     FabricanteId = table.Column<int>(nullable: false),
-                    ComponenteId = table.Column<int>(nullable: false)
+                    ComponenteId = table.Column<int>(nullable: false),
+                    UnidadeSigla = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -259,6 +542,39 @@ namespace Atelie.Migrations
                         principalTable: "Materiais",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NecessidadeDeMaterial",
+                columns: table => new
+                {
+                    ModeloCodigo = table.Column<string>(nullable: false),
+                    MaterialId = table.Column<int>(nullable: false),
+                    TamanhoDeModeloSigla = table.Column<string>(nullable: true),
+                    Quantidade = table.Column<double>(nullable: false),
+                    CustoPadrao = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NecessidadeDeMaterial", x => new { x.ModeloCodigo, x.MaterialId });
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeMaterial_Materiais_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materiais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeMaterial_Modelos_ModeloCodigo",
+                        column: x => x.ModeloCodigo,
+                        principalTable: "Modelos",
+                        principalColumn: "Codigo",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NecessidadeDeMaterial_TamanhoDeModelo_TamanhoDeModeloSigla",
+                        column: x => x.TamanhoDeModeloSigla,
+                        principalTable: "TamanhoDeModelo",
+                        principalColumn: "Sigla",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -374,9 +690,9 @@ namespace Atelie.Migrations
                 columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
                 values: new object[,]
                 {
-                    { 1, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 2000J N. 120", 0.0, null, null },
-                    { 2, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 5000J N. 120", 0.0, null, null },
-                    { 3, 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", 0.0, null, null }
+                    { 1, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 2000J N. 120", 0.0, "m", null },
+                    { 2, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 5000J N. 120", 0.0, "m", null },
+                    { 3, 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", 0.0, "unid", null }
                 });
 
             migrationBuilder.InsertData(
@@ -404,13 +720,23 @@ namespace Atelie.Migrations
                 columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
                 values: new object[,]
                 {
-                    { 8, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta).", 16, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos com aba - PEAD (polietileno de alta densidade)", 0.0, null, null },
-                    { 9, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 17, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", 0.0, null, null },
-                    { 6, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6", 0.0, null, null },
-                    { 7, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6 com defeito", 0.0, null, null },
-                    { 4, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 9, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio da marca Bonfio 300g", 0.0, null, null },
-                    { 5, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio Soltex 300g da marca Coats Corrente", 0.0, null, null }
+                    { 8, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta).", 16, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos com aba - PEAD (polietileno de alta densidade)", 0.0, "unid", null },
+                    { 9, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 17, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", 0.0, "unid", null },
+                    { 6, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6", 0.0, "m", null },
+                    { 7, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6 com defeito", 0.0, "m", null },
+                    { 4, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 9, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio da marca Bonfio 300g", 0.0, "m", null },
+                    { 5, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio Soltex 300g da marca Coats Corrente", 0.0, "m", null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AplicacaoDeInvestimento_InvestimentoId",
+                table: "AplicacaoDeInvestimento",
+                column: "InvestimentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AplicacaoDeInvestimento_ModeloCodigo1",
+                table: "AplicacaoDeInvestimento",
+                column: "ModeloCodigo1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Componentes_ComponentePaiId",
@@ -433,9 +759,24 @@ namespace Atelie.Migrations
                 column: "PessoaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CustoFixo_PlanoComercialId",
+                table: "CustoFixo",
+                column: "PlanoComercialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustoVariavel_PlanoComercialId",
+                table: "CustoVariavel",
+                column: "PlanoComercialId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DisponibilidadesDeMeiosDePagamento_MeioDePagamentoId",
                 table: "DisponibilidadesDeMeiosDePagamento",
                 column: "MeioDePagamentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EtapaDeProducao_ModeloCodigo",
+                table: "EtapaDeProducao",
+                column: "ModeloCodigo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FabricacoesDeComponentes_ComponenteId",
@@ -446,6 +787,16 @@ namespace Atelie.Migrations
                 name: "IX_FornecimentosDeMateriais_MaterialId",
                 table: "FornecimentosDeMateriais",
                 column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemDePlanoComercial_ModeloCodigo",
+                table: "ItemDePlanoComercial",
+                column: "ModeloCodigo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemDePlanoComercial_PlanoComercialId",
+                table: "ItemDePlanoComercial",
+                column: "PlanoComercialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Materiais_ComponenteId",
@@ -461,15 +812,49 @@ namespace Atelie.Migrations
                 name: "IX_Materiais_UnidadeSigla",
                 table: "Materiais",
                 column: "UnidadeSigla");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NecessidadeDeFerramentaDeProducao_FerramentaId",
+                table: "NecessidadeDeFerramentaDeProducao",
+                column: "FerramentaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NecessidadeDeMaterial_MaterialId",
+                table: "NecessidadeDeMaterial",
+                column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NecessidadeDeMaterial_TamanhoDeModeloSigla",
+                table: "NecessidadeDeMaterial",
+                column: "TamanhoDeModeloSigla");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NecessidadeDeTipoDeRecurso_TipoDeRecursoId",
+                table: "NecessidadeDeTipoDeRecurso",
+                column: "TipoDeRecursoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TipoDeRecurso_UnidadeDeCustoId",
+                table: "TipoDeRecurso",
+                column: "UnidadeDeCustoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AplicacaoDeInvestimento");
+
+            migrationBuilder.DropTable(
                 name: "ContatoDeEmail");
 
             migrationBuilder.DropTable(
                 name: "ContatoDeTelefone");
+
+            migrationBuilder.DropTable(
+                name: "CustoFixo");
+
+            migrationBuilder.DropTable(
+                name: "CustoVariavel");
 
             migrationBuilder.DropTable(
                 name: "DisponibilidadesDeMeiosDePagamento");
@@ -481,19 +866,55 @@ namespace Atelie.Migrations
                 name: "FornecimentosDeMateriais");
 
             migrationBuilder.DropTable(
+                name: "ItemDePlanoComercial");
+
+            migrationBuilder.DropTable(
+                name: "NecessidadeDeFerramentaDeProducao");
+
+            migrationBuilder.DropTable(
+                name: "NecessidadeDeMaterial");
+
+            migrationBuilder.DropTable(
+                name: "NecessidadeDeTipoDeRecurso");
+
+            migrationBuilder.DropTable(
+                name: "Investimentos");
+
+            migrationBuilder.DropTable(
                 name: "MeioDePagamento");
 
             migrationBuilder.DropTable(
                 name: "Pessoas");
 
             migrationBuilder.DropTable(
+                name: "PlanosComerciais");
+
+            migrationBuilder.DropTable(
+                name: "FerramentaDeProducao");
+
+            migrationBuilder.DropTable(
                 name: "Materiais");
+
+            migrationBuilder.DropTable(
+                name: "TamanhoDeModelo");
+
+            migrationBuilder.DropTable(
+                name: "EtapaDeProducao");
+
+            migrationBuilder.DropTable(
+                name: "TipoDeRecurso");
 
             migrationBuilder.DropTable(
                 name: "Componentes");
 
             migrationBuilder.DropTable(
                 name: "Fabricantes");
+
+            migrationBuilder.DropTable(
+                name: "Modelos");
+
+            migrationBuilder.DropTable(
+                name: "UnidadeDeCusto");
 
             migrationBuilder.DropTable(
                 name: "Unidades");

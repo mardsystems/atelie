@@ -36,7 +36,7 @@ namespace Atelie.Decisoes.Comerciais
 
         public decimal RendaBrutaMensal
         {
-            get { return model.ReceitaBrutaMensal; }
+            get { return model.RendaBrutaMensal; }
             set
             {
                 model.DefineRendaBrutaMensal(value);
@@ -114,20 +114,27 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
-        public ItensDePlanoComercialBindingList Itens { get; set; }
+        public ItensDePlanoComercialObservableCollection Itens { get; set; }
+
+        public PlanoComercialViewModel()
+        {
+            Itens = new ItensDePlanoComercialObservableCollection(new List<ItemDePlanoComercialViewModel>() { });
+
+            Itens.planoComercial = this;
+        }
 
         public static PlanoComercialViewModel From(IPlanoComercial planoComercial)
         {
             var itensDePlanoComercial = planoComercial.Itens.Select(p => ItemDePlanoComercialViewModel.From(p)).ToList();
 
-            var itensDePlanoComercialBindingList = new ItensDePlanoComercialBindingList(itensDePlanoComercial);
+            var itensDePlanoComercialObservableCollection = new ItensDePlanoComercialObservableCollection(itensDePlanoComercial);
 
             var viewModel = new PlanoComercialViewModel
             {
                 model = planoComercial as PlanoComercial,
                 //Id = planoComercial.Id,
                 Nome = planoComercial.Nome,
-                RendaBrutaMensal = planoComercial.ReceitaBrutaMensal,
+                RendaBrutaMensal = planoComercial.RendaBrutaMensal,
                 CustoFixo = planoComercial.CustoFixo,
                 CustoFixoPercentual = planoComercial.CustoFixoPercentual,
                 CustoVariavel = planoComercial.CustoVariavel,
@@ -135,10 +142,10 @@ namespace Atelie.Decisoes.Comerciais
                 Margem = planoComercial.Margem,
                 MargemPercentual = planoComercial.MargemPercentual,
                 TaxaDeMarcacao = planoComercial.TaxaDeMarcacao,
-                Itens = itensDePlanoComercialBindingList
+                Itens = itensDePlanoComercialObservableCollection
             };
 
-            itensDePlanoComercialBindingList.planoComercial = viewModel;
+            itensDePlanoComercialObservableCollection.planoComercial = viewModel;
 
             return viewModel;
         }
@@ -161,11 +168,11 @@ namespace Atelie.Decisoes.Comerciais
 
     public class ItemDePlanoComercialViewModel : ObservableObject //, IEditableObject
     {
-        string planoComercialId = string.Empty;
+        protected internal ItemDePlanoComercial model;
+
         public string PlanoComercialId
         {
-            get { return planoComercialId; }
-            set { SetProperty(ref planoComercialId, value); }
+            get { return model.PlanoComercial.Id; }
         }
 
         string modeloCodigo = string.Empty;
@@ -182,25 +189,39 @@ namespace Atelie.Decisoes.Comerciais
             set { SetProperty(ref modeloNome, value); }
         }
 
-        decimal custoDeProducaoValor = 0;
         public decimal CustoDeProducaoValor
         {
-            get { return custoDeProducaoValor; }
-            set { SetProperty(ref custoDeProducaoValor, value); }
+            get { return model.CustoDeProducao.Valor; }
+            set
+            {
+                model.DefineCustoDeProducao(value);
+
+                OnPropertyChanged();
+
+                OnPropertyChanged("PrecoDeVenda");
+            }
         }
 
-        decimal precoDeVenda = 0;
         public decimal PrecoDeVenda
         {
-            get { return precoDeVenda; }
-            set { SetProperty(ref precoDeVenda, value); }
+            get { return model.PrecoDeVenda; }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public ItemDePlanoComercialViewModel()
+        {
+
         }
 
         public static ItemDePlanoComercialViewModel From(IItemDePlanoComercial itemDePlanoComercial)
         {
             var viewModel = new ItemDePlanoComercialViewModel
             {
-                PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
+                model = itemDePlanoComercial as ItemDePlanoComercial,
+                //PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
                 ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
                 ModeloNome = itemDePlanoComercial.Modelo.Nome,
                 CustoDeProducaoValor = itemDePlanoComercial.CustoDeProducao.Valor,
@@ -359,18 +380,170 @@ namespace Atelie.Decisoes.Comerciais
 
         protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
         {
-            viewModel.PlanoComercialId = planoComercial.Id;
+            //viewModel.model = planoComercial;
 
             base.OnAddNew(viewModel);
         }
     }
 
-    public class PlanosComerciaisObservableCollection : ObservableCollection<PlanoComercialViewModel>
+    public class PlanosComerciaisObservableCollection : ExtendedObservableCollection<PlanoComercialViewModel>
     {
+        private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
+
+        private readonly IPlanejamentoComercial planejamentoComercial;
+
+        public PlanosComerciaisObservableCollection()
+            : base()
+        {
+
+        }
+
+        public PlanosComerciaisObservableCollection(
+            IConsultaDePlanosComerciais consultaDePlanosComerciais,
+            IPlanejamentoComercial planejamentoComercial,
+            IList<PlanoComercialViewModel> list
+        )
+            : base(list)
+        {
+            this.consultaDePlanosComerciais = consultaDePlanosComerciais;
+
+            this.planejamentoComercial = planejamentoComercial;
+        }
+
         public PlanosComerciaisObservableCollection(IList<PlanoComercialViewModel> list)
             : base(list)
         {
 
+        }
+
+        //protected override object AddNewCore()
+        //{
+        //    var model = new PlanoComercial(
+        //        Guid.NewGuid().ToString(),
+        //        null,
+        //        6000,
+        //        20
+        //    );
+
+        //    var viewModel = PlanoComercialViewModel.From(model);
+
+        //    OnAddNew(viewModel);
+
+        //    return viewModel;
+        //}
+
+        protected override void OnAddNew(PlanoComercialViewModel viewModel)
+        {
+            //item.BindingList = this;
+
+            var model = new PlanoComercial(
+                            Guid.NewGuid().ToString(),
+                            null,
+                            6000,
+                            20
+                        );
+
+            viewModel.model = model;
+
+            //viewModel.Itens.planoComercial = viewModel;
+
+            base.OnAddNew(viewModel);
+        }
+
+        public override async Task SaveChanges()
+        {
+            var newItems = GetItemsBy(ObjectState.New);
+
+            foreach (var newItem in newItems)
+            {
+                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
+                {
+                    Id = newItem.Id,
+                    Nome = newItem.Nome,
+                    //ComponenteId = newItem.ComponenteId,
+                    //FabricanteId = newItem.FabricanteId,
+                };
+
+                try
+                {
+                    var resposta = await planejamentoComercial.CriaPlanoComercial(solicitacaoDeCadastroDePlanoComercial);
+
+                    SetStatus($"Novo planoComercial '{resposta.Id}' cadastrado com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
+
+            //
+
+            var modifiedItems = GetItemsBy(ObjectState.Modified);
+
+            foreach (var modifiedItem in modifiedItems)
+            {
+                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
+                {
+                    Id = modifiedItem.Id,
+                    Nome = modifiedItem.Nome,
+                    //ComponenteId = modifiedItem.ComponenteId,
+                    //FabricanteId = modifiedItem.FabricanteId,
+                };
+
+                try
+                {
+                    var resposta = await planejamentoComercial.AtualizaPlanoComercial(modifiedItem.Id, solicitacaoDeCadastroDePlanoComercial);
+
+                    SetStatus($"PlanoComercial '{resposta.Id}' atualizado com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
+
+            //
+
+            var deletedItems = GetItemsBy(ObjectState.Deleted);
+
+            foreach (var deletedItem in deletedItems)
+            {
+                try
+                {
+                    await planejamentoComercial.ExcluiPlanoComercial(deletedItem.Id);
+
+                    SetStatus($"PlanoComercial '{deletedItem.Id}' excluído com sucesso.");
+                }
+                catch (Exception ex)
+                {
+                    SetStatus(ex.Message);
+                }
+            }
+        }
+    }
+
+    public class ItensDePlanoComercialObservableCollection : ExtendedObservableCollection<ItemDePlanoComercialViewModel>
+    {
+        protected internal PlanoComercialViewModel planoComercial;
+
+        public ItensDePlanoComercialObservableCollection(IList<ItemDePlanoComercialViewModel> list)
+            : base(list)
+        {
+
+        }
+
+        protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
+        {
+            var model = new ItemDePlanoComercial(
+                0,
+                planoComercial.model
+            );
+
+            viewModel.model = model;
+
+            //viewModel.PlanoComercialId = planoComercial.Id;
+
+            base.OnAddNew(viewModel);
         }
     }
 }
