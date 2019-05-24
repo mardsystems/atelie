@@ -2,6 +2,7 @@
 using Atelie.Cadastro.Materiais.Componentes;
 using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Decisoes.Comerciais;
+using MahApps.Metro.Controls;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Atelie.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         readonly Container container;
 

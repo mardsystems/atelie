@@ -1,8 +1,9 @@
-﻿<Window
+﻿<controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:Atelie.Decisoes.Comerciais"
         xmlns:planos="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI" x:Class="Atelie.Decisoes.Comerciais.PlanosComerciaisWindow"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -17,8 +18,13 @@
         FontFamily="{DynamicResource MaterialDesignFont}"    
     >
     <Window.Resources>
-        <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
-        <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
+            <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -43,19 +49,43 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="planoComercialViewModelDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14">
+            <DataGrid x:Name="planoComercialViewModelDataGrid" AlternatingRowBackground="#FFD9E1F2"  RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                        <Style.Triggers>
+                             <!--Order of these triggers matter as the last one will take precedence-->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                     <!--When the cell is selected, switching to transparent to let the row's Background be visible-->
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 <!--<DataGrid.Style>
                     <Style TargetType="{x:Type DataGrid}">
                         <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
                     </Style>
                 </DataGrid.Style>
+                -->
                 <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                         <Setter Property="FontWeight"  Value="Bold" />
                         <Setter Property="Background" Value="#FF4472C4" />
                         <Setter Property="Foreground" Value="White"/>
                     </Style>
-                </DataGrid.ColumnHeaderStyle>-->
+                </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>
                     <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome}"/>
@@ -71,7 +101,15 @@
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <GroupBox Grid.Column="2" Header="Tabela de Preços">
+            <GroupBox Grid.Column="2" Header="Tabela de Preços" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ImageArea" Height="32" Width="32" VerticalAlignment="Center" />
+                            <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
                 <DataGrid x:Name="itensDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                     <!--<DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}">
@@ -100,4 +138,4 @@
             <Label Content="Pronto."/>
         </StatusBar>
     </Grid>
-</Window>
+</controls:MetroWindow>

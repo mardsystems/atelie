@@ -18,7 +18,7 @@ namespace Atelie.Decisoes.Comerciais
     /// <summary>
     /// Interaction logic for PlanosComerciaisWindow.xaml
     /// </summary>
-    public partial class PlanosComerciaisWindow : Window
+    public partial class PlanosComerciaisWindow
     {
         private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
 
