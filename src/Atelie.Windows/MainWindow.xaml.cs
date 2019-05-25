@@ -4,6 +4,7 @@ using Atelie.Cadastro.Materiais.Fabricantes;
 using Atelie.Decisoes.Comerciais;
 using MahApps.Metro.Controls;
 using SimpleInjector;
+using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,34 @@ namespace Atelie.Windows
 
             container = new Container();
 
+            //container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             container.RegisterPackages(assemblies);
+
+            container.Verify();
+
+            //// Build an IServiceProvider with DbContext pooling and resolve a scope factory.
+            //var scopeFactory = new ServiceCollection()
+            //    .AddDbContextPool<BloggingContext>(o => o.UseSqlServer(connectionString))
+            //    .BuildServiceProvider(validateScopes: true)
+            //    .GetRequiredService<IServiceScopeFactory>();
+
+            //// Use that scope factory to register an IServiceScope into Simple Injector
+            //container.Register<IServiceScope>(scopeFactory.CreateScope, Lifestyle.Scoped);
+
+            //// Cross wire the DbContext by resolving the IServiceScope and requesting the
+            //// DbContext from that scope.
+            //container.Register(() => container.GetInstance<IServiceScope>().ServiceProvider
+            //    .GetService<BloggingContext>(),
+            //    Lifestyle.Scoped);
+
+            //// Start using Simple Injector as usual:
+            //using (AsyncScopedLifestyle.BeginScope(container))
+            //{
+            //    var c = container.GetInstance<SomeComponentDependingOnBloggingContext>();
+            //}
         }
 
         private void CadastroDeFabricantesMenuItem_Click(object sender, RoutedEventArgs e)
@@ -60,13 +86,16 @@ namespace Atelie.Windows
 
         private void PlanejamentoComercialMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var consultaDePlanosComerciais = container.GetInstance<IConsultaDePlanosComerciais>();
+            var planosComerciaisLocalService = container.GetInstance<PlanosComerciaisLocalService>();
 
-            var planejamentoComercial = container.GetInstance<IPlanejamentoComercial>();
+            //var consultaDePlanosComerciais = container.GetInstance<IConsultaDePlanosComerciais>();
+
+            //var planejamentoComercial = container.GetInstance<IPlanejamentoComercial>();
 
             var planosComerciaisForm = new PlanosComerciaisWindow(
-                consultaDePlanosComerciais,
-                planejamentoComercial
+                planosComerciaisLocalService
+                //consultaDePlanosComerciais,
+                //planejamentoComercial
             );
 
             planosComerciaisForm.Show();

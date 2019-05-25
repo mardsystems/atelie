@@ -20,31 +20,37 @@ namespace Atelie.Decisoes.Comerciais
     /// </summary>
     public partial class PlanosComerciaisWindow
     {
-        private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
+        private readonly PlanosComerciaisLocalService planosComerciaisLocalService;
 
-        private readonly IPlanejamentoComercial planejamentoComercial;
+        //private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
+
+        //private readonly IPlanejamentoComercial planejamentoComercial;
 
         public PlanosComerciaisWindow(
-            IConsultaDePlanosComerciais consultaDePlanosComerciais,
-            IPlanejamentoComercial planejamentoComercial
+            PlanosComerciaisLocalService planosComerciaisLocalService
+            //IConsultaDePlanosComerciais consultaDePlanosComerciais,
+            //IPlanejamentoComercial planejamentoComercial
         )
         {
-            this.consultaDePlanosComerciais = consultaDePlanosComerciais;
+            this.planosComerciaisLocalService = planosComerciaisLocalService;
 
-            this.planejamentoComercial = planejamentoComercial;
+            //this.consultaDePlanosComerciais = consultaDePlanosComerciais;
+
+            //this.planejamentoComercial = planejamentoComercial;
 
             InitializeComponent();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var planosComerciais = await consultaDePlanosComerciais.ObtemObservavelDePlanosComerciais();
+            var planosComerciais = await ((IConsultaDePlanosComerciais)planosComerciaisLocalService).ObtemObservavelDePlanosComerciais();
 
             var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
 
             var observableCollection = new PlanosComerciaisObservableCollection(
-                consultaDePlanosComerciais,
-                planejamentoComercial,
+                planosComerciaisLocalService,
+                //consultaDePlanosComerciais,
+                //planejamentoComercial,
                 list
             );
 

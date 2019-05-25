@@ -1,4 +1,5 @@
-﻿using SimpleInjector;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleInjector;
 using SimpleInjector.Packaging;
 using System;
 using System.Configuration;
@@ -24,6 +25,14 @@ namespace Atelie
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
             container.RegisterInstance(client);
+
+            //
+
+            var connectionString = ConfigurationManager.ConnectionStrings["Atelie"].ToString();
+
+            var builder = new DbContextOptionsBuilder<AtelieDbContext>();
+
+            container.Register(() => new AtelieDbContext(builder.UseSqlite(connectionString).Options), Lifestyle.Singleton);
         }
     }
 }

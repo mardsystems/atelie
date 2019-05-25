@@ -126,9 +126,17 @@
       <Project>{e4bc24b0-aca7-4ae3-9c82-a7c1efeba4e1}</Project>
       <Name>Atelie.BusinessModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj">
+      <Project>{18480afd-aa24-47d7-b2b6-a1922a39142e}</Project>
+      <Name>Atelie.DomainModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Atelie.Infrastructure.Client\Atelie.Infrastructure.Client.csproj">
       <Project>{05c20511-e761-4578-8fa4-55ea4c2ea04c}</Project>
       <Name>Atelie.Infrastructure.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atelie.Migrations\Atelie.Migrations.csproj">
+      <Project>{c4753d04-7509-483b-9862-ba2fbeb845cb}</Project>
+      <Name>Atelie.Migrations</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atelie.UI\Atelie.UI.csproj">
       <Project>{559205d1-a209-4f0b-8a69-0fa7bf6c70c7}</Project>
@@ -155,6 +163,12 @@
     </PackageReference>
     <PackageReference Include="MaterialDesignThemes.MahApps">
       <Version>0.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <Version>2.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
+      <Version>2.2.4</Version>
     </PackageReference>
     <PackageReference Include="SimpleInjector">
       <Version>4.6.0</Version>

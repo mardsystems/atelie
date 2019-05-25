@@ -7,9 +7,9 @@ namespace Atelie.Decisoes.Comerciais
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IPlanejamentoComercial, PlanosComerciaisHttpService>();
+            container.Register<PlanosComerciaisLocalService>();
 
-            container.Register<IConsultaDePlanosComerciais, PlanosComerciaisHttpService>();
+            container.Register<PlanosComerciaisHttpService>();
         }
     }
 }

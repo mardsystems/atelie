@@ -14,6 +14,11 @@ namespace Atelie.Decisoes.Comerciais
             this.db = db;
         }
 
+        public async Task SaveChanges()
+        {
+            await db.SaveChangesAsync();
+        }
+
         public async Task Add(PlanoComercial planoComercial)
         {
             try

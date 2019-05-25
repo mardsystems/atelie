@@ -43,6 +43,11 @@ namespace Atelie
 
         public DbSet<PlanoComercial> PlanosComerciais { get; set; }
 
+        //public AtelieDbContext()
+        //{
+
+        //}
+
         public AtelieDbContext(DbContextOptions options)
             : base(options)
         {

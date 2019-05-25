@@ -3,29 +3,23 @@ using System;
 using Atelie;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Atelie.Migrations
 {
     [DbContext(typeof(AtelieDbContext))]
-    [Migration("20190523010510_Initial")]
-    partial class Initial
+    partial class AtelieDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Componentes.Componente", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ComponentePaiId");
 
@@ -384,8 +378,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Fabricantes.Fabricante", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Marca");
 
@@ -552,8 +545,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Materiais.Material", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("ComponenteId");
 
@@ -719,8 +711,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Modelos.Investimentos.Investimento", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("CustoTotal");
 
@@ -758,8 +749,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.EtapaDeProducao", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Descricao");
 
@@ -777,8 +767,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Modelos.Producao.Ferramentas.FerramentaDeProducao", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Nome");
 
@@ -861,8 +850,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Recursos.TipoDeRecurso", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<decimal?>("CustoPadrao");
 
@@ -884,8 +872,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Cadastro.Recursos.UnidadeDeCusto", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Nome");
 
@@ -897,8 +884,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Comum.Comercial.MeioDePagamento", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Nome");
 
@@ -910,8 +896,7 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Comum.Pessoa", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
@@ -947,14 +932,11 @@ namespace Atelie.Migrations
             modelBuilder.Entity("Atelie.Decisoes.Comerciais.ItemDePlanoComercial", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ModeloCodigo");
 
                     b.Property<string>("PlanoComercialId");
-
-                    b.Property<decimal>("PrecoDeVenda");
 
                     b.HasKey("Id");
 
@@ -1247,8 +1229,7 @@ namespace Atelie.Migrations
                     b.OwnsMany("Atelie.Comum.ContatoDeEmail", "ContatosDeEmail", b1 =>
                         {
                             b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Nome");
 
@@ -1269,9 +1250,7 @@ namespace Atelie.Migrations
 
                             b1.OwnsOne("Atelie.Comum.Email", "Email", b2 =>
                                 {
-                                    b2.Property<int>("ContatoDeEmailId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                    b2.Property<int>("ContatoDeEmailId");
 
                                     b2.Property<string>("Endereco");
 
@@ -1289,8 +1268,7 @@ namespace Atelie.Migrations
                     b.OwnsMany("Atelie.Comum.ContatoDeTelefone", "ContatosDeTelefone", b1 =>
                         {
                             b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Nome");
 
@@ -1311,9 +1289,7 @@ namespace Atelie.Migrations
 
                             b1.OwnsOne("Atelie.Comum.Telefone", "Telefone", b2 =>
                                 {
-                                    b2.Property<int>("ContatoDeTelefoneId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                    b2.Property<int>("ContatoDeTelefoneId");
 
                                     b2.Property<string>("DDD");
 
@@ -1345,9 +1321,7 @@ namespace Atelie.Migrations
 
                     b.OwnsOne("Atelie.Operacoes.Producao.CustoDeProducao", "CustoDeProducao", b1 =>
                         {
-                            b1.Property<int>("ItemDePlanoComercialId")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b1.Property<int>("ItemDePlanoComercialId");
 
                             b1.Property<decimal>("CustoDeComposicao");
 

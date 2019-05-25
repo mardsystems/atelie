@@ -222,8 +222,8 @@ namespace Atelie.Decisoes.Comerciais
             {
                 model = itemDePlanoComercial as ItemDePlanoComercial,
                 //PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
-                ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
-                ModeloNome = itemDePlanoComercial.Modelo.Nome,
+                //ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
+                //ModeloNome = itemDePlanoComercial.Modelo.Nome,
                 CustoDeProducaoValor = itemDePlanoComercial.CustoDeProducao.Valor,
                 PrecoDeVenda = itemDePlanoComercial.PrecoDeVenda,
             };
@@ -234,6 +234,8 @@ namespace Atelie.Decisoes.Comerciais
 
     public class PlanosComerciaisBindingList : ExtendedBindingList<PlanoComercialViewModel>
     {
+        private readonly PlanosComerciaisLocalService planosComerciaisLocalService;
+
         private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
 
         private readonly IPlanejamentoComercial planejamentoComercial;
@@ -251,6 +253,8 @@ namespace Atelie.Decisoes.Comerciais
         )
             : base(list)
         {
+            //this.planosComerciaisLocalService = planosComerciaisLocalService;
+
             this.consultaDePlanosComerciais = consultaDePlanosComerciais;
 
             this.planejamentoComercial = planejamentoComercial;
@@ -302,19 +306,11 @@ namespace Atelie.Decisoes.Comerciais
 
             foreach (var newItem in newItems)
             {
-                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
-                {
-                    Id = newItem.Id,
-                    Nome = newItem.Nome,
-                    //ComponenteId = newItem.ComponenteId,
-                    //FabricanteId = newItem.FabricanteId,
-                };
-
                 try
                 {
-                    var resposta = await planejamentoComercial.CriaPlanoComercial(solicitacaoDeCadastroDePlanoComercial);
+                    await planosComerciaisLocalService.Add(newItem.model);
 
-                    SetStatus($"Novo planoComercial '{resposta.Id}' cadastrado com sucesso.");
+                    SetStatus($"Novo planoComercial '{newItem.model.Id}' cadastrado com sucesso.");
                 }
                 catch (Exception ex)
                 {
@@ -328,19 +324,11 @@ namespace Atelie.Decisoes.Comerciais
 
             foreach (var modifiedItem in modifiedItems)
             {
-                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
-                {
-                    Id = modifiedItem.Id,
-                    Nome = modifiedItem.Nome,
-                    //ComponenteId = modifiedItem.ComponenteId,
-                    //FabricanteId = modifiedItem.FabricanteId,
-                };
-
                 try
                 {
-                    var resposta = await planejamentoComercial.AtualizaPlanoComercial(modifiedItem.Id, solicitacaoDeCadastroDePlanoComercial);
+                    await planosComerciaisLocalService.Update(modifiedItem.model);
 
-                    SetStatus($"PlanoComercial '{resposta.Id}' atualizado com sucesso.");
+                    SetStatus($"PlanoComercial '{modifiedItem.Id}' atualizado com sucesso.");
                 }
                 catch (Exception ex)
                 {
@@ -356,7 +344,7 @@ namespace Atelie.Decisoes.Comerciais
             {
                 try
                 {
-                    await planejamentoComercial.ExcluiPlanoComercial(deletedItem.Id);
+                    await planosComerciaisLocalService.Remove(deletedItem.model);
 
                     SetStatus($"PlanoComercial '{deletedItem.Id}' excluído com sucesso.");
                 }
@@ -388,9 +376,11 @@ namespace Atelie.Decisoes.Comerciais
 
     public class PlanosComerciaisObservableCollection : ExtendedObservableCollection<PlanoComercialViewModel>
     {
-        private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
+        private readonly PlanosComerciaisLocalService planosComerciaisLocalService;
 
-        private readonly IPlanejamentoComercial planejamentoComercial;
+        //private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
+
+        //private readonly IPlanejamentoComercial planejamentoComercial;
 
         public PlanosComerciaisObservableCollection()
             : base()
@@ -399,15 +389,18 @@ namespace Atelie.Decisoes.Comerciais
         }
 
         public PlanosComerciaisObservableCollection(
-            IConsultaDePlanosComerciais consultaDePlanosComerciais,
-            IPlanejamentoComercial planejamentoComercial,
+            PlanosComerciaisLocalService planosComerciaisLocalService,
+            //IConsultaDePlanosComerciais consultaDePlanosComerciais,
+            //IPlanejamentoComercial planejamentoComercial,
             IList<PlanoComercialViewModel> list
         )
             : base(list)
         {
-            this.consultaDePlanosComerciais = consultaDePlanosComerciais;
+            this.planosComerciaisLocalService = planosComerciaisLocalService;
 
-            this.planejamentoComercial = planejamentoComercial;
+            //this.consultaDePlanosComerciais = consultaDePlanosComerciais;
+
+            //this.planejamentoComercial = planejamentoComercial;
         }
 
         public PlanosComerciaisObservableCollection(IList<PlanoComercialViewModel> list)
@@ -452,73 +445,68 @@ namespace Atelie.Decisoes.Comerciais
 
         public override async Task SaveChanges()
         {
-            var newItems = GetItemsBy(ObjectState.New);
-
-            foreach (var newItem in newItems)
+            try
             {
-                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
-                {
-                    Id = newItem.Id,
-                    Nome = newItem.Nome,
-                    //ComponenteId = newItem.ComponenteId,
-                    //FabricanteId = newItem.FabricanteId,
-                };
+                await planosComerciaisLocalService.SaveChanges();
 
-                try
-                {
-                    var resposta = await planejamentoComercial.CriaPlanoComercial(solicitacaoDeCadastroDePlanoComercial);
-
-                    SetStatus($"Novo planoComercial '{resposta.Id}' cadastrado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
+                SetStatus($"PlanoComercial salvo com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                SetStatus(ex.Message);
             }
 
-            //
+            //var newItems = GetItemsBy(ObjectState.New);
 
-            var modifiedItems = GetItemsBy(ObjectState.Modified);
+            //foreach (var newItem in newItems)
+            //{
+            //    try
+            //    {
+            //        await planosComerciaisLocalService.Add(newItem.model);
 
-            foreach (var modifiedItem in modifiedItems)
-            {
-                var solicitacaoDeCadastroDePlanoComercial = new SolicitacaoDeCriacaoDePlanoComercial
-                {
-                    Id = modifiedItem.Id,
-                    Nome = modifiedItem.Nome,
-                    //ComponenteId = modifiedItem.ComponenteId,
-                    //FabricanteId = modifiedItem.FabricanteId,
-                };
+            //        SetStatus($"Novo planoComercial '{newItem.model.Id}' cadastrado com sucesso.");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        SetStatus(ex.Message);
+            //    }
+            //}
 
-                try
-                {
-                    var resposta = await planejamentoComercial.AtualizaPlanoComercial(modifiedItem.Id, solicitacaoDeCadastroDePlanoComercial);
+            ////
 
-                    SetStatus($"PlanoComercial '{resposta.Id}' atualizado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
+            //var modifiedItems = GetItemsBy(ObjectState.Modified);
 
-            //
+            //foreach (var modifiedItem in modifiedItems)
+            //{
+            //    try
+            //    {
+            //        await planosComerciaisLocalService.Update(modifiedItem.model);
 
-            var deletedItems = GetItemsBy(ObjectState.Deleted);
+            //        SetStatus($"PlanoComercial '{modifiedItem.Id}' atualizado com sucesso.");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        SetStatus(ex.Message);
+            //    }
+            //}
 
-            foreach (var deletedItem in deletedItems)
-            {
-                try
-                {
-                    await planejamentoComercial.ExcluiPlanoComercial(deletedItem.Id);
+            ////
 
-                    SetStatus($"PlanoComercial '{deletedItem.Id}' excluído com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
+            //var deletedItems = GetItemsBy(ObjectState.Deleted);
+
+            //foreach (var deletedItem in deletedItems)
+            //{
+            //    try
+            //    {
+            //        await planosComerciaisLocalService.Remove(deletedItem.model);
+
+            //        SetStatus($"PlanoComercial '{deletedItem.Id}' excluído com sucesso.");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        SetStatus(ex.Message);
+            //    }
+            //}
         }
     }
 
@@ -534,10 +522,7 @@ namespace Atelie.Decisoes.Comerciais
 
         protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
         {
-            var model = new ItemDePlanoComercial(
-                0,
-                planoComercial.model
-            );
+            var model = planoComercial.model.AdicionaItem();
 
             viewModel.model = model;
 

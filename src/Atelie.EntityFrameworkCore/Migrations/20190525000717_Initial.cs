@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Atelie.Migrations
@@ -13,7 +12,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true),
                     Marca = table.Column<string>(nullable: true),
                     Site = table.Column<string>(nullable: true)
@@ -28,7 +27,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -41,7 +40,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Tipo = table.Column<int>(nullable: false),
                     LivrosEObjetos = table.Column<decimal>(nullable: false),
                     Viagens = table.Column<decimal>(nullable: false),
@@ -60,7 +59,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -86,7 +85,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     CNPJ = table.Column<string>(nullable: true),
@@ -134,7 +133,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -188,7 +187,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Ordem = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     ModeloCodigo = table.Column<string>(nullable: true)
@@ -209,7 +208,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true),
                     Principal = table.Column<bool>(nullable: false),
                     Email_Endereco = table.Column<string>(nullable: true),
@@ -231,7 +230,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true),
                     Principal = table.Column<bool>(nullable: false),
                     Telefone_DDD = table.Column<string>(nullable: true),
@@ -319,12 +318,11 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     PlanoComercialId = table.Column<string>(nullable: true),
                     ModeloCodigo = table.Column<string>(nullable: true),
                     CustoDeProducao_CustoDeComposicao = table.Column<decimal>(nullable: false),
-                    CustoDeProducao_CustoDeConfeccao = table.Column<decimal>(nullable: false),
-                    PrecoDeVenda = table.Column<decimal>(nullable: false)
+                    CustoDeProducao_CustoDeConfeccao = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -348,7 +346,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true),
                     Interno = table.Column<bool>(nullable: false),
                     CustoPadrao = table.Column<decimal>(nullable: true),
@@ -371,7 +369,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Version = table.Column<byte[]>(nullable: true),
                     CreateOn = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true),
@@ -480,7 +478,7 @@ namespace Atelie.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Version = table.Column<byte[]>(nullable: true),
                     CreateOn = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true),
@@ -580,153 +578,407 @@ namespace Atelie.Migrations
             migrationBuilder.InsertData(
                 table: "Fabricantes",
                 columns: new[] { "Id", "Marca", "Nome", "Site" },
-                values: new object[,]
-                {
-                    { 1, "Genérica", "Genérico", null },
-                    { 16, "Helioplast", "Helioplast", "http://helioplast.com.br" },
-                    { 15, "YKK", "YKK", "https://www.ykkfastening.com" },
-                    { 14, "Werner", "Werner", "https://wernertecidos.com.br" },
-                    { 13, "Tekla", "Tekla", "http://www.tekla.com.br" },
-                    { 12, "Speedpel", "Speedpel", "http://www.speedpel.com.br" },
-                    { 11, "RenauxView", "RenauxView", "https://renauxview.com.br" },
-                    { 10, "Setta", "Linhas Setta", "http://www.setta.com.br" },
-                    { 17, "Público Alvo", "Público Alvo Embalagens", "https://www.publicoalvoembalagens.com.br" },
-                    { 8, "Lamar", "Lamar Etiquetas", "http://www.etiquetaslamar.com.br" },
-                    { 7, "Picardie", "Lainière de Picardie", "http://www.lainieredepicardie.com.br" },
-                    { 6, "Helvetia", "Helvetia", "https://www.helvetia.com.br" },
-                    { 5, "Eberler", "Eberler Fashion", "http://www.eberlefashion.com.br" },
-                    { 4, "Cordex", "Cordex", "https://www.cordex.com.br" },
-                    { 3, "Coats", "Coats", "http://www.coatscorrente.com.br" },
-                    { 2, "Baxmann", "Baxmann", "https://www.baxmann.com.br" },
-                    { 9, "Bonfio", "Linhas Bonfio", "http://www.bonfio.com.br" }
-                });
+                values: new object[] { 1, "Genérica", "Genérico", null });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 16, "Helioplast", "Helioplast", "http://helioplast.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 15, "YKK", "YKK", "https://www.ykkfastening.com" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 14, "Werner", "Werner", "https://wernertecidos.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 13, "Tekla", "Tekla", "http://www.tekla.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 12, "Speedpel", "Speedpel", "http://www.speedpel.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 11, "RenauxView", "RenauxView", "https://renauxview.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 10, "Setta", "Linhas Setta", "http://www.setta.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 17, "Público Alvo", "Público Alvo Embalagens", "https://www.publicoalvoembalagens.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 8, "Lamar", "Lamar Etiquetas", "http://www.etiquetaslamar.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 7, "Picardie", "Lainière de Picardie", "http://www.lainieredepicardie.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 6, "Helvetia", "Helvetia", "https://www.helvetia.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 5, "Eberler", "Eberler Fashion", "http://www.eberlefashion.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 4, "Cordex", "Cordex", "https://www.cordex.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 3, "Coats", "Coats", "http://www.coatscorrente.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 2, "Baxmann", "Baxmann", "https://www.baxmann.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Fabricantes",
+                columns: new[] { "Id", "Marca", "Nome", "Site" },
+                values: new object[] { 9, "Bonfio", "Linhas Bonfio", "http://www.bonfio.com.br" });
 
             migrationBuilder.InsertData(
                 table: "Pessoas",
                 columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
-                values: new object[,]
-                {
-                    { 12, "Fornecedor", "Oeste Aviamentos", null, "https://www.oesteaviamentos.com" },
-                    { 11, "Fornecedor", "Speedpel", null, "http://www.speedpel.com.br" },
-                    { 10, "Fornecedor", "Público Alvo", null, "https://www.publicoalvoembalagens.com.br" },
-                    { 9, "Fornecedor", "Helioplast", null, "http://helioplast.com.br" },
-                    { 8, "Fornecedor", "Caçula de São Cristovão", null, null },
-                    { 7, "Fornecedor", "Amsterdam", null, null },
-                    { 4, "Fornecedor", "Helvetia", null, "https://www.helvetia.com.br" },
-                    { 5, "Fornecedor", "Lamar Etiquetas", null, "http://www.etiquetaslamar.com.br" },
-                    { 3, "Fornecedor", "Casa Ferro", null, "https://www.armarinhos25.com.br" },
-                    { 2, "Fornecedor", "Armarinhos 25", null, "https://www.armarinhos25.com.br" },
-                    { 1, "Fornecedor", "Werner", null, "https://wernertecidos.com.br" },
-                    { 6, "Fornecedor", "Motta Carvalho", null, null }
-                });
+                values: new object[] { 12, "Fornecedor", "Oeste Aviamentos", null, "https://www.oesteaviamentos.com" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 11, "Fornecedor", "Speedpel", null, "http://www.speedpel.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 10, "Fornecedor", "Público Alvo", null, "https://www.publicoalvoembalagens.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 9, "Fornecedor", "Helioplast", null, "http://helioplast.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 8, "Fornecedor", "Caçula de São Cristovão", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 7, "Fornecedor", "Amsterdam", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 4, "Fornecedor", "Helvetia", null, "https://www.helvetia.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 5, "Fornecedor", "Lamar Etiquetas", null, "http://www.etiquetaslamar.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 3, "Fornecedor", "Casa Ferro", null, "https://www.armarinhos25.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 2, "Fornecedor", "Armarinhos 25", null, "https://www.armarinhos25.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 1, "Fornecedor", "Werner", null, "https://wernertecidos.com.br" });
+
+            migrationBuilder.InsertData(
+                table: "Pessoas",
+                columns: new[] { "Id", "Discriminator", "Nome", "CNPJ", "Site" },
+                values: new object[] { 6, "Fornecedor", "Motta Carvalho", null, null });
 
             migrationBuilder.InsertData(
                 table: "Unidades",
                 columns: new[] { "Sigla", "Discriminator", "NomeNoPlural", "NomeNoSingular" },
-                values: new object[,]
-                {
-                    { "J", "UnidadeDeMedida", "Jardas", "Jarda" },
-                    { "unid", "UnidadeDeMedida", "Unidades", "Unidade" },
-                    { "m", "UnidadeDeMedida", "Metros", "Metro" },
-                    { "cm", "UnidadeDeMedida", "Centímetros", "Centímetro" }
-                });
+                values: new object[] { "J", "UnidadeDeMedida", "Jardas", "Jarda" });
+
+            migrationBuilder.InsertData(
+                table: "Unidades",
+                columns: new[] { "Sigla", "Discriminator", "NomeNoPlural", "NomeNoSingular" },
+                values: new object[] { "unid", "UnidadeDeMedida", "Unidades", "Unidade" });
+
+            migrationBuilder.InsertData(
+                table: "Unidades",
+                columns: new[] { "Sigla", "Discriminator", "NomeNoPlural", "NomeNoSingular" },
+                values: new object[] { "m", "UnidadeDeMedida", "Metros", "Metro" });
+
+            migrationBuilder.InsertData(
+                table: "Unidades",
+                columns: new[] { "Sigla", "Discriminator", "NomeNoPlural", "NomeNoSingular" },
+                values: new object[] { "cm", "UnidadeDeMedida", "Centímetros", "Centímetro" });
 
             migrationBuilder.InsertData(
                 table: "Componentes",
                 columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
-                values: new object[,]
-                {
-                    { 1, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão", "unid", null },
-                    { 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela", "unid", null },
-                    { 11, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta", "unid", null },
-                    { 17, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ilhós", "unid", null },
-                    { 21, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico", "unid", null },
-                    { 25, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tag", "unid", null },
-                    { 31, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Viés", "unid", null },
-                    { 33, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ziper", "unid", null },
-                    { 6, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordão", "m", null },
-                    { 7, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordinha", "m", null },
-                    { 9, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Elástico", "m", null },
-                    { 15, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio", "m", null },
-                    { 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha", "m", null },
-                    { 19, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Papel", "m", null },
-                    { 26, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido", "m", null }
-                });
+                values: new object[] { 1, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão", "unid", null });
 
             migrationBuilder.InsertData(
                 table: "Componentes",
                 columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
-                values: new object[,]
-                {
-                    { 2, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão com casa", "unid", null },
-                    { 28, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (cupro)", "m", null },
-                    { 27, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (brim)", "m", null },
-                    { 20, 19, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Papel de embrulho", "m", null },
-                    { 16, 15, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio para overlock", "m", null },
-                    { 29, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (seda)", "m", null },
-                    { 32, 31, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Viés para cordão", "unid", null },
-                    { 24, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bobinas plásticas", "unid", null },
-                    { 8, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordinha para o tag", "m", null },
-                    { 22, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacola plástica", "unid", null },
-                    { 14, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta de tamanho", "unid", null },
-                    { 13, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta de composição", "unid", null },
-                    { 12, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta bordada", "unid", null },
-                    { 3, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão", "unid", null },
-                    { 23, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos plástica", "unid", null },
-                    { 30, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (seda lavada)", "m", null }
-                });
+                values: new object[] { 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 11, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 17, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ilhós", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 21, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 25, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tag", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 31, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Viés", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 33, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ziper", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 6, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordão", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 7, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordinha", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 9, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Elástico", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 15, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 19, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Papel", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 26, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 2, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão com casa", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 28, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (cupro)", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 27, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (brim)", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 20, 19, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Papel de embrulho", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 16, 15, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio para overlock", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 29, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (seda)", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 32, 31, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Viés para cordão", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 24, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bobinas plásticas", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 8, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cordinha para o tag", "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 22, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacola plástica", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 14, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta de tamanho", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 13, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta de composição", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 12, 11, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Etiqueta bordada", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 3, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 23, 21, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos plástica", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 30, 26, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido (seda lavada)", "m", null });
 
             migrationBuilder.InsertData(
                 table: "FabricacoesDeComponentes",
                 columns: new[] { "FabricanteId", "ComponenteId" },
-                values: new object[,]
-                {
-                    { 9, 18 },
-                    { 10, 18 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Materiais",
-                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
-                values: new object[,]
-                {
-                    { 1, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 2000J N. 120", 0.0, "m", null },
-                    { 2, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 5000J N. 120", 0.0, "m", null },
-                    { 3, 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", 0.0, "unid", null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Componentes",
-                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
-                values: new object[,]
-                {
-                    { 4, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão grande", "unid", null },
-                    { 5, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão pequeno", "unid", null }
-                });
+                values: new object[] { 9, 18 });
 
             migrationBuilder.InsertData(
                 table: "FabricacoesDeComponentes",
                 columns: new[] { "FabricanteId", "ComponenteId" },
-                values: new object[,]
-                {
-                    { 16, 22 },
-                    { 17, 22 },
-                    { 16, 23 },
-                    { 16, 24 }
-                });
+                values: new object[] { 10, 18 });
 
             migrationBuilder.InsertData(
                 table: "Materiais",
                 columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
-                values: new object[,]
-                {
-                    { 8, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta).", 16, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos com aba - PEAD (polietileno de alta densidade)", 0.0, "unid", null },
-                    { 9, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 17, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", 0.0, "unid", null },
-                    { 6, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6", 0.0, "m", null },
-                    { 7, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6 com defeito", 0.0, "m", null },
-                    { 4, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 9, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio da marca Bonfio 300g", 0.0, "m", null },
-                    { 5, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio Soltex 300g da marca Coats Corrente", 0.0, "m", null }
-                });
+                values: new object[] { 1, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 2000J N. 120", 0.0, "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 2, 18, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Linha Xik Poliester 5000J N. 120", 0.0, "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 3, 10, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 7, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Entretela 2805/325 da marca Lainière, 1,50cmX25cm", 0.0, "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 4, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão grande", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Componentes",
+                columns: new[] { "Id", "ComponentePaiId", "CreateBy", "CreateOn", "ModifiedBy", "ModifiedOn", "Nome", "UnidadePadraoSigla", "Version" },
+                values: new object[] { 5, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Botão de pressão pequeno", "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "FabricacoesDeComponentes",
+                columns: new[] { "FabricanteId", "ComponenteId" },
+                values: new object[] { 16, 22 });
+
+            migrationBuilder.InsertData(
+                table: "FabricacoesDeComponentes",
+                columns: new[] { "FabricanteId", "ComponenteId" },
+                values: new object[] { 17, 22 });
+
+            migrationBuilder.InsertData(
+                table: "FabricacoesDeComponentes",
+                columns: new[] { "FabricanteId", "ComponenteId" },
+                values: new object[] { 16, 23 });
+
+            migrationBuilder.InsertData(
+                table: "FabricacoesDeComponentes",
+                columns: new[] { "FabricanteId", "ComponenteId" },
+                values: new object[] { 16, 24 });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 8, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "São entregues em pacotes de papel craft com quantidades programadas pelos clientes ou em caixas de papelão (sob consulta).", 16, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sacos com aba - PEAD (polietileno de alta densidade)", 0.0, "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 9, 22, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 17, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial", 0.0, "unid", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 6, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6", 0.0, "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 7, 24, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tecido artigo 1198/6 com defeito", 0.0, "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 4, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 9, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio da marca Bonfio 300g", 0.0, "m", null });
+
+            migrationBuilder.InsertData(
+                table: "Materiais",
+                columns: new[] { "Id", "ComponenteId", "Cor", "CreateBy", "CreateOn", "CustoPadrao", "Descricao", "FabricanteId", "ModifiedBy", "ModifiedOn", "Nome", "Tamanho", "UnidadeSigla", "Version" },
+                values: new object[] { 5, 16, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fio Soltex 300g da marca Coats Corrente", 0.0, "m", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AplicacaoDeInvestimento_InvestimentoId",

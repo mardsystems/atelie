@@ -1,5 +1,6 @@
 ﻿using Atelie.Cadastro.Modelos;
 using Atelie.Operacoes.Producao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -99,6 +100,20 @@ namespace Atelie.Decisoes.Comerciais
             CustosVariaveis = new HashSet<CustoVariavel>();
 
             Itens = new HashSet<ItemDePlanoComercial>();
+        }
+
+        public ItemDePlanoComercial AdicionaItem()
+        {
+            var max = Itens.Count;
+
+            var model = new ItemDePlanoComercial(
+                max++,
+                this
+            );
+
+            Itens.Add(model);
+
+            return model;
         }
     }
 
