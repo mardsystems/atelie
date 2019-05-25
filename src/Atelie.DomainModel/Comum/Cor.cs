@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public abstract class Cor : ICor
+    public abstract class Cor
     {
         public string Codigo { get; internal set; }
 

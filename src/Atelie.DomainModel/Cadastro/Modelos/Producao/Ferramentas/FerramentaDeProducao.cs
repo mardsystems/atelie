@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Modelos.Producao.Ferramentas
 {
-    public class FerramentaDeProducao : IFerramentaDeProducao
+    public class FerramentaDeProducao
     {
         public int Id { get; internal set; }
 

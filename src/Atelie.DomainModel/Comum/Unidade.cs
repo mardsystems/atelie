@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public abstract class Unidade : IUnidade
+    public abstract class Unidade
     {
         public string Sigla { get; internal set; }
 

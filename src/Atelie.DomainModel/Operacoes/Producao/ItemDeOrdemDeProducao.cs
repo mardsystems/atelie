@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Atelie.Operacoes.Producao
 {
-    public class ItemDeOrdemDeProducao : IItemDeOrdemDeProducao
+    public class ItemDeOrdemDeProducao
     {
         public virtual OrdemDeProducao Ordem { get; internal set; }
 
@@ -19,14 +19,6 @@ namespace Atelie.Operacoes.Producao
         public virtual ICollection<AlocacaoDeMaterial> MateriaisAlocados { get; internal set; }
 
         public virtual ICollection<AlocacaoDeRecurso> RecursosAlocados { get; internal set; }
-
-        IOrdemDeProducao IItemDeOrdemDeProducao.Ordem => throw new System.NotImplementedException();
-
-        ITamanhoDeModelo IItemDeOrdemDeProducao.Tamanho => throw new System.NotImplementedException();
-
-        IAlocacaoDeMaterial[] IItemDeOrdemDeProducao.MateriaisAlocados => MateriaisAlocados.ToArray();
-
-        IAlocacaoDeRecurso[] IItemDeOrdemDeProducao.RecursosAlocados => RecursosAlocados.ToArray();
 
         public ItemDeOrdemDeProducao()
         {

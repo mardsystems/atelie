@@ -4,17 +4,13 @@ using System.Linq;
 
 namespace Atelie.Cadastro.Materiais.Fornecedores
 {
-    public class Fornecedor : PessoaJuridica, IFornecedor
+    public class Fornecedor : PessoaJuridica
     {
         public string Site { get; internal set; }
 
         public virtual IEnumerable<DisponibilidadeDeMeioDePagamento> MeiosDePagamento { get; internal set; }
 
         //public virtual IEnumerable<FornecimentoDeMaterial> MateriaisFornecidos { get; internal set; }
-
-        IDisponibilidadeDeMeioDePagamento[] IFornecedor.MeiosDePagamento => MeiosDePagamento.ToArray();
-
-        //IFornecimentoDeMaterial[] IFornecedor.MateriaisFornecidos => MateriaisFornecidos.ToArray();
 
         public Fornecedor()
         {

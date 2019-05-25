@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Decisoes.Comerciais
 {
-    public class PlanoComercial : IPlanoComercial
+    public class PlanoComercial
     {
         public string Id { get; set; }
 
@@ -83,16 +83,6 @@ namespace Atelie.Decisoes.Comerciais
             MargemPercentual = margemPercentual;
         }
 
-        #region IPlanoComercial
-
-        ICusto[] IPlanoComercial.CustosFixos => CustosFixos.ToArray();
-
-        ICusto[] IPlanoComercial.CustosVariaveis => CustosVariaveis.ToArray();
-
-        IItemDePlanoComercial[] IPlanoComercial.Itens => Itens.ToArray();
-
-        #endregion
-
         public PlanoComercial()
         {
             CustosFixos = new HashSet<CustoFixo>();
@@ -117,7 +107,7 @@ namespace Atelie.Decisoes.Comerciais
         }
     }
 
-    public class ItemDePlanoComercial : IItemDePlanoComercial
+    public class ItemDePlanoComercial
     {
         public int Id { get; set; }
 
@@ -152,23 +142,13 @@ namespace Atelie.Decisoes.Comerciais
             CustoDeProducao = new CustoDeProducao(valor);
         }
 
-        #region IItemDePlanoComercial
-
-        IPlanoComercial IItemDePlanoComercial.PlanoComercial => PlanoComercial;
-
-        IModelo IItemDePlanoComercial.Modelo => Modelo;
-
-        ICustoDeProducao IItemDePlanoComercial.CustoDeProducao => CustoDeProducao;
-
-        #endregion
-
         public ItemDePlanoComercial()
         {
 
         }
     }
 
-    public class CustoFixo : ICusto
+    public class CustoFixo
     {
         public string Descricao { get; internal set; }
 
@@ -177,7 +157,7 @@ namespace Atelie.Decisoes.Comerciais
         public decimal ValorPercentual { get; internal set; }
     }
 
-    public class CustoVariavel : ICusto
+    public class CustoVariavel
     {
         public string Descricao { get; internal set; }
 
@@ -186,12 +166,12 @@ namespace Atelie.Decisoes.Comerciais
         public decimal ValorPercentual { get; internal set; }
     }
 
-    public class PrecoDePrateleiraDesejado //: IPrecoDePrateleiraDesejado
+    public class PrecoDePrateleiraDesejado
     {
         public decimal Valor { get; internal set; }
     }
 
-    public class PrecoDeConsignacao //: IPrecoDeConsignacao
+    public class PrecoDeConsignacao
     {
         public decimal Valor { get; internal set; }
     }

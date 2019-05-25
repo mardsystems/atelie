@@ -2,7 +2,7 @@
 
 namespace Atelie.Cadastro.Modelos.Producao
 {
-    public class NecessidadeDeTipoDeRecurso : INecessidadeDeTipoDeRecurso
+    public class NecessidadeDeTipoDeRecurso
     {
         public virtual EtapaDeProducao Etapa { get; internal set; }
 
@@ -15,10 +15,6 @@ namespace Atelie.Cadastro.Modelos.Producao
         public double Tempo { get; internal set; }
 
         public decimal? CustoPadrao { get; internal set; }
-
-        IEtapaDeProducao INecessidadeDeTipoDeRecurso.Etapa => Etapa;
-
-        ITipoDeRecurso INecessidadeDeTipoDeRecurso.TipoDeRecurso => TipoDeRecurso;
 
         public int EtapaId { get; internal set; }
 

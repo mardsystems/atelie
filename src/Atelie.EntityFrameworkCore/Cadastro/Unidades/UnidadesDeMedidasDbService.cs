@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Unidades
 {
-    public class UnidadesDeMedidasDbService : RepositorioDeUnidadesDeMedidas, IConsultaDeUnidadesDeMedidas
+    public class UnidadesDeMedidasDbService : RepositorioDeUnidadesDeMedidas
     {
         private readonly AtelieDbContext db;
 
@@ -76,7 +76,7 @@ namespace Atelie.Cadastro.Unidades
             }
         }
 
-        public IObservable<IUnidadeDeMedida[]> ObtemObservavelDeUnidades()
+        public IObservable<UnidadeDeMedida[]> ObtemObservavelDeUnidades()
         {
             try
             {

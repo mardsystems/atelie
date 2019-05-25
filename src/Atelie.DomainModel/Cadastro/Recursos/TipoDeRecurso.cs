@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Recursos
 {
-    public class TipoDeRecurso : ITipoDeRecurso
+    public class TipoDeRecurso
     {
         public int Id { get; internal set; }
 
@@ -13,7 +13,5 @@
         public double? MaximoDeHorasPorDia { get; internal set; }
 
         public virtual UnidadeDeCusto UnidadeDeCusto { get; internal set; }
-
-        IUnidadeDeCusto ITipoDeRecurso.UnidadeDeCusto => UnidadeDeCusto;
     }
 }

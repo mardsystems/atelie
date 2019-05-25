@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais.Componentes
 {
-    public class ComponentesDbService : IRepositorioDeComponentes, IConsultaDeComponentes
+    public class ComponentesDbService : IRepositorioDeComponentes
     {
         private readonly AtelieDbContext db;
 
@@ -77,7 +77,7 @@ namespace Atelie.Cadastro.Materiais.Componentes
             }
         }
 
-        public IObservable<IComponente[]> ObtemObservavelDeComponentes()
+        public IObservable<Componente[]> ObtemObservavelDeComponentes()
         {
             try
             {

@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public class Email : IEmail
+    public class Email
     {
         public string Endereco { get; internal set; }
     }

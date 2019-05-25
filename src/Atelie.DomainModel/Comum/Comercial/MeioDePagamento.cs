@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum.Comercial
 {
-    public class MeioDePagamento : IMeioDePagamento
+    public class MeioDePagamento
     {
         public int Id { get; internal set; }
 

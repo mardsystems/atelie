@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Atelie.Cadastro.Modelos
 {
-    public class Modelo : IModelo
+    public class Modelo
     {
         public string Codigo { get; internal set; }
 
@@ -18,12 +18,6 @@ namespace Atelie.Cadastro.Modelos
         public virtual ICollection<EtapaDeProducao> EtapasDeProducao { get; internal set; }
 
         public virtual IEnumerable<AplicacaoDeInvestimento> Investimentos { get; internal set; }
-
-        INecessidadeDeMaterial[] IModelo.MateriaisNecessarios => MateriaisNecessarios.ToArray();
-
-        IEtapaDeProducao[] IModelo.EtapasDeProducao => EtapasDeProducao.ToArray();
-
-        IAplicacaoDeInvestimento[] IModelo.Investimentos => Investimentos.ToArray();
 
         public Modelo(string codigo)
         {

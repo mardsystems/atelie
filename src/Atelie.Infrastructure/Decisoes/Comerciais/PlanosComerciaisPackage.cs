@@ -7,9 +7,9 @@ namespace Atelie.Decisoes.Comerciais
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IPlanejamentoComercial, ServicoDePlanejamentoComercial>();
+            //container.Register<ServicoDePlanejamentoComercial>();
 
-            container.Register<IConsultaDePlanosComerciais, PlanosComerciaisDbService>();
+            container.Register<PlanosComerciaisDbService>();
 
             container.Register<IRepositorioDePlanosComerciais, PlanosComerciaisDbService>();
 

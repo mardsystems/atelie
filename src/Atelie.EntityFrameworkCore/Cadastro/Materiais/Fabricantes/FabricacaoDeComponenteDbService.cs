@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais.Fabricantes
 {
-    public class FabricacoesDeComponentesDbService : IRepositorioDeFabricacoesDeComponentes, IConsultaDeFabricacoesDeComponentes
+    public class FabricacoesDeComponentesDbService : IRepositorioDeFabricacoesDeComponentes
     {
         private readonly AtelieDbContext db;
 
@@ -79,7 +79,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             }
         }
 
-        public IObservable<IFabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentes()
+        public IObservable<FabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentes()
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             }
         }
 
-        public IObservable<IFabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentesPorFabricante(int fabricanteId)
+        public IObservable<FabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentesPorFabricante(int fabricanteId)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
             }
         }
 
-        public IObservable<IFabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentesPorComponente(int componenteId)
+        public IObservable<FabricacaoDeComponente[]> ObtemObservavelDeFabricacoesDeComponentesPorComponente(int componenteId)
         {
             try
             {

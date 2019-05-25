@@ -7,9 +7,9 @@ namespace Atelie.Cadastro.Materiais.Componentes
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ICadastroDeComponentes, ServicoDeCadastroDeComponentes>();
+            //container.Register<ServicoDeCadastroDeComponentes>();
 
-            container.Register<IConsultaDeComponentes, ComponentesDbService>();
+            container.Register<ComponentesDbService>();
 
             container.Register<IRepositorioDeComponentes, ComponentesDbService>();
         }

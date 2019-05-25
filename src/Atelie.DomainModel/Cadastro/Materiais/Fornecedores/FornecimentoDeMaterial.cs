@@ -3,7 +3,7 @@ using Atelie.Cadastro.Unidades;
 
 namespace Atelie.Cadastro.Materiais.Fornecedores
 {
-    public class FornecimentoDeMaterial : IFornecimentoDeMaterial
+    public class FornecimentoDeMaterial
     {
         public virtual Fornecedor Fornecedor { get; internal set; }
 
@@ -16,14 +16,6 @@ namespace Atelie.Cadastro.Materiais.Fornecedores
         //public virtual Tamanho TamanhoMinimoPorPedido { get; internal set; }
 
         public decimal? UltimoPreco { get; internal set; }
-
-        IFornecedor IFornecimentoDeMaterial.Fornecedor => Fornecedor;
-
-        IMaterial IFornecimentoDeMaterial.Material => Material;
-
-        //ICorDeFabricante IFornecimentoDeMaterial.Cor => Cor;
-
-        //ITamanho IFornecimentoDeMaterial.TamanhoMinimoPorPedido => TamanhoMinimoPorPedido;
 
         public int FornecedorId { get; internal set; }
 

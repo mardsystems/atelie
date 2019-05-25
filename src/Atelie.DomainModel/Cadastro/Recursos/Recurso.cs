@@ -2,7 +2,7 @@
 
 namespace Atelie.Cadastro.Recursos
 {
-    public class Recurso : PessoaFisica, IRecurso
+    public class Recurso : PessoaFisica
     {
         public virtual TipoDeRecurso Tipo { get; internal set; }
 
@@ -11,11 +11,5 @@ namespace Atelie.Cadastro.Recursos
         public virtual Cargo Cargo { get; internal set; }
 
         public virtual Departamento Departamento { get; internal set; }
-
-        ITipoDeRecurso IRecurso.Tipo => Tipo;
-
-        ICargo IRecurso.Cargo => Cargo;
-
-        IDepartamento IRecurso.Departamento => Departamento;
     }
 }

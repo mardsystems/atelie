@@ -43,15 +43,15 @@ namespace Atelie.Decisoes.Comerciais
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var planosComerciais = await ((IConsultaDePlanosComerciais)planosComerciaisLocalService).ObtemObservavelDePlanosComerciais();
+            //var planosComerciais = await ((IConsultaDePlanosComerciais)planosComerciaisLocalService).ObtemObservavelDePlanosComerciais();
 
-            var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
+            //var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
 
             var observableCollection = new PlanosComerciaisObservableCollection(
-                planosComerciaisLocalService,
+                //planosComerciaisLocalService,
                 //consultaDePlanosComerciais,
                 //planejamentoComercial,
-                list
+                //list
             );
 
             //planosComerciaisBindingSource.DataSource = bindingList;

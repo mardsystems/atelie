@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Decisoes.Comerciais
 {
-    public class PlanosComerciaisDbService : IRepositorioDePlanosComerciais, IConsultaDePlanosComerciais
+    public class PlanosComerciaisDbService : IRepositorioDePlanosComerciais
     {
         private readonly AtelieDbContext db;
 
@@ -81,7 +81,7 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
-        public IObservable<IPlanoComercial[]> ObtemObservavelDePlanosComerciais()
+        public IObservable<PlanoComercial[]> ObtemObservavelDePlanosComerciais()
         {
             try
             {

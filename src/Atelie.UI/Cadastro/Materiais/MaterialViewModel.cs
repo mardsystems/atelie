@@ -78,7 +78,7 @@ namespace Atelie.Cadastro.Materiais
             }
         }
 
-        public static MaterialViewModel From(IMaterial material)
+        public static MaterialViewModel From(Material material)
         {
             var viewModel = new MaterialViewModel
             {
@@ -116,127 +116,6 @@ namespace Atelie.Cadastro.Materiais
         public void EndEdit()
         {
 
-        }
-    }
-
-    public class MateriaisBindingList : ExtendedBindingList<MaterialViewModel>
-    {
-        private readonly IConsultaDeMateriais consultaDeMateriais;
-
-        private readonly ICadastroDeMateriais cadastroDeMateriais;
-
-        private readonly IConsultaDeComponentes consultaDeComponentes;
-
-        private readonly IConsultaDeFabricantes consultaDeFabricantes;
-
-        public MateriaisBindingList()
-            : base()
-        {
-
-        }
-
-        public MateriaisBindingList(
-            IConsultaDeMateriais consultaDeMateriais,
-            ICadastroDeMateriais cadastroDeMateriais,
-            IConsultaDeComponentes consultaDeComponentes,
-            IConsultaDeFabricantes consultaDeFabricantes,
-            IList<MaterialViewModel> list
-        )
-            : base(list)
-        {
-            this.consultaDeMateriais = consultaDeMateriais;
-
-            this.cadastroDeMateriais = cadastroDeMateriais;
-
-            this.consultaDeComponentes = consultaDeComponentes;
-
-            this.consultaDeFabricantes = consultaDeFabricantes;
-
-
-        }
-
-        public MateriaisBindingList(IList<MaterialViewModel> list)
-            : base(list)
-        {
-
-        }
-
-        protected override void OnAddNew(MaterialViewModel item)
-        {
-            //item.BindingList = this;
-
-            base.OnAddNew(item);
-        }
-
-        public override async Task SaveChanges()
-        {
-            var newItems = GetItemsBy(ObjectState.New);
-
-            foreach (var newItem in newItems)
-            {
-                var solicitacaoDeCadastroDeMaterial = new SolicitacaoDeCadastroDeMaterial
-                {
-                    Id = newItem.Id,
-                    Nome = newItem.Nome,
-                    ComponenteId = newItem.ComponenteId,
-                    FabricanteId = newItem.FabricanteId,
-                };
-
-                try
-                {
-                    var resposta = await cadastroDeMateriais.CadastraMaterial(solicitacaoDeCadastroDeMaterial);
-
-                    SetStatus($"Novo material '{resposta.Id}' cadastrado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
-
-            //
-
-            var modifiedItems = GetItemsBy(ObjectState.Modified);
-
-            foreach (var modifiedItem in modifiedItems)
-            {
-                var solicitacaoDeCadastroDeMaterial = new SolicitacaoDeCadastroDeMaterial
-                {
-                    Id = modifiedItem.Id,
-                    Nome = modifiedItem.Nome,
-                    ComponenteId = modifiedItem.ComponenteId,
-                    FabricanteId = modifiedItem.FabricanteId,
-                };
-
-                try
-                {
-                    var resposta = await cadastroDeMateriais.AtualizaMaterial(modifiedItem.Id, solicitacaoDeCadastroDeMaterial);
-
-                    SetStatus($"Material '{resposta.Id}' atualizado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
-
-            //
-
-            var deletedItems = GetItemsBy(ObjectState.Deleted);
-
-            foreach (var deletedItem in deletedItems)
-            {
-                try
-                {
-                    await cadastroDeMateriais.ExcluiMaterial(deletedItem.Id);
-
-                    SetStatus($"Material '{deletedItem.Id}' excluído com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
         }
     }
 

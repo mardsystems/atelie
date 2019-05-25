@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Recursos
 {
-    public class UnidadeDeCusto : IUnidadeDeCusto
+    public class UnidadeDeCusto
     {
         public int Id { get; internal set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Recursos
 {
-    public class Cargo : ICargo
+    public class Cargo
     {
         public int Id { get; internal set; }
 

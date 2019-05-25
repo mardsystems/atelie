@@ -2,7 +2,7 @@
 
 namespace Atelie.Cadastro.Modelos.Producao
 {
-    public class NecessidadeDeMaterial : INecessidadeDeMaterial
+    public class NecessidadeDeMaterial
     {
         public virtual Modelo Modelo { get; internal set; }
 
@@ -19,18 +19,6 @@ namespace Atelie.Cadastro.Modelos.Producao
         public double Quantidade { get; internal set; }
 
         public double CustoPadrao { get; internal set; }
-
-        IModelo INecessidadeDeMaterial.Modelo => Modelo;
-
-        ITamanhoDeModelo INecessidadeDeMaterial.TamanhoDeModelo => TamanhoDeModelo;
-
-        IMaterial INecessidadeDeMaterial.Material => Material;
-
-        //ICorDeFabricante INecessidadeDeMaterial.Cor => Cor;
-
-        //ITamanho INecessidadeDeMaterial.TamanhoDeMaterial => TamanhoDeMaterial;
-
-        //IUnidade INecessidadeDeMaterial.Unidade => Unidade;
 
         public string ModeloCodigo { get; internal set; }
 

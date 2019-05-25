@@ -106,11 +106,11 @@ namespace Atelie
 
         private void CadastroDeFabricantesButton_Click(object sender, RoutedEventArgs e)
         {
-            var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
+            //var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
 
-            var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
+            //var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
 
-            var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
+            //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
 
             //var fabricantesPage = new FabricantesPage(
             //    cadastroDeFabricantes,
@@ -120,9 +120,9 @@ namespace Atelie
 
             var parameter = new FabricantesPageParameter
             {
-                CadastroDeFabricantes = cadastroDeFabricantes,
-                ConsultaDeComponentes = consultaDeComponentes,
-                ConsultaDeFabricantes = consultaDeFabricantes,
+                //CadastroDeFabricantes = cadastroDeFabricantes,
+                //ConsultaDeComponentes = consultaDeComponentes,
+                //ConsultaDeFabricantes = consultaDeFabricantes,
             };
 
             this.Frame.Navigate(typeof(FabricantesPage), parameter);
@@ -243,11 +243,11 @@ namespace Atelie
                 }
                 else if (invokedItem == _cadastroDeFabricantesMenuItem)
                 {
-                    var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
+                    //var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
 
-                    var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
+                    //var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
 
-                    var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
+                    //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
 
                     //var fabricantesPage = new FabricantesPage(
                     //    cadastroDeFabricantes,
@@ -257,9 +257,9 @@ namespace Atelie
 
                     var parameter = new FabricantesPageParameter
                     {
-                        CadastroDeFabricantes = cadastroDeFabricantes,
-                        ConsultaDeComponentes = consultaDeComponentes,
-                        ConsultaDeFabricantes = consultaDeFabricantes,
+                        //CadastroDeFabricantes = cadastroDeFabricantes,
+                        //ConsultaDeComponentes = consultaDeComponentes,
+                        //ConsultaDeFabricantes = consultaDeFabricantes,
                     };
 
                     //this.Frame.Navigate(typeof(FabricantesPage), parameter);

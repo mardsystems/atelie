@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public class Telefone : ITelefone
+    public class Telefone
     {
         public string DDD { get; internal set; }
 

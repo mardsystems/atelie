@@ -123,13 +123,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BooleanToValueConverter.cs" />
-    <Compile Include="Cadastro\Materiais\Componentes\ComponenteViewModel.cs" />
     <Compile Include="Cadastro\Materiais\Fabricantes\FabricacaoDeComponenteViewModel.cs" />
     <Compile Include="Cadastro\Materiais\Fabricantes\FabricantesPage.xaml.cs">
       <DependentUpon>FabricantesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cadastro\Materiais\Fabricantes\FabricanteViewModel.cs" />
-    <Compile Include="Cadastro\Materiais\MaterialViewModel.cs" />
     <Compile Include="ControlInfoDataSource.cs" />
     <Compile Include="Behaviors\ImageScrollBehavior.cs" />
     <Compile Include="DeviceFamilyTrigger.cs" />
@@ -566,24 +564,22 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj">
-      <Project>{e4bc24b0-aca7-4ae3-9c82-a7c1efeba4e1}</Project>
-      <Name>Atelie.BusinessModel</Name>
+    <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj">
+      <Project>{18480afd-aa24-47d7-b2b6-a1922a39142e}</Project>
+      <Name>Atelie.DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atelie.Infrastructure.Client\Atelie.Infrastructure.Client.csproj">
       <Project>{05c20511-e761-4578-8fa4-55ea4c2ea04c}</Project>
       <Name>Atelie.Infrastructure.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atelie.UseCaseModel\Atelie.UseCaseModel.csproj">
-      <Project>{97af144a-bd64-4a5d-8783-b2cf975fe615}</Project>
-      <Name>Atelie.UseCaseModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj">
       <Project>{61147a2d-c246-4c6a-8ddb-1211550e0c1d}</Project>
       <Name>System.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Cadastro\Materiais\Componentes\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

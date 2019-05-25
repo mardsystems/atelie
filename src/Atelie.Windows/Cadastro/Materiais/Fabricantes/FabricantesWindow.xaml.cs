@@ -21,37 +21,22 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
     /// </summary>
     public partial class FabricantesWindow : Window
     {
-        private readonly ICadastroDeFabricantes cadastroDeFabricantes;
-
-        private readonly IConsultaDeComponentes consultaDeComponentes;
-
-        private readonly IConsultaDeFabricantes consultaDeFabricantes;
-
         public FabricantesWindow(
-            ICadastroDeFabricantes cadastroDeFabricantes,
-            IConsultaDeComponentes consultaDeComponentes,
-            IConsultaDeFabricantes consultaDeFabricantes
         )
         {
-            this.cadastroDeFabricantes = cadastroDeFabricantes;
-
-            this.consultaDeComponentes = consultaDeComponentes;
-
-            this.consultaDeFabricantes = consultaDeFabricantes;
-
             InitializeComponent();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var fabricantes = await consultaDeFabricantes.ObtemObservavelDeFabricantes();
+            //var fabricantes = await consultaDeFabricantes.ObtemObservavelDeFabricantes();
 
-            var list = fabricantes.Select(p => FabricanteViewModel.From(p)).ToList();
+            //var list = fabricantes.Select(p => FabricanteViewModel.From(p)).ToList();
 
-            var observableCollection = new FabricantesObservableCollection(
-                cadastroDeFabricantes,
-                list
-            );
+            //var observableCollection = new FabricantesObservableCollection(
+            //    cadastroDeFabricantes,
+            //    list
+            //);
 
             //fabricantesBindingSource.DataSource = bindingList;
 
@@ -63,7 +48,7 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             CollectionViewSource fabricanteViewModelViewSource = ((CollectionViewSource)(this.FindResource("fabricanteViewModelViewSource")));
 
-            fabricanteViewModelViewSource.Source = observableCollection;
+            //fabricanteViewModelViewSource.Source = observableCollection;
         }
     }
 }

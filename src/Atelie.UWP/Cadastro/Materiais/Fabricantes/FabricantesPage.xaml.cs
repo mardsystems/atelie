@@ -24,12 +24,6 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
     /// </summary>
     public sealed partial class FabricantesPage : Page
     {
-        private ICadastroDeFabricantes cadastroDeFabricantes;
-
-        private IConsultaDeComponentes consultaDeComponentes;
-
-        private IConsultaDeFabricantes consultaDeFabricantes;
-
         public FabricantesObservableCollection Fabricantes;
 
         public FabricantesPage()
@@ -48,24 +42,18 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             var parameters = e.Parameter as FabricantesPageParameter;
 
-            this.cadastroDeFabricantes = parameters.CadastroDeFabricantes;
+            ////
 
-            this.consultaDeComponentes = parameters.ConsultaDeComponentes;
+            //var fabricantes = await consultaDeFabricantes.ObtemObservavelDeFabricantes();
 
-            this.consultaDeFabricantes = parameters.ConsultaDeFabricantes;
+            //var list = fabricantes.Select(p => FabricanteViewModel.From(p)).ToList();
 
-            //
+            //var observableCollection = new FabricantesObservableCollection(
+            //    cadastroDeFabricantes,
+            //    list
+            //);
 
-            var fabricantes = await consultaDeFabricantes.ObtemObservavelDeFabricantes();
-
-            var list = fabricantes.Select(p => FabricanteViewModel.From(p)).ToList();
-
-            var observableCollection = new FabricantesObservableCollection(
-                cadastroDeFabricantes,
-                list
-            );
-
-            Fabricantes = observableCollection;
+            //Fabricantes = observableCollection;
 
             //fabricantesBindingSource.DataSource = bindingList;
 
@@ -83,10 +71,10 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
     public class FabricantesPageParameter
     {
-        public ICadastroDeFabricantes CadastroDeFabricantes { get; set; }
+        //public ICadastroDeFabricantes CadastroDeFabricantes { get; set; }
 
-        public IConsultaDeComponentes ConsultaDeComponentes { get; set; }
+        //public IConsultaDeComponentes ConsultaDeComponentes { get; set; }
 
-        public IConsultaDeFabricantes ConsultaDeFabricantes { get; set; }
+        //public IConsultaDeFabricantes ConsultaDeFabricantes { get; set; }
     }
 }

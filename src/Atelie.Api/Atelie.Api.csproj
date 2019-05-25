@@ -20,13 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj" />
     <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj">
       <Aliases></Aliases>
     </ProjectReference>
     <ProjectReference Include="..\Atelie.Infrastructure\Atelie.Infrastructure.csproj" />
     <ProjectReference Include="..\Atelie.Migrations\Atelie.Migrations.csproj" />
-    <ProjectReference Include="..\Atelie.UseCaseModel\Atelie.UseCaseModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>
 

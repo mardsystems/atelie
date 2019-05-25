@@ -7,9 +7,9 @@ namespace Atelie.Cadastro.Materiais
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ICadastroDeMateriais, ServicoDeCadastroDeMateriais>();
+            //container.Register<ServicoDeCadastroDeMateriais>();
 
-            container.Register<IConsultaDeMateriais, MateriaisDbService>();
+            container.Register<MateriaisDbService>();
 
             container.Register<IRepositorioDeMateriais, MateriaisDbService>();
 

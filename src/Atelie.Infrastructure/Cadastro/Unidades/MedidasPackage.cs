@@ -7,9 +7,9 @@ namespace Atelie.Cadastro.Unidades
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ICadastroDeUnidadesDeMedidas, ServicoDeCadastroDeUnidadesDeMedidas>();
+            //container.Register<ServicoDeCadastroDeUnidadesDeMedidas>();
 
-            container.Register<IConsultaDeUnidadesDeMedidas, UnidadesDeMedidasDbService>();
+            container.Register<UnidadesDeMedidasDbService>();
 
             container.Register<RepositorioDeUnidadesDeMedidas, UnidadesDeMedidasDbService>();
         }

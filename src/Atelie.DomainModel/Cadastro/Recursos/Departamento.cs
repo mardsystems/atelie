@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Recursos
 {
-    public class Departamento : IDepartamento
+    public class Departamento
     {
         public int Id { get; internal set; }
 

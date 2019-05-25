@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Unidades
 {
-    public class UnidadeDeMedida : Unidade, IUnidadeDeMedida
+    public class UnidadeDeMedida : Unidade
     {
         //public ConversaoDeUnidade[] De { get; internal set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Modelos.Investimentos
 {
-    public class Investimento : IInvestimento
+    public class Investimento
     {
         public int Id { get; internal set; }
 

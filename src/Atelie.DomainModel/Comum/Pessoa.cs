@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Atelie.Comum
 {
-    public abstract class Pessoa : IPessoa
+    public abstract class Pessoa
     {
         public int Id { get; internal set; }
 
@@ -14,12 +14,6 @@ namespace Atelie.Comum
         public virtual ICollection<ContatoDeTelefone> ContatosDeTelefone { get; internal set; }
 
         public virtual ICollection<ContatoDeEmail> ContatosDeEmail { get; internal set; }
-
-        //IEndereco IPessoa.Endereco => Endereco;
-
-        IContatoDeTelefone[] IPessoa.ContatosDeTelefone => ContatosDeTelefone.ToArray();
-
-        IContatoDeEmail[] IPessoa.ContatosDeEmail => ContatosDeEmail.ToArray();
 
         protected Pessoa()
         {

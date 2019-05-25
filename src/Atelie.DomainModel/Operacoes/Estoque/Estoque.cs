@@ -5,7 +5,7 @@ using Atelie.Comum;
 
 namespace Atelie.Operacoes.Estoque
 {
-    public abstract class Estoque : IEstoque
+    public abstract class Estoque
     {
         public int Quantidade { get; internal set; }
 
@@ -25,11 +25,9 @@ namespace Atelie.Operacoes.Estoque
         {
             Registros = new HashSet<RegistroDeEstoque>();
         }
-
-        IRegistroDeEstoque[] IEstoque.Registros => Registros.ToArray();
     }
 
-    public class RegistroDeEstoque : IRegistroDeEstoque
+    public class RegistroDeEstoque
     {
         public virtual Estoque Estoque { get; internal set; }
 
@@ -42,10 +40,6 @@ namespace Atelie.Operacoes.Estoque
         public decimal ValorUnitario { get; internal set; }
 
         public TipoDeRegistroDeEstoque Tipo { get; internal set; }
-
-        IEstoque IRegistroDeEstoque.Estoque => Estoque;
-
-        IUnidade IRegistroDeEstoque.Unidade => Unidade;
     }
 
     public interface IRepositorioDeEstoques

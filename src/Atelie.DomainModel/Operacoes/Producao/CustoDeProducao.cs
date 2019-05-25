@@ -2,7 +2,7 @@
 
 namespace Atelie.Operacoes.Producao
 {
-    public class CustoDeProducao : ICustoDeProducao
+    public class CustoDeProducao
     {
         public decimal CustoDeComposicao { get; internal set; }
 

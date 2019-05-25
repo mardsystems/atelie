@@ -7,15 +7,11 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ICadastroDeFabricantes, FabricantesHttpService>();
-
-            container.Register<IConsultaDeFabricantes, FabricantesHttpService>();
+            //container.Register<FabricantesHttpService>();
 
             //
 
-            container.Register<ICadastroDeFabricacoesDeComponentes, FabricacoesDeComponentesHttpService>();
-
-            container.Register<IConsultaDeFabricacoesDeComponentes, FabricacoesDeComponentesHttpService>();
+            //container.Register<FabricacoesDeComponentesHttpService>();
         }
     }
 }

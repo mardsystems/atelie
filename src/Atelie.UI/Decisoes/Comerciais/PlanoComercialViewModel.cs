@@ -123,7 +123,7 @@ namespace Atelie.Decisoes.Comerciais
             Itens.planoComercial = this;
         }
 
-        public static PlanoComercialViewModel From(IPlanoComercial planoComercial)
+        public static PlanoComercialViewModel From(PlanoComercial planoComercial)
         {
             var itensDePlanoComercial = planoComercial.Itens.Select(p => ItemDePlanoComercialViewModel.From(p)).ToList();
 
@@ -216,7 +216,7 @@ namespace Atelie.Decisoes.Comerciais
 
         }
 
-        public static ItemDePlanoComercialViewModel From(IItemDePlanoComercial itemDePlanoComercial)
+        public static ItemDePlanoComercialViewModel From(ItemDePlanoComercial itemDePlanoComercial)
         {
             var viewModel = new ItemDePlanoComercialViewModel
             {
@@ -229,148 +229,6 @@ namespace Atelie.Decisoes.Comerciais
             };
 
             return viewModel;
-        }
-    }
-
-    public class PlanosComerciaisBindingList : ExtendedBindingList<PlanoComercialViewModel>
-    {
-        private readonly PlanosComerciaisLocalService planosComerciaisLocalService;
-
-        private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
-
-        private readonly IPlanejamentoComercial planejamentoComercial;
-
-        public PlanosComerciaisBindingList()
-            : base()
-        {
-
-        }
-
-        public PlanosComerciaisBindingList(
-            IConsultaDePlanosComerciais consultaDePlanosComerciais,
-            IPlanejamentoComercial planejamentoComercial,
-            IList<PlanoComercialViewModel> list
-        )
-            : base(list)
-        {
-            //this.planosComerciaisLocalService = planosComerciaisLocalService;
-
-            this.consultaDePlanosComerciais = consultaDePlanosComerciais;
-
-            this.planejamentoComercial = planejamentoComercial;
-        }
-
-        public PlanosComerciaisBindingList(IList<PlanoComercialViewModel> list)
-            : base(list)
-        {
-
-        }
-
-        //protected override object AddNewCore()
-        //{
-        //    var model = new PlanoComercial(
-        //        Guid.NewGuid().ToString(),
-        //        null,
-        //        6000,
-        //        20
-        //    );
-
-        //    var viewModel = PlanoComercialViewModel.From(model);
-
-        //    OnAddNew(viewModel);
-
-        //    return viewModel;
-        //}
-
-        protected override void OnAddNew(PlanoComercialViewModel viewModel)
-        {
-            //item.BindingList = this;
-
-            var model = new PlanoComercial(
-                            Guid.NewGuid().ToString(),
-                            null,
-                            6000,
-                            20
-                        );
-
-            viewModel.model = model;
-
-            //viewModel.Itens.planoComercial = viewModel;
-
-            base.OnAddNew(viewModel);
-        }
-
-        public override async Task SaveChanges()
-        {
-            var newItems = GetItemsBy(ObjectState.New);
-
-            foreach (var newItem in newItems)
-            {
-                try
-                {
-                    await planosComerciaisLocalService.Add(newItem.model);
-
-                    SetStatus($"Novo planoComercial '{newItem.model.Id}' cadastrado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
-
-            //
-
-            var modifiedItems = GetItemsBy(ObjectState.Modified);
-
-            foreach (var modifiedItem in modifiedItems)
-            {
-                try
-                {
-                    await planosComerciaisLocalService.Update(modifiedItem.model);
-
-                    SetStatus($"PlanoComercial '{modifiedItem.Id}' atualizado com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
-
-            //
-
-            var deletedItems = GetItemsBy(ObjectState.Deleted);
-
-            foreach (var deletedItem in deletedItems)
-            {
-                try
-                {
-                    await planosComerciaisLocalService.Remove(deletedItem.model);
-
-                    SetStatus($"PlanoComercial '{deletedItem.Id}' excluído com sucesso.");
-                }
-                catch (Exception ex)
-                {
-                    SetStatus(ex.Message);
-                }
-            }
-        }
-    }
-
-    public class ItensDePlanoComercialBindingList : ExtendedBindingList<ItemDePlanoComercialViewModel>
-    {
-        protected internal PlanoComercialViewModel planoComercial;
-
-        public ItensDePlanoComercialBindingList(IList<ItemDePlanoComercialViewModel> list)
-            : base(list)
-        {
-
-        }
-
-        protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
-        {
-            //viewModel.model = planoComercial;
-
-            base.OnAddNew(viewModel);
         }
     }
 

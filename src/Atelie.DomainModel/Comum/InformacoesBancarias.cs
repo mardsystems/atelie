@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public class InformacoesBancarias : IInformacoesBancarias
+    public class InformacoesBancarias
     {
         public string NumeroDoBanco { get; internal set; }
 

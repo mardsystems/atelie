@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais.Componentes
 {
-    public class Componente : AggregateRoot, IComponente
+    public class Componente : AggregateRoot
     {
         public int Id { get; internal set; }
 
@@ -49,16 +49,6 @@ namespace Atelie.Cadastro.Materiais.Componentes
 
             #endregion
         }
-
-        #region IComponente
-
-        IComponente IComponente.ComponentePai => ComponentePai;
-
-        IUnidadeDeMedida IComponente.UnidadePadrao => UnidadePadrao;
-
-        IFabricacaoDeComponente[] IComponente.Fabricantes => Fabricantes.ToArray();
-
-        #endregion
 
         #region Infraestrutura
 

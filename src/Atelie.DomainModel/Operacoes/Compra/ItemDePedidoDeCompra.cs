@@ -4,7 +4,7 @@ using Atelie.Comum;
 
 namespace Atelie.Operacoes.Compra
 {
-    public class ItemDePedidoDeCompra : IItemDePedidoDeCompra
+    public class ItemDePedidoDeCompra
     {
         public virtual PedidoDeCompra Pedido { get; internal set; }
 
@@ -17,13 +17,5 @@ namespace Atelie.Operacoes.Compra
         public double Quantidade { get; internal set; }
 
         public decimal Valor { get; internal set; }
-
-        IPedidoDeCompra IItemDePedidoDeCompra.Pedido => Pedido;
-
-        IMaterial IItemDePedidoDeCompra.Material => Material;
-
-        //ICorDeFabricante IItemDePedidoDeCompra.Cor => Cor;
-
-        IUnidade IItemDePedidoDeCompra.Unidade => Unidade;
     }
 }

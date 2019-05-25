@@ -18,9 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Atelie.BusinessModel\Atelie.BusinessModel.csproj">
-      <Aliases></Aliases>
-    </ProjectReference>
     <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
   </ItemGroup>

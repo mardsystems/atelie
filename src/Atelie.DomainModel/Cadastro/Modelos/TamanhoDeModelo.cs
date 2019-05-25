@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Cadastro.Modelos
 {
-    public class TamanhoDeModelo : ITamanhoDeModelo
+    public class TamanhoDeModelo
     {
         public string Sigla { get; internal set; }
 

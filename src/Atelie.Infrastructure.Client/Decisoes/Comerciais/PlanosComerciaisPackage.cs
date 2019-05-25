@@ -9,7 +9,7 @@ namespace Atelie.Decisoes.Comerciais
         {
             container.Register<PlanosComerciaisLocalService>();
 
-            container.Register<PlanosComerciaisHttpService>();
+            //container.Register<PlanosComerciaisHttpService>();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Atelie.Cadastro.Materiais.Componentes
 
         public BindingList<FabricanteViewModel> Fabricantes { get; set; }
 
-        public static ComponenteViewModel From(IComponente componente)
+        public static ComponenteViewModel From(Componente componente)
         {
             var viewModel = new ComponenteViewModel
             {
@@ -57,15 +57,6 @@ namespace Atelie.Cadastro.Materiais.Componentes
         }
     }
 
-    public class ComponentesBindingList : ExtendedBindingList<ComponenteViewModel>
-    {
-        public ComponentesBindingList(IList<ComponenteViewModel> list)
-            : base(list)
-        {
-
-        }
-    }
-
     public class ComponentesObservableCollection : ObservableCollection<ComponenteViewModel>
     {
         public ComponentesObservableCollection(IList<ComponenteViewModel> list)
@@ -75,24 +66,24 @@ namespace Atelie.Cadastro.Materiais.Componentes
         }
     }
 
-    public static class ExtensaoDeComponentes
-    {
-        public static IObservable<ComponentesBindingList> ParaDropdown(this IConsultaDeComponentes consultaDeComponentes)
-        {
-            var observable = consultaDeComponentes.ObtemObservavelDeComponentes()
-                .Select(componentes =>
-                {
-                    var list = componentes.Select(p => ComponenteViewModel.From(p)).ToList();
+    //public static class ExtensaoDeComponentes
+    //{
+    //    public static IObservable<ComponentesObservableCollection> ParaDropdown(this IConsultaDeComponentes consultaDeComponentes)
+    //    {
+    //        var observable = consultaDeComponentes.ObtemObservavelDeComponentes()
+    //            .Select(componentes =>
+    //            {
+    //                var list = componentes.Select(p => ComponenteViewModel.From(p)).ToList();
 
-                    list.Add(new ComponenteViewModel { Id = 0, Nome = "Selecione" });
+    //                list.Add(new ComponenteViewModel { Id = 0, Nome = "Selecione" });
 
-                    var bindingList = new ComponentesBindingList(list);
+    //                var observableCollection = new ComponentesObservableCollection(list);
 
-                    return Observable.Return(bindingList);
-                })
-                .Switch();
+    //                return Observable.Return(observableCollection);
+    //            })
+    //            .Switch();
 
-            return observable;
-        }
-    }
+    //        return observable;
+    //    }
+    //}
 }

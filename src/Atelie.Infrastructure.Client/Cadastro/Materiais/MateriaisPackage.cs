@@ -7,9 +7,7 @@ namespace Atelie.Cadastro.Materiais
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ICadastroDeMateriais, MateriaisHttpService>();
-
-            container.Register<IConsultaDeMateriais, MateriaisHttpService>();
+            //container.Register<MateriaisHttpService>();
         }
     }
 }

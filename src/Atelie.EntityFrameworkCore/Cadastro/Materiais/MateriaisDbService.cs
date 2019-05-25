@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais
 {
-    public class MateriaisDbService : IRepositorioDeMateriais, IConsultaDeMateriais
+    public class MateriaisDbService : IRepositorioDeMateriais
     {
         private readonly AtelieDbContext db;
 
@@ -76,7 +76,7 @@ namespace Atelie.Cadastro.Materiais
             }
         }
 
-        public IObservable<IMaterial[]> ObtemObservavelDeMateriais()
+        public IObservable<Material[]> ObtemObservavelDeMateriais()
         {
             try
             {

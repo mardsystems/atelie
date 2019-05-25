@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Atelie.Cadastro.Modelos.Producao
 {
-    public class EtapaDeProducao : IEtapaDeProducao
+    public class EtapaDeProducao
     {
         public int Id { get; internal set; }
 
@@ -15,10 +15,6 @@ namespace Atelie.Cadastro.Modelos.Producao
         public virtual ICollection<NecessidadeDeTipoDeRecurso> TiposDeRecursoNecessarios { get; internal set; }
 
         public virtual ICollection<NecessidadeDeFerramentaDeProducao> FerramentasNecessarias { get; internal set; }
-
-        INecessidadeDeTipoDeRecurso[] IEtapaDeProducao.TiposDeRecursoNecessarios => TiposDeRecursoNecessarios.ToArray();
-
-        INecessidadeDeFerramentaDeProducao[] IEtapaDeProducao.FerramentasNecessarias => FerramentasNecessarias.ToArray();
 
         public EtapaDeProducao()
         {

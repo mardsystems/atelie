@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public class Endereco : IEndereco
+    public class Endereco
     {
         public string Logradouro { get; internal set; }
 

@@ -22,7 +22,6 @@
     <Compile Remove="Cadastro\Materiais\Fabricantes\CorDeFabricante.cs" />
     <Compile Remove="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagem.cs" />
     <Compile Remove="Cadastro\Materiais\Fabricantes\Embalagem.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\PeriodoDeUnidadeDeFabricacao.cs" />
     <Compile Remove="Cadastro\Modelos\Producao\DisponibilidadeDeTipoDeRecurso.cs" />
     <Compile Remove="Cadastro\Modelos\Producao\Ferramentas\DisponibilidadeDeFerramentaDeProducao.cs" />
     <Compile Remove="Cadastro\Unidades\ConversaoDeUnidade.cs" />

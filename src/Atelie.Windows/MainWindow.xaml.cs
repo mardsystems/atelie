@@ -69,16 +69,16 @@ namespace Atelie.Windows
 
         private void CadastroDeFabricantesMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
+            //var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
 
-            var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
+            //var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
 
-            var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
+            //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
 
             var fabricantesWindow = new FabricantesWindow(
-                cadastroDeFabricantes,
-                consultaDeComponentes,
-                consultaDeFabricantes
+                //cadastroDeFabricantes,
+                //consultaDeComponentes,
+                //consultaDeFabricantes
             );
 
             fabricantesWindow.Show();

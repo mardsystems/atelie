@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais
 {
-    public class Material : AggregateRoot, IMaterial
+    public class Material : AggregateRoot
     {
         public int Id { get; internal set; }
 
@@ -68,22 +68,6 @@ namespace Atelie.Cadastro.Materiais
 
             #endregion
         }
-
-        #region IMaterial
-
-        IFabricante IMaterial.Fabricante => Fabricante;
-
-        IComponente IMaterial.Componente => Componente;
-
-        IUnidadeDeMedida IMaterial.Unidade => Unidade;
-
-        //ICatalogo IMaterial.Catalogo => Catalogo;
-
-        //IEmbalagem IMaterial.Embalagem => Embalagem;
-
-        IFornecimentoDeMaterial[] IMaterial.Fornecedores => Fornecedores.ToArray();
-
-        #endregion
 
         #region Infraestrutura
 

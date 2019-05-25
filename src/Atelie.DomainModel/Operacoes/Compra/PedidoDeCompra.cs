@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Atelie.Operacoes.Compra
 {
-    public class PedidoDeCompra : IPedidoDeCompra
+    public class PedidoDeCompra
     {
         public int Id { get; internal set; }
 
@@ -24,12 +24,6 @@ namespace Atelie.Operacoes.Compra
         {
             Itens = new HashSet<ItemDePedidoDeCompra>();
         }
-
-        IItemDePedidoDeCompra[] IPedidoDeCompra.Itens => Itens.ToArray();
-
-        IMeioDePagamento IPedidoDeCompra.MeioDePagamento => MeioDePagamento;
-
-        IFornecedor IPedidoDeCompra.Fornecedor => Fornecedor;
 
         public void Finaliza()
         {

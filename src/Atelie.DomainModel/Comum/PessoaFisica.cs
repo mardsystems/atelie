@@ -1,6 +1,6 @@
 ﻿namespace Atelie.Comum
 {
-    public abstract class PessoaFisica : Pessoa, IPessoaFisica
+    public abstract class PessoaFisica : Pessoa
     {
         public string CPF { get; internal set; }
 

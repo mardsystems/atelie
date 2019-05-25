@@ -8,7 +8,7 @@ using Atelie.Comum.Comercial;
 
 namespace Atelie.Operacoes.Venda
 {
-    public class PedidoDeVenda : IPedidoDeVenda
+    public class PedidoDeVenda
     {
         public int Id { get; internal set; }
 
@@ -20,17 +20,13 @@ namespace Atelie.Operacoes.Venda
 
         public StatusDePedidoDeVenda Status { get; internal set; }
 
-        IItemDePedidoDeVenda[] IPedidoDeVenda.Itens => Itens.ToArray();
-
-        IMeioDePagamento IPedidoDeVenda.MeioDePagamento => MeioDePagamento;
-
         public void Finaliza()
         {
 
         }
     }
 
-    public class ItemDePedidoDeVenda : IItemDePedidoDeVenda
+    public class ItemDePedidoDeVenda
     {
         public virtual PedidoDeVenda Pedido { get; internal set; }
 
@@ -47,19 +43,9 @@ namespace Atelie.Operacoes.Venda
         public decimal Desconto { get; internal set; }
 
         public virtual TipoDeComercializacao TipoDeComercializacao { get; internal set; }
-
-        IPedidoDeVenda IItemDePedidoDeVenda.Pedido => Pedido;
-
-        ITamanhoDeModelo IItemDePedidoDeVenda.TamanhoDeModelo => TamanhoDeModelo;
-
-        IModelo IItemDePedidoDeVenda.Modelo => Modelo;
-
-        IUnidade IItemDePedidoDeVenda.Unidade => Unidade;
-
-        ITipoDeComercializacao IItemDePedidoDeVenda.TipoDeComercializacao => TipoDeComercializacao;
     }
 
-    public class TipoDeComercializacao : ITipoDeComercializacao
+    public class TipoDeComercializacao
     {
         public string Sigla { get; internal set; }
 

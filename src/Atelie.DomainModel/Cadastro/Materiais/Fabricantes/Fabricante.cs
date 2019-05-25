@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Cadastro.Materiais.Fabricantes
 {
-    public class Fabricante : IFabricante
+    public class Fabricante
     {
         public int Id { get; internal set; }
 
@@ -35,12 +35,6 @@ namespace Atelie.Cadastro.Materiais.Fabricantes
 
             #endregion
         }
-
-        #region IFabricante
-
-        IFabricacaoDeComponente[] IFabricante.ComponentesFabricados => ComponentesFabricados.ToArray();
-
-        #endregion
 
         #region Infraestrutura
 
