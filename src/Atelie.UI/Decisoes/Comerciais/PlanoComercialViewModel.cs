@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Atelie.Decisoes.Comerciais
 {
-    public class PlanoComercialViewModel : ObservableObject, INotifyPropertyChanged, IEditableObject, INotifyDataErrorInfo //, IDataErrorInfo
+    public class PlanoComercialViewModel : ObservableObject, INotifyPropertyChanged, IEditableObject
     {
         protected internal PlanoComercial model;
 
@@ -218,87 +218,6 @@ namespace Atelie.Decisoes.Comerciais
 
             margemPercentual = model.MargemPercentual.ToString();
         }
-
-        protected readonly Dictionary<string, IList<Exception>> validationErrors = new Dictionary<string, IList<Exception>>();
-
-        private void ClearErrors(string propertyName)
-        {
-            if (!validationErrors.ContainsKey(propertyName))
-            {
-                return;
-            }
-
-            validationErrors.Remove(propertyName);
-
-            OnErrorsChanged(propertyName);
-        }
-
-        private void RaiseErrorsChanged(string propertyName, Exception exception)
-        {
-            IList<Exception> errors;
-
-            if (validationErrors.ContainsKey(propertyName))
-            {
-                errors = validationErrors[propertyName];
-            }
-            else
-            {
-                errors = new List<Exception>();
-
-                validationErrors.Add(propertyName, errors);
-            }
-
-            errors.Add(exception);
-
-            OnErrorsChanged(propertyName);
-        }
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        protected virtual void OnErrorsChanged(string propertyName)
-        {
-            if (ErrorsChanged != null)
-            {
-                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-        }
-
-        public bool HasErrors
-        {
-            get { return validationErrors.Count > 0; }
-        }
-
-        public string Error => "teste";
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (validationErrors.Count == 0)
-                {
-                    return null;
-                }
-
-                if (validationErrors[columnName].Count > 0)
-                {
-                    return validationErrors[columnName][0].Message;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        public IEnumerable GetErrors(string propertyName)
-        {
-            if (string.IsNullOrEmpty(propertyName) || !validationErrors.ContainsKey(propertyName))
-            {
-                return null;
-            }
-
-            return validationErrors[propertyName];
-        }
     }
 
     public class ItemDePlanoComercialViewModel : ObservableObject //, IEditableObject
@@ -310,30 +229,44 @@ namespace Atelie.Decisoes.Comerciais
             get { return model.PlanoComercial.Id; }
         }
 
-        string modeloCodigo = string.Empty;
         public string ModeloCodigo
         {
-            get { return modeloCodigo; }
-            set { SetProperty(ref modeloCodigo, value); }
+            get { return model.Modelo.Codigo; }
         }
 
-        string modeloNome = string.Empty;
         public string ModeloNome
         {
-            get { return modeloNome; }
-            set { SetProperty(ref modeloNome, value); }
+            get { return model.Modelo.Nome; }
         }
 
-        public decimal CustoDeProducaoValor
+        private string custoDeProducaoValor;
+        public string CustoDeProducaoValor
         {
-            get { return model.CustoDeProducao.Valor; }
+            get { return custoDeProducaoValor; }
             set
             {
-                model.DefineCustoDeProducao(value);
+                custoDeProducaoValor = value;
 
                 OnPropertyChanged();
 
-                OnPropertyChanged("PrecoDeVenda");
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefineCustoDeProducao(value2);
+
+                    OnPropertyChanged("PrecoDeVenda");
+
+                    ClearErrors("CustoDeProducaoValor");
+
+                    ClearErrors("PrecoDeVenda");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("CustoDeProducaoValor", ex);
+
+                    RaiseErrorsChanged("PrecoDeVenda", ex);
+                }
             }
         }
 
@@ -359,7 +292,7 @@ namespace Atelie.Decisoes.Comerciais
                 //PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
                 //ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
                 //ModeloNome = itemDePlanoComercial.Modelo.Nome,
-                CustoDeProducaoValor = itemDePlanoComercial.CustoDeProducao.Valor,
+                CustoDeProducaoValor = itemDePlanoComercial.CustoDeProducao.Valor.ToString(),
                 PrecoDeVenda = itemDePlanoComercial.PrecoDeVenda,
             };
 

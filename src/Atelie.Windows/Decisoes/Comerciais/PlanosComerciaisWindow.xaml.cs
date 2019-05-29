@@ -78,6 +78,11 @@ namespace Atelie.Decisoes.Comerciais
 
             await observableCollection.SaveChanges();
         }
+
+        private void AdicionarModeloButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class PlanoComercialValidationRule : ValidationRule

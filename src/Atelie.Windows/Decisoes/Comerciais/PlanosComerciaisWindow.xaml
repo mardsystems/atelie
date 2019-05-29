@@ -8,75 +8,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Planos Comerciais" Height="795" Width="1193" Loaded="Window_Loaded"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Medium"
-        TextElement.FontSize="14"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"    
     >
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
             <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
-            <!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />-->
-            <Style x:Key="cellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
-                <Setter Property="Validation.ErrorTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <StackPanel>
-                                <AdornedElementPlaceholder x:Name="placeholder" />
-                                <Popup HorizontalAlignment="Left" PopupAnimation="Fade" Placement="Bottom" IsOpen="true">
-                                    <Grid Background="White">
-                                        <TextBlock Text="{Binding [0].ErrorContent}"/>
-                                    </Grid>
-                                </Popup>
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
-                <Setter Property="Validation.ErrorTemplate">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <StackPanel>
-                                <AdornedElementPlaceholder x:Name="placeholder" />
-                                <Popup HorizontalAlignment="Left" PopupAnimation="Fade" Placement="Bottom" IsOpen="true">
-                                    <Grid Background="White">
-                                        <TextBlock Text="{Binding [0].ErrorContent}"/>
-                                    </Grid>
-                                </Popup>
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <!--<Setter Property="Padding" Value="-2"/>
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="True">
-                        <Setter Property="Background" Value="Red"/>
-                        <Setter Property="ToolTip" 
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                            Path=(Validation.Errors)[0].ErrorContent.Message}"/>
-                    </Trigger>
-                </Style.Triggers>-->
-            </Style>
-            <Style x:Key="error2Style" TargetType="{x:Type Label}">
-                <Setter Property="Padding" Value="-2"/>
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="True">
-                        <Setter Property="Background" Value="Red"/>
-                        <Setter Property="ToolTip" 
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                            Path=(Validation.Errors)[0].ErrorContent}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -87,15 +23,32 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="71*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
-            <MenuItem Header="Sistema"/>
+            <MenuItem Header="Registro">
+                <MenuItem Header="Novo Plano Comercial ..."/>
+                <Separator/>
+                <MenuItem Header="Salvar" InputGestureText="Ctrl+S" Click="SaveButton_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ContentSave" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Fechar"/>
+            </MenuItem>
         </Menu>
         <ToolBar VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2">
-            <Button Content="Novo Fabricante..."/>
-            <Button x:Name="saveButton" Content="Salvar" Click="SaveButton_Click"/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Novo Plano Comercial ..."/>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button x:Name="saveButton" ToolTip="Salvar" Click="SaveButton_Click">
+                <materialDesign:PackIcon Kind="ContentSave" />
+            </Button>
         </ToolBar>
         <Grid Grid.Row="2" DataContext="{StaticResource planoComercialViewModelViewSource}" Margin="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -103,75 +56,18 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="planoComercialViewModelDataGrid"  RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" FontFamily="Calibri" HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4" FontSize="14">
+            <DataGrid 
+                x:Name="planoComercialViewModelDataGrid"
+                ItemsSource="{Binding}"
+                RowDetailsVisibilityMode="VisibleWhenSelected"
+                EnableRowVirtualization="True"
+                AutoGenerateColumns="False"
+            >
                 <DataGrid.RowValidationRules>
                     <local:PlanoComercialValidationRule ValidationStep="UpdatedValue"/>
                 </DataGrid.RowValidationRules>
-                <DataGrid.AlternatingRowBackground>
-                    <SolidColorBrush Color="#FFD9E1F2" Opacity="0.5"/>
-                </DataGrid.AlternatingRowBackground>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
-                        <Style.Triggers>
-                            <!--Order of these triggers matter as the last one will take precedence-->
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="Transparent" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.CellStyle>
-                    <!--When the cell is selected, switching to transparent to let the row's Background be visible-->
-                    <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="Transparent" />
-                            </Trigger>
-                            <!--<Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>-->
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
-                                <!--<Setter Property="BorderThickness" Value="1"/>-->
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.CellStyle>
-                <!--<DataGrid.Style>
-                    <Style TargetType="{x:Type DataGrid}">
-                        <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
-                    </Style>
-                </DataGrid.Style>
-                -->
-                <!--<DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                        <Setter Property="FontWeight"  Value="Bold" />
-                        <Setter Property="Background" Value="#FF4472C4" />
-                        <Setter Property="Foreground" Value="White"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>-->
-                <DataGrid.RowValidationErrorTemplate>
-                    <ControlTemplate>
-                        <Grid Margin="0,-2,0,-2"
-                            ToolTip="{Binding RelativeSource={RelativeSource
-                                FindAncestor, AncestorType={x:Type DataGridRow}},
-                                Path=(Validation.Errors)[0].ErrorContent}">
-                            <Ellipse StrokeThickness="0" Fill="Red" 
-                                Width="{TemplateBinding FontSize}" 
-                                Height="{TemplateBinding FontSize}" />
-                            <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
-                                FontWeight="Bold" Foreground="White" 
-                                HorizontalAlignment="Center" />
-                        </Grid>
-                    </ControlTemplate>
-                </DataGrid.RowValidationErrorTemplate>
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>
+                    <!--<DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>-->
                     <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome, ValidatesOnExceptions=True}"/>
                     <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="RBM (R$)" Binding="{Binding RendaBrutaMensal}"/>
                     <DataGridTextColumn x:Name="custoFixoColumn" Header="CF (R$)" Binding="{Binding CustoFixo}"/>
@@ -179,43 +75,36 @@
                     <DataGridTextColumn x:Name="custoVariavelColumn" Header="CV (R$)" Binding="{Binding CustoVariavel}"/>
                     <DataGridTextColumn x:Name="custoPercentualColumn" Header="CV (%)" Binding="{Binding CustoPercentual}"/>
                     <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Binding="{Binding Margem}"/>
-                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Binding="{Binding MargemPercentual, ValidatesOnNotifyDataErrors=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao, ValidatesOnNotifyDataErrors=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                    <DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>
+                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Binding="{Binding MargemPercentual, ValidatesOnNotifyDataErrors=True}"/>
+                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao, ValidatesOnNotifyDataErrors=True}"/>
+                    <!--<DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>-->
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <GroupBox Grid.Column="2" Header="Tabela de Preços" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="16">
-                <GroupBox.HeaderTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ImageArea" Height="32" Width="32" VerticalAlignment="Center" />
-                            <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </GroupBox.HeaderTemplate>
-                <DataGrid x:Name="itensDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" FontFamily="Calibri" FontSize="14" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                    <!--<DataGrid.Style>
-                        <Style TargetType="{x:Type DataGrid}">
-                            <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
-                        </Style>
-                    </DataGrid.Style>
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="FontWeight"  Value="Bold" />
-                            <Setter Property="Background" Value="#FF4472C4" />
-                            <Setter Property="Foreground" Value="White"/>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>-->
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="custoDeProducaoValorColumn" Binding="{Binding CustoDeProducaoValor}" Header="CP (R$)" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="modeloCodigoColumn" Binding="{Binding ModeloCodigo}" Header="Modelo" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="modeloNomeColumn" Binding="{Binding ModeloNome}" Header="Modelo Nome" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda}" Header="PV (R$)" Width="SizeToHeader"/>
-                        <DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+            <GroupBox Grid.Column="2" Header="Tabela de Preços" Style="{StaticResource GroupBoxSplit}">
+                <StackPanel>
+                    <ToolBar VerticalAlignment="Top">
+                        <Button x:Name="adicionarModeloButton" Content="Adicionar Modelo..." Click="AdicionarModeloButton_Click"/>
+                    </ToolBar>
+                    <DataGrid
+                        x:Name="itensDataGrid"
+                        ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}"
+                        RowDetailsVisibilityMode="VisibleWhenSelected"
+                        VerticalContentAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        EnableRowVirtualization="True"
+                        AutoGenerateColumns="False"
+                    >
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>-->
+                            <DataGridTextColumn x:Name="custoDeProducaoValorColumn" Binding="{Binding CustoDeProducaoValor}" Header="CP (R$)" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="modeloCodigoColumn" Binding="{Binding ModeloCodigo}" Header="Modelo" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="modeloNomeColumn" Binding="{Binding ModeloNome}" Header="Modelo Nome" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda}" Header="PV (R$)" Width="SizeToHeader"/>
+                            <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </GroupBox>
         </Grid>
         <StatusBar Grid.Row="3" VerticalAlignment="Bottom" Grid.ColumnSpan="2">

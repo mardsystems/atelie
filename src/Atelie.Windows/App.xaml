@@ -10,6 +10,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepOrange.xaml" />
+
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />-->
+
+                <!--<ResourceDictionary Source="DataGrid.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
@@ -30,6 +34,25 @@
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
 
             <SolidColorBrush x:Key="DataGridColumnHeader" Color="{DynamicResource Primary500}" Opacity="0.4"/>
+
+            <Style x:Key="GroupBoxSplit" TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}" Margin="-4" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="BorderThickness" Value="5" />
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Hello World!!!!!!"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>-->
+            </Style>            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

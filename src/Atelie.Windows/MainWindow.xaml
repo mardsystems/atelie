@@ -6,20 +6,101 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Atelie"
         mc:Ignorable="d"
-        Title="Atelie" Height="450" Width="800">
+        Title="Atelie" Height="450" Width="800"
+        >
     <Window.Resources>
         <local:VisualToImageSourceConverter x:Key="Converter" />
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="151*"/>
-            <ColumnDefinition Width="244*"/>
-        </Grid.ColumnDefinitions>
-        <Menu IsMainMenu="True" Grid.ColumnSpan="2">
-            <MenuItem Header="Sistema">
-                <MenuItem Header="Trocar de Usuário"></MenuItem>
-                <MenuItem Header="Logoff"></MenuItem>
-                <Separator></Separator>
+    <materialDesign:DrawerHost>
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <StackPanel Margin="16">
+                <TextBlock Margin="4" HorizontalAlignment="Center">Atelie</TextBlock>
+                <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Margin="4" HorizontalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    Fechar
+                </Button>
+                <!--<Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                    Margin="4" HorizontalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    CLOSE ALL
+                </Button>-->
+            </StackPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+        <!--<Grid MinWidth="480" MinHeight="480" Grid.ColumnSpan="3">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone
+                        Mode="Dark"
+                        Padding="16"                        
+                        Grid.ColumnSpan="3"
+                        >
+                <DockPanel>
+                    <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" VerticalAlignment="Center"
+                                  DockPanel.Dock="Right" />
+                    <StackPanel Orientation="Horizontal"
+                            materialDesign:RippleAssist.IsCentered="True">
+                        <ToggleButton
+                            Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"                            
+                            Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                        <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                   Margin="16 0 0 0"
+                                   materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Style="{DynamicResource MaterialDesignToolButton}">
+                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                </Button>
+                                <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Build a search bar" 
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                     MinWidth="200" VerticalAlignment="Center" />
+                                <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="2">
+                                    <materialDesign:PackIcon Kind="Microphone" Opacity=".56" Margin="8 0 0 0" />
+                                </Button>
+                            </Grid>
+                        </materialDesign:ColorZone>
+                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0">
+                            <materialDesign:PackIcon Kind="Send" />
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+            <Menu IsMainMenu="True" Grid.Row="1" Grid.ColumnSpan="3">
+                <MenuItem Header="Sistema">
+                    <MenuItem Header="Trocar de Usuário"></MenuItem>
+                    <MenuItem Header="Logoff"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Opções"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Sair"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Cadastro">
                     <MenuItem Header="Materiais"></MenuItem>
                     <Separator></Separator>
@@ -34,11 +115,64 @@
                         <MenuItem Header="Planejamento Comercial" x:Name="planejamentoComercialMenuItem" Click="PlanejamentoComercialMenuItem_Click"></MenuItem>
                     </MenuItem>
                 </MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Opções"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Sair"></MenuItem>
-            </MenuItem>
-        </Menu>
-    </Grid>
+            </Menu>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="36" TextAlignment="Center" VerticalAlignment="Center">
+                Sistema de Atelie
+            </TextBlock>
+            <StackPanel>
+                <!--<Button
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Grid.Row="1" Grid.Column="0"  Margin="4">
+                    <materialDesign:PackIcon Kind="ArrowLeft" />
+                </Button>-->
+                <!--<Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Top}"
+                            Grid.Row="0" Grid.Column="1" Margin="4">
+                    <materialDesign:PackIcon Kind="ArrowUp" />
+                </Button>
+                <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Right}"
+                            Grid.Row="1" Grid.Column="2" Margin="4">
+                    <materialDesign:PackIcon Kind="ArrowRight" />
+                </Button>
+                <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Bottom}"
+                            Grid.Row="2" Grid.Column="1" Margin="4">
+                    <materialDesign:PackIcon Kind="ArrowDown" />
+                </Button>
+                <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            Grid.Row="1" Grid.Column="1" Margin="4" 
+                            Style="{DynamicResource MaterialDesignRaisedAccentButton}">
+                    <materialDesign:PackIcon Kind="ArrowAll" />
+                </Button>-->
+            </StackPanel>
+        </Grid>
+    </materialDesign:DrawerHost>
+
+
+    <!--<DockPanel>
+                <materialDesign:PopupBox
+      DockPanel.Dock="Right"
+      PlacementMode="BottomAndAlignRightEdges">
+                    <ListBox>
+                        <ListBoxItem>
+                            Hello World
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            Nice Popup
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            Goodbye.
+                        </ListBoxItem>
+                    </ListBox>
+                </materialDesign:PopupBox>
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">
+                Menu
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>-->
+
 </Window>
