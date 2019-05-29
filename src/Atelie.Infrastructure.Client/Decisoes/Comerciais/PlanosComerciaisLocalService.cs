@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -41,11 +42,11 @@ namespace Atelie.Decisoes.Comerciais
             return result;
         }
 
-        public IObservable<PlanoComercial[]> ObtemObservavelDePlanosComerciais()
+        public async Task<IEnumerable<PlanoComercial>> ObtemObservavelDePlanosComerciais()
         {
-            var result = db.ObtemObservavelDePlanosComerciais();
+            var result = await db.ObtemObservavelDePlanosComerciais();
 
-            return result.Cast<PlanoComercial[]>();
+            return result; //.Cast<PlanoComercial[]>();
         }
     }
 }

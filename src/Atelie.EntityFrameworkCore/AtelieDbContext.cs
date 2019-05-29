@@ -423,6 +423,10 @@ namespace Atelie
             //    new FornecimentoDeMaterial { FornecedorId = 9, MaterialId = 8, NomeComercial = "Sacos com aba - PEAD (polietileno de alta densidade)?" },
             //    new FornecimentoDeMaterial { FornecedorId = 10, MaterialId = 9, NomeComercial = "Plástico fosco transparente (alta densidade) medindo 46 x 60 x 18 com alça especial?" }
             //);
+
+            modelBuilder.Entity<Modelo>().HasData(
+                new Modelo { Codigo = "1", Nome = "TatiModel"}
+            );
         }
     }
 }

@@ -28,8 +28,8 @@ namespace Atelie.Decisoes.Comerciais
 
         public PlanosComerciaisWindow(
             PlanosComerciaisLocalService planosComerciaisLocalService
-            //IConsultaDePlanosComerciais consultaDePlanosComerciais,
-            //IPlanejamentoComercial planejamentoComercial
+        //IConsultaDePlanosComerciais consultaDePlanosComerciais,
+        //IPlanejamentoComercial planejamentoComercial
         )
         {
             this.planosComerciaisLocalService = planosComerciaisLocalService;
@@ -43,15 +43,15 @@ namespace Atelie.Decisoes.Comerciais
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //var planosComerciais = await ((IConsultaDePlanosComerciais)planosComerciaisLocalService).ObtemObservavelDePlanosComerciais();
+            var planosComerciais = await planosComerciaisLocalService.ObtemObservavelDePlanosComerciais();
 
-            //var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
+            var list = planosComerciais.Select(p => PlanoComercialViewModel.From(p)).ToList();
 
             var observableCollection = new PlanosComerciaisObservableCollection(
-                //planosComerciaisLocalService,
+                planosComerciaisLocalService,
                 //consultaDePlanosComerciais,
                 //planejamentoComercial,
-                //list
+                list
             );
 
             //planosComerciaisBindingSource.DataSource = bindingList;
@@ -77,6 +77,23 @@ namespace Atelie.Decisoes.Comerciais
             var observableCollection = (PlanosComerciaisObservableCollection)planoComercialViewModelViewSource.Source;
 
             await observableCollection.SaveChanges();
+        }
+    }
+
+    public class PlanoComercialValidationRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value,
+            System.Globalization.CultureInfo cultureInfo)
+        {
+            PlanoComercialViewModel viewModel = (value as BindingGroup).Items[0] as PlanoComercialViewModel;
+            if (viewModel.HasErrors)
+            {
+                return new ValidationResult(false, viewModel.Error);
+            }
+            else
+            {
+                return ValidationResult.ValidResult;
+            }
         }
     }
 }

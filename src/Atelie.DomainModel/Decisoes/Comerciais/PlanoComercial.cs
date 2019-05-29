@@ -92,13 +92,14 @@ namespace Atelie.Decisoes.Comerciais
             Itens = new HashSet<ItemDePlanoComercial>();
         }
 
-        public ItemDePlanoComercial AdicionaItem()
+        public ItemDePlanoComercial AdicionaItem(Modelo modelo)
         {
             var max = Itens.Count;
 
             var model = new ItemDePlanoComercial(
                 max++,
-                this
+                this,
+                modelo
             );
 
             Itens.Add(model);
@@ -127,12 +128,15 @@ namespace Atelie.Decisoes.Comerciais
 
         public ItemDePlanoComercial(
             int id,
-            PlanoComercial planoComercial
+            PlanoComercial planoComercial,
+            Modelo modelo
         )
         {
             Id = id;
 
             PlanoComercial = planoComercial;
+
+            Modelo = modelo;
 
             CustoDeProducao = new CustoDeProducao();
         }

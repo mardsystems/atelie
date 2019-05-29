@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Atelie.Windows
+namespace Atelie
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -76,9 +76,9 @@ namespace Atelie.Windows
             //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
 
             var fabricantesWindow = new FabricantesWindow(
-                //cadastroDeFabricantes,
-                //consultaDeComponentes,
-                //consultaDeFabricantes
+            //cadastroDeFabricantes,
+            //consultaDeComponentes,
+            //consultaDeFabricantes
             );
 
             fabricantesWindow.Show();
@@ -94,8 +94,8 @@ namespace Atelie.Windows
 
             var planosComerciaisForm = new PlanosComerciaisWindow(
                 planosComerciaisLocalService
-                //consultaDePlanosComerciais,
-                //planejamentoComercial
+            //consultaDePlanosComerciais,
+            //planejamentoComercial
             );
 
             planosComerciaisForm.Show();

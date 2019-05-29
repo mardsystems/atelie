@@ -4,9 +4,9 @@
 
 ## Migrations
 
-add-migration -name Initial -project Atelie.Migrations -startupproject Atelie.Api
-update-database -project Atelie.Migrations -startupproject Atelie.Api
-drop-database -project Atelie.Migrations -startupproject Atelie.Api
+add-migration -name Initial -project Atelie.EntityFrameworkCore -startupproject Atelie.Windows
+update-database -project Atelie.EntityFrameworkCore -startupproject Atelie.Windows
+drop-database -project Atelie.EntityFrameworkCore -startupproject Atelie.Windows
 
 ## WPF
 

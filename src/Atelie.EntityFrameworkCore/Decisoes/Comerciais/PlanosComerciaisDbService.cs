@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
@@ -16,6 +18,13 @@ namespace Atelie.Decisoes.Comerciais
 
         public async Task SaveChanges()
         {
+            var items = db.ChangeTracker.Entries<ItemDePlanoComercial>().ToArray();
+
+            foreach (var item in items)
+            {
+                item.State.ToString();
+            }
+
             await db.SaveChangesAsync();
         }
 
@@ -81,25 +90,26 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
-        public IObservable<PlanoComercial[]> ObtemObservavelDePlanosComerciais()
+        public async Task<IEnumerable<PlanoComercial>> ObtemObservavelDePlanosComerciais()
         {
             try
             {
-                var planosComerciais = db.PlanosComerciais
+                var planosComerciais = await db.PlanosComerciais
                     .Include(p => p.CustosFixos)
                     .Include(p => p.CustosVariaveis)
                     .Include(p => p.Itens)
-                    .ToArrayAsync();
+                        .ThenInclude(p => p.Modelo)
+                    .ToListAsync();
 
-                var observable = planosComerciais.ToObservable();
+                //var observable = planosComerciais.ToObservable();
 
-                return observable;
+                return planosComerciais;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: Tratar erros de persistência aqui.
 
-                throw new ApplicationException();
+                throw new ApplicationException("Erro em Planos Comerciais.", ex);
             }
         }
     }
