@@ -12,6 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
+            <CollectionViewSource x:Key="planoComercialViewModelCustosViewSource" Source="{Binding Custos, Source={StaticResource planoComercialViewModelViewSource}}"/>
             <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
         </ResourceDictionary>
     </Window.Resources>
@@ -22,10 +23,6 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="70*"/>
-        </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Header="Registro">
                 <MenuItem Header="Novo Plano Comercial ..."/>
@@ -70,42 +67,76 @@
                     <!--<DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>-->
                     <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome, ValidatesOnExceptions=True}"/>
                     <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="RBM (R$)" Binding="{Binding RendaBrutaMensal}"/>
-                    <DataGridTextColumn x:Name="custoFixoColumn" Header="CF (R$)" Binding="{Binding CustoFixo}"/>
-                    <DataGridTextColumn x:Name="custoFixoPercentualColumn" Header="CF (%)" Binding="{Binding CustoFixoPercentual}"/>
-                    <DataGridTextColumn x:Name="custoVariavelColumn" Header="CV (R$)" Binding="{Binding CustoVariavel}"/>
-                    <DataGridTextColumn x:Name="custoPercentualColumn" Header="CV (%)" Binding="{Binding CustoPercentual}"/>
+                    <DataGridTextColumn x:Name="custoFixoTotalColumn" Header="CF (R$)" Binding="{Binding CustoFixoTotal, Mode=OneWay}"/>
+                    <DataGridTextColumn x:Name="custoFixoPercentualTotalColumn" Header="CF (%)" Binding="{Binding CustoFixoPercentualTotal, Mode=OneWay}"/>
+                    <DataGridTextColumn x:Name="custoVariavelTotalColumn" Header="CV (R$)" Binding="{Binding CustoVariavelTotal, Mode=OneWay}"/>
+                    <DataGridTextColumn x:Name="custoVariavelPercentualTotalColumn" Header="CV (%)" Binding="{Binding CustoVariavelPercentualTotal, Mode=OneWay}"/>
                     <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Binding="{Binding Margem}"/>
                     <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Binding="{Binding MargemPercentual, ValidatesOnNotifyDataErrors=True}"/>
-                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao, ValidatesOnNotifyDataErrors=True}"/>
+                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao, Mode=OneWay, ValidatesOnNotifyDataErrors=True}"/>
                     <!--<DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>-->
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <GroupBox Grid.Column="2" Header="Tabela de Preços" Style="{StaticResource GroupBoxSplit}">
-                <StackPanel>
-                    <ToolBar VerticalAlignment="Top">
-                        <Button x:Name="adicionarModeloButton" Content="Adicionar Modelo..." Click="AdicionarModeloButton_Click"/>
-                    </ToolBar>
-                    <DataGrid
-                        x:Name="itensDataGrid"
-                        ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}"
-                        RowDetailsVisibilityMode="VisibleWhenSelected"
-                        VerticalContentAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        EnableRowVirtualization="True"
-                        AutoGenerateColumns="False"
-                    >
-                        <DataGrid.Columns>
-                            <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>-->
-                            <DataGridTextColumn x:Name="custoDeProducaoValorColumn" Binding="{Binding CustoDeProducaoValor}" Header="CP (R$)" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="modeloCodigoColumn" Binding="{Binding ModeloCodigo}" Header="Modelo" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="modeloNomeColumn" Binding="{Binding ModeloNome}" Header="Modelo Nome" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda}" Header="PV (R$)" Width="SizeToHeader"/>
-                            <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>-->
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </GroupBox>
+            <Grid Grid.Column="2" Margin="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <GroupBox Header="Custos" Style="{StaticResource GroupBoxSplit}">
+                    <StackPanel>
+                        <ToolBar VerticalAlignment="Top">
+                            <Button x:Name="adicionarCustoButton" Content="Adicionar Custo..." Click="AdicionarModeloButton_Click"/>
+                        </ToolBar>
+                        <DataGrid
+                            x:Name="custosDataGrid"
+                            ItemsSource="{Binding Source={StaticResource planoComercialViewModelCustosViewSource}}"
+                            RowDetailsVisibilityMode="VisibleWhenSelected"
+                            VerticalContentAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            EnableRowVirtualization="True"
+                            AutoGenerateColumns="False"
+                        >
+                            <DataGrid.Columns>
+                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="SizeToHeader" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
+                                <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor}" Header="V (R$)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual}" Header="P (%)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado}" Header="VC (R$)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado}" Header="PC (%)" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </GroupBox>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+                <GroupBox Grid.Row="2" Header="Tabela de Preços" Style="{StaticResource GroupBoxSplit}">
+                    <StackPanel>
+                        <ToolBar VerticalAlignment="Top">
+                            <Button x:Name="adicionarModeloButton" Content="Adicionar Modelo..." Click="AdicionarModeloButton_Click"/>
+                        </ToolBar>
+                        <DataGrid
+                            x:Name="itensDataGrid"
+                            ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}"
+                            RowDetailsVisibilityMode="VisibleWhenSelected"
+                            VerticalContentAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            EnableRowVirtualization="True"
+                            AutoGenerateColumns="False"
+                        >
+                            <DataGrid.Columns>
+                                <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>-->
+                                <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay}" Header="CP (R$)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay}" Header="CPS (R$)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo, Mode=OneWay}" Header="Modelo" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay}" Header="PV (R$)" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado}" Header="PVD (R$)" Width="SizeToHeader"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>-->
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
         </Grid>
         <StatusBar Grid.Row="3" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
             <Label Content="Pronto."/>

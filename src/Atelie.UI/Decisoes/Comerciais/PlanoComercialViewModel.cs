@@ -18,7 +18,7 @@ namespace Atelie.Decisoes.Comerciais
 
         public string Id
         {
-            get { return model.Id; }
+            get { return model.Codigo; }
             //set
             //{
             //    OnPropertyChanged();
@@ -60,40 +60,29 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
-        public decimal CustoFixo
+        public decimal CustoFixoTotal
         {
-            get { return model.CustoFixo; }
-            set
-            {
-                OnPropertyChanged();
-            }
+            get { return model.CustoFixoTotal; }
         }
 
-        public decimal CustoFixoPercentual
+        public decimal CustoFixoPercentualTotal
         {
-            get { return model.CustoFixoPercentual; }
-            set
-            {
-                OnPropertyChanged();
-            }
+            get { return model.CustoFixoPercentualTotal; }
         }
 
-        public decimal CustoVariavel
+        public decimal CustoVariavelTotal
         {
-            get { return model.CustoVariavel; }
-            set
-            {
-                OnPropertyChanged();
-            }
+            get { return model.CustoVariavelTotal; }
         }
 
-        public decimal CustoPercentual
+        public decimal CustoVariavelPercentualTotal
         {
-            get { return model.CustoPercentual; }
-            set
-            {
-                OnPropertyChanged();
-            }
+            get { return model.CustoVariavelPercentualTotal; }
+        }
+
+        public decimal CustoPercentualTotal
+        {
+            get { return model.CustoPercentualTotal; }
         }
 
         public decimal Margem
@@ -141,11 +130,40 @@ namespace Atelie.Decisoes.Comerciais
         public decimal TaxaDeMarcacao
         {
             get { return model.TaxaDeMarcacao; }
+        }
+
+        private string taxaDeMarcacaoSugerida;
+        public string TaxaDeMarcacaoSugerida
+        {
+            get { return (model.TaxaDeMarcacaoSugerida.HasValue ? model.TaxaDeMarcacaoSugerida.Value.ToString() : null); }
             set
             {
+                taxaDeMarcacaoSugerida = value;
+
                 OnPropertyChanged();
+
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefineMargemPercentual(value2);
+
+                    //OnPropertyChanged("TaxaDeMarcacao");
+
+                    ClearErrors("TaxaDeMarcacaoSugerida");
+
+                    //ClearErrors("TaxaDeMarcacao");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("TaxaDeMarcacaoSugerida", ex);
+
+                    //RaiseErrorsChanged("TaxaDeMarcacao", ex);
+                }
             }
         }
+
+        public CustosObservableCollection Custos { get; set; }
 
         public ItensDePlanoComercialObservableCollection Itens { get; set; }
 
@@ -158,6 +176,10 @@ namespace Atelie.Decisoes.Comerciais
 
         public static PlanoComercialViewModel From(PlanoComercial planoComercial)
         {
+            var custos = planoComercial.Custos.Select(p => CustoViewModel.From(p)).ToList();
+
+            var custosObservableCollection = new CustosObservableCollection(custos);
+
             var itensDePlanoComercial = planoComercial.Itens.Select(p => ItemDePlanoComercialViewModel.From(p)).ToList();
 
             var itensDePlanoComercialObservableCollection = new ItensDePlanoComercialObservableCollection(itensDePlanoComercial);
@@ -166,17 +188,16 @@ namespace Atelie.Decisoes.Comerciais
             {
                 model = planoComercial as PlanoComercial,
                 //Id = planoComercial.Id,
-                Nome = planoComercial.Nome,
+                nome = planoComercial.Nome,
                 RendaBrutaMensal = planoComercial.RendaBrutaMensal,
-                CustoFixo = planoComercial.CustoFixo,
-                CustoFixoPercentual = planoComercial.CustoFixoPercentual,
-                CustoVariavel = planoComercial.CustoVariavel,
-                CustoPercentual = planoComercial.CustoPercentual,
                 Margem = planoComercial.Margem,
-                MargemPercentual = planoComercial.MargemPercentual.ToString(),
-                TaxaDeMarcacao = planoComercial.TaxaDeMarcacao,
+                margemPercentual = planoComercial.MargemPercentual.ToString(),
+                taxaDeMarcacaoSugerida = (planoComercial.TaxaDeMarcacaoSugerida.HasValue ? planoComercial.TaxaDeMarcacaoSugerida.Value.ToString() : null),
+                Custos = custosObservableCollection,
                 Itens = itensDePlanoComercialObservableCollection
             };
+
+            custosObservableCollection.planoComercial = viewModel;
 
             itensDePlanoComercialObservableCollection.planoComercial = viewModel;
 
@@ -220,32 +241,70 @@ namespace Atelie.Decisoes.Comerciais
         }
     }
 
-    public class ItemDePlanoComercialViewModel : ObservableObject //, IEditableObject
+    public class CustoViewModel : ObservableObject //, IEditableObject
     {
-        protected internal ItemDePlanoComercial model;
+        protected internal CustosObservableCollection collection;
 
-        public string PlanoComercialId
+        protected internal Custo model;
+
+        public string PlanoComercialCodigo
         {
-            get { return model.PlanoComercial.Id; }
+            get { return model.PlanoComercial.Codigo; }
         }
 
-        public string ModeloCodigo
+        private TipoDeCusto tipo;
+        public TipoDeCusto Tipo
         {
-            get { return model.Modelo.Codigo; }
-        }
-
-        public string ModeloNome
-        {
-            get { return model.Modelo.Nome; }
-        }
-
-        private string custoDeProducaoValor;
-        public string CustoDeProducaoValor
-        {
-            get { return custoDeProducaoValor; }
+            get { return tipo; }
             set
             {
-                custoDeProducaoValor = value;
+                tipo = value;
+
+                OnPropertyChanged();
+
+                try
+                {
+                    model.DefineTipo(value);
+
+                    ClearErrors("Tipo");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("Tipo", ex);
+                }
+            }
+        }
+
+        private string descricao;
+        public string Descricao
+        {
+            get { return descricao; }
+            set
+            {
+                descricao = value;
+
+                OnPropertyChanged();
+
+                try
+                {
+                    model.DefineDescricao(value);
+
+                    ClearErrors("Descricao");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("Descricao", ex);
+                }
+            }
+        }
+
+        private string valor;
+        public string Valor
+        {
+            get { return valor; }
+            set
+            {
+                valor = value;
 
                 OnPropertyChanged();
 
@@ -253,29 +312,162 @@ namespace Atelie.Decisoes.Comerciais
                 {
                     var value2 = Convert.ToDecimal(value);
 
-                    model.DefineCustoDeProducao(value2);
+                    model.DefineValor(value2);
 
-                    OnPropertyChanged("PrecoDeVenda");
+                    collection.planoComercial.OnPropertyChanged("CustoFixoTotal");
 
-                    ClearErrors("CustoDeProducaoValor");
-
-                    ClearErrors("PrecoDeVenda");
+                    ClearErrors("Valor");
                 }
                 catch (Exception ex)
                 {
-                    RaiseErrorsChanged("CustoDeProducaoValor", ex);
-
-                    RaiseErrorsChanged("PrecoDeVenda", ex);
+                    RaiseErrorsChanged("Valor", ex);
                 }
             }
         }
 
+        private string percentual;
+        public string Percentual
+        {
+            get { return percentual; }
+            set
+            {
+                percentual = value;
+
+                OnPropertyChanged();
+
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefinePercentual(value2);
+
+                    ClearErrors("Percentual");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("Percentual", ex);
+                }
+            }
+        }
+
+        public decimal ValorCalculado
+        {
+            get { return model.ValorCalculado; }
+        }
+
+        public decimal PercentualCalculado
+        {
+            get { return model.PercentualCalculado; }
+        }
+
+        public CustoViewModel()
+        {
+
+        }
+
+        public static CustoViewModel From(Custo custo)
+        {
+            var viewModel = new CustoViewModel
+            {
+                model = custo,
+                tipo = custo.Tipo,
+                descricao = custo.Descricao,
+                valor = custo.Valor.ToString(),
+                percentual = custo.Percentual.ToString(),
+            };
+
+            return viewModel;
+        }
+    }
+
+    public class ItemDePlanoComercialViewModel : ObservableObject //, IEditableObject
+    {
+        protected internal ItemDePlanoComercial model;
+
+        public string PlanoComercialCodigo
+        {
+            get { return model.PlanoComercial.Codigo; }
+        }
+
+        public string Modelo
+        {
+            get { return $"{model.Modelo.Nome} ({model.Modelo.Codigo})"; }
+        }
+
+        public decimal CustoDeProducao
+        {
+            get { return model.CustoDeProducao; }
+        }
+
+        public decimal? CustoDeProducaoSugerido
+        {
+            get { return model.CustoDeProducaoSugerido; }
+        }
+
+        //private string custoDeProducaoSugerido;
+        //public string CustoDeProducaoSugerido
+        //{
+        //    get { return custoDeProducaoSugerido; }
+        //    set
+        //    {
+        //        custoDeProducaoSugerido = value;
+
+        //        OnPropertyChanged();
+
+        //        try
+        //        {
+        //            var value2 = Convert.ToDecimal(value);
+
+        //            //model.DefineCustoDeProducao(value2);
+
+        //            OnPropertyChanged("PrecoDeVenda");
+
+        //            ClearErrors("CustoDeProducaoSugerido");
+
+        //            ClearErrors("PrecoDeVenda");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            RaiseErrorsChanged("CustoDeProducaoSugerido", ex);
+
+        //            RaiseErrorsChanged("PrecoDeVenda", ex);
+        //        }
+        //    }
+        //}
+
         public decimal PrecoDeVenda
         {
             get { return model.PrecoDeVenda; }
+        }
+
+        private string precoDeVendaDesejado;
+        public string PrecoDeVendaDesejado
+        {
+            get { return precoDeVendaDesejado; }
             set
             {
+                precoDeVendaDesejado = value;
+
                 OnPropertyChanged();
+
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefinePrecoDeVendaDesejado(value2);
+
+                    //OnPropertyChanged("PrecoDeVenda");
+
+                    ClearErrors("PrecoDeVendaDesejado");
+
+                    //ClearErrors("PrecoDeVenda");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("PrecoDeVendaDesejado", ex);
+
+                    //RaiseErrorsChanged("PrecoDeVenda", ex);
+                }
             }
         }
 
@@ -288,12 +480,12 @@ namespace Atelie.Decisoes.Comerciais
         {
             var viewModel = new ItemDePlanoComercialViewModel
             {
-                model = itemDePlanoComercial as ItemDePlanoComercial,
+                model = itemDePlanoComercial,
                 //PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
                 //ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
                 //ModeloNome = itemDePlanoComercial.Modelo.Nome,
-                CustoDeProducaoValor = itemDePlanoComercial.CustoDeProducao.Valor.ToString(),
-                PrecoDeVenda = itemDePlanoComercial.PrecoDeVenda,
+                //CustoDeProducaoSugerido = itemDePlanoComercial.CustoDeProducaoSugerido.ToString(),
+                precoDeVendaDesejado = (itemDePlanoComercial.PrecoDeVendaDesejado.HasValue ? itemDePlanoComercial.PrecoDeVendaDesejado.Value.ToString() : null),
             };
 
             return viewModel;
@@ -433,6 +625,33 @@ namespace Atelie.Decisoes.Comerciais
             //        SetStatus(ex.Message);
             //    }
             //}
+        }
+    }
+
+    public class CustosObservableCollection : ExtendedObservableCollection<CustoViewModel>
+    {
+        protected internal PlanoComercialViewModel planoComercial;
+
+        public CustosObservableCollection(IList<CustoViewModel> list)
+            : base(list)
+        {
+            foreach (var item in list)
+            {
+                item.collection = this;
+            }
+        }
+
+        protected override void OnAddNew(CustoViewModel viewModel)
+        {
+            var model = planoComercial.model.AdicionaCusto(TipoDeCusto.Fixo, "Custo #");
+
+            viewModel.collection = this;
+
+            viewModel.model = model;
+
+            //viewModel.PlanoComercialId = planoComercial.Id;
+
+            base.OnAddNew(viewModel);
         }
     }
 

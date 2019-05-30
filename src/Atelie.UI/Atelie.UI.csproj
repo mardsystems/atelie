@@ -6,13 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Cadastro\Materiais\Fabricantes\CatalogoViewModel.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\CorDeFabricanteViewModel.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagemViewModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Operacoes\" />
+    <Compile Remove="Cadastro\Materiais\**" />
+    <Compile Remove="Operacoes\**" />
+    <EmbeddedResource Remove="Cadastro\Materiais\**" />
+    <EmbeddedResource Remove="Operacoes\**" />
+    <None Remove="Cadastro\Materiais\**" />
+    <None Remove="Operacoes\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +22,10 @@
     <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj" />
     <ProjectReference Include="..\Atelie.Infrastructure.Client\Atelie.Infrastructure.Client.csproj" />
     <ProjectReference Include="..\System.Extensions\System.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cadastro\Modelos\" />
   </ItemGroup>
 
 </Project>

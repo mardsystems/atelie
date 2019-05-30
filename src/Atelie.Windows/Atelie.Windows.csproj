@@ -62,14 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="VisualToImageSourceConverter.cs" />
-    <Page Include="Cadastro\Materiais\Fabricantes\FabricantesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Cadastro\Materiais\MateriaisWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,12 +77,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Cadastro\Materiais\Fabricantes\FabricantesWindow.xaml.cs">
-      <DependentUpon>FabricantesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Cadastro\Materiais\MateriaisWindow.xaml.cs">
-      <DependentUpon>MateriaisWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Decisoes\Comerciais\PlanosComerciaisWindow.xaml.cs">
       <DependentUpon>PlanosComerciaisWindow.xaml</DependentUpon>
@@ -129,7 +115,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Operacoes\" />
+    <Folder Include="Cadastro\Modelos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj">
@@ -139,10 +125,6 @@
     <ProjectReference Include="..\Atelie.Infrastructure.Client\Atelie.Infrastructure.Client.csproj">
       <Project>{05c20511-e761-4578-8fa4-55ea4c2ea04c}</Project>
       <Name>Atelie.Infrastructure.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atelie.Migrations\Atelie.Migrations.csproj">
-      <Project>{c4753d04-7509-483b-9862-ba2fbeb845cb}</Project>
-      <Name>Atelie.Migrations</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atelie.UI\Atelie.UI.csproj">
       <Project>{559205d1-a209-4f0b-8a69-0fa7bf6c70c7}</Project>
@@ -174,6 +156,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
       <Version>2.2.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <Version>2.2.4</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SimpleInjector">
       <Version>4.6.0</Version>

@@ -1,5 +1,4 @@
 ﻿using Atelie.Cadastro.Modelos;
-using Atelie.Operacoes.Producao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +8,120 @@ namespace Atelie.Decisoes.Comerciais
 {
     public class PlanoComercial
     {
-        public string Id { get; set; }
+        public string Codigo { get; set; }
 
         public string Nome { get; set; }
 
+        public DateTime Data { get; set; }
+
         public decimal RendaBrutaMensal { get; set; }
 
-        public decimal CustoFixo { get; set; }
+        public decimal RendaBrutaMensalCalculada
+        {
+            get
+            {
+                return 0;
+            }
+        }
 
-        public decimal CustoFixoPercentual { get; set; }
+        public decimal CustoFixoTotal
+        {
+            get
+            {
+                var total = Custos.Where(p => p.Tipo == TipoDeCusto.Fixo).Sum(p => p.Valor);
 
-        public decimal CustoVariavel { get; set; }
+                return total;
+            }
+        }
 
-        public decimal CustoPercentual { get; set; }
+        public decimal CustoFixoPercentualTotal
+        {
+            get
+            {
+                var total = Custos.Where(p => p.Tipo == TipoDeCusto.Fixo).Sum(p => p.PercentualCalculado);
+
+                return total;
+
+                //var percentual = 0m;
+
+                //if (RendaBrutaMensal != 0)
+                //{
+                //    percentual = CustoFixoTotal / RendaBrutaMensal;
+                //}
+
+                //return percentual;
+            }
+        }
+
+        public decimal CustoVariavelTotal
+        {
+            get
+            {
+                var total = Custos.Where(p => p.Tipo == TipoDeCusto.Variavel).Sum(p => p.ValorCalculado);
+
+                return total;
+            }
+        }
+
+        public decimal CustoVariavelPercentualTotal
+        {
+            get
+            {
+                var total = Custos.Where(p => p.Tipo == TipoDeCusto.Variavel).Sum(p => p.Percentual);
+
+                return total;
+            }
+        }
+
+        public decimal CustoPercentualTotal
+        {
+            get
+            {
+                var total = CustoFixoPercentualTotal + CustoVariavelTotal;
+
+                return total;
+            }
+        }
 
         public decimal Margem { get; set; }
 
         public decimal MargemPercentual { get; set; }
 
+        public decimal MargemCalculada
+        {
+            get
+            {
+                var valor = MargemPercentual * RendaBrutaMensal;
+
+                return valor;
+            }
+        }
+
+        public decimal MargemPercentualCalculada
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         public decimal TaxaDeMarcacao
         {
             get
             {
-                return 100 / (100 - (CustoFixoPercentual + CustoVariavel + MargemPercentual));
+                return 100 / (100 - (CustoFixoPercentualTotal + CustoVariavelPercentualTotal + MargemPercentual));
             }
         }
 
-        public virtual ICollection<CustoFixo> CustosFixos { get; set; }
+        public decimal? TaxaDeMarcacaoSugerida { get; set; }
 
-        public virtual ICollection<CustoVariavel> CustosVariaveis { get; set; }
+        public virtual ICollection<Custo> Custos { get; set; }
 
         public virtual ICollection<ItemDePlanoComercial> Itens { get; set; }
 
-        public PlanoComercial(
-            string id,
-            string nome,
-            decimal rendaBrutaMensal,
-            decimal margem
-        )
+        public PlanoComercial(string id, string nome, decimal rendaBrutaMensal, decimal margem)
         {
-            Id = id;
+            Codigo = id;
 
             Nome = nome;
 
@@ -56,9 +129,7 @@ namespace Atelie.Decisoes.Comerciais
 
             Margem = margem;
 
-            CustosFixos = new HashSet<CustoFixo>();
-
-            CustosVariaveis = new HashSet<CustoVariavel>();
+            Custos = new HashSet<Custo>();
 
             Itens = new HashSet<ItemDePlanoComercial>();
         }
@@ -66,6 +137,11 @@ namespace Atelie.Decisoes.Comerciais
         public void DefineNome(string nome)
         {
             Nome = nome;
+        }
+
+        public void DefineData(DateTime data)
+        {
+            Data = data;
         }
 
         public void DefineRendaBrutaMensal(decimal rendaBrutaMensal)
@@ -83,24 +159,34 @@ namespace Atelie.Decisoes.Comerciais
             MargemPercentual = margemPercentual;
         }
 
+        public void SugereTaxaDeMarcacao(decimal? taxaDeMarcacaoSugerida)
+        {
+            TaxaDeMarcacaoSugerida = taxaDeMarcacaoSugerida;
+        }
+
         public PlanoComercial()
         {
-            CustosFixos = new HashSet<CustoFixo>();
-
-            CustosVariaveis = new HashSet<CustoVariavel>();
+            Custos = new HashSet<Custo>();
 
             Itens = new HashSet<ItemDePlanoComercial>();
+        }
+
+        public Custo AdicionaCusto(TipoDeCusto tipo, string descricao)
+        {
+            var model = new Custo(this, tipo, descricao);
+
+            Custos.Add(model);
+
+            return model;
         }
 
         public ItemDePlanoComercial AdicionaItem(Modelo modelo)
         {
             var max = Itens.Count;
 
-            var model = new ItemDePlanoComercial(
-                max++,
-                this,
-                modelo
-            );
+            var nextId = max++;
+
+            var model = new ItemDePlanoComercial(this, nextId, modelo);
 
             Itens.Add(model);
 
@@ -108,76 +194,179 @@ namespace Atelie.Decisoes.Comerciais
         }
     }
 
+    public enum TipoDeCusto
+    {
+        Fixo,
+        Variavel,
+    }
+
+    public class Custo
+    {
+        public PlanoComercial PlanoComercial { get; set; }
+
+        public TipoDeCusto Tipo { get; set; }
+
+        public string Descricao { get; set; }
+
+        public decimal Valor { get; set; }
+
+        public decimal Percentual { get; set; }
+
+        public decimal ValorCalculado
+        {
+            get
+            {
+                if (Tipo == TipoDeCusto.Fixo)
+                {
+                    return Valor;
+                }
+                else if (Tipo == TipoDeCusto.Variavel)
+                {
+                    var valorCalculado = (PlanoComercial.RendaBrutaMensal * Percentual) / 100;
+
+                    return valorCalculado;
+                }
+                else
+                {
+                    throw new InvalidCastException();
+                }
+            }
+        }
+
+        public decimal PercentualCalculado
+        {
+            get
+            {
+                if (Tipo == TipoDeCusto.Fixo)
+                {
+                    var percentualCalculado = 0m;
+
+                    if (PlanoComercial.RendaBrutaMensal != 0)
+                    {
+                        percentualCalculado = (Valor / PlanoComercial.RendaBrutaMensal) * 100;
+                    }
+
+                    return percentualCalculado;
+                }
+                else if (Tipo == TipoDeCusto.Variavel)
+                {
+                    return Percentual;
+                }
+                else
+                {
+                    throw new InvalidCastException();
+                }
+            }
+        }
+
+        public Custo(PlanoComercial planoComercial, TipoDeCusto tipo, string descricao)
+        {
+            PlanoComercial = planoComercial;
+
+            Tipo = tipo;
+
+            Descricao = descricao;
+        }
+
+        public void DefineTipo(TipoDeCusto tipo)
+        {
+            Tipo = tipo;
+        }
+
+        public void DefineDescricao(string descricao)
+        {
+            Descricao = descricao;
+        }
+
+        public void DefineValor(decimal valor)
+        {
+            Valor = valor;
+        }
+
+        public void DefinePercentual(decimal percentual)
+        {
+            Percentual = percentual;
+        }
+
+        public Custo()
+        {
+
+        }
+
+        public string PlanoComercialCodigo { get; set; }
+    }
+
     public class ItemDePlanoComercial
     {
-        public int Id { get; set; }
-
         public virtual PlanoComercial PlanoComercial { get; set; }
+
+        public int Id { get; set; }
 
         public virtual Modelo Modelo { get; set; }
 
-        public virtual CustoDeProducao CustoDeProducao { get; set; }
+        public decimal CustoDeProducao { get { return Modelo.CustoDeProducao; } }
+
+        public decimal? CustoDeProducaoSugerido
+        {
+            get
+            {
+                var custo = 0m;
+
+                if (PrecoDeVendaDesejado.HasValue && CustoDeProducao != 0)
+                {
+                    custo = PrecoDeVendaDesejado.Value / CustoDeProducao;
+                }
+
+                return custo;
+            }
+        }
 
         public decimal PrecoDeVenda
         {
             get
             {
-                return CustoDeProducao.Valor * PlanoComercial.TaxaDeMarcacao;
+                decimal precoDeVenda;
+
+                var taxaDeMarcacao = PlanoComercial.TaxaDeMarcacao;
+
+                var custoDeProducao = CustoDeProducao;
+
+                ///////////////////////////////////////////////////
+                precoDeVenda = taxaDeMarcacao * custoDeProducao; //
+                ///////////////////////////////////////////////////
+
+                return precoDeVenda;
             }
         }
 
-        public ItemDePlanoComercial(
-            int id,
-            PlanoComercial planoComercial,
-            Modelo modelo
-        )
+        public decimal? PrecoDeVendaDesejado { get; set; }
+
+        public ItemDePlanoComercial(PlanoComercial planoComercial, int id, Modelo modelo)
         {
             Id = id;
 
             PlanoComercial = planoComercial;
 
             Modelo = modelo;
-
-            CustoDeProducao = new CustoDeProducao();
         }
 
-        public void DefineCustoDeProducao(decimal valor)
+        public void DefinePrecoDeVendaDesejado(decimal valor)
         {
-            CustoDeProducao = new CustoDeProducao(valor);
+            PrecoDeVendaDesejado = valor;
+
+            var taxaDeMarcacaoSugerida = PrecoDeVendaDesejado / CustoDeProducao;
+
+            PlanoComercial.SugereTaxaDeMarcacao(taxaDeMarcacaoSugerida);
         }
 
         public ItemDePlanoComercial()
         {
 
         }
-    }
 
-    public class CustoFixo
-    {
-        public string Descricao { get; internal set; }
+        public string PlanoComercialCodigo { get; set; }
 
-        public decimal Valor { get; internal set; }
-
-        public decimal ValorPercentual { get; internal set; }
-    }
-
-    public class CustoVariavel
-    {
-        public string Descricao { get; internal set; }
-
-        public decimal Valor { get; internal set; }
-
-        public decimal ValorPercentual { get; internal set; }
-    }
-
-    public class PrecoDePrateleiraDesejado
-    {
-        public decimal Valor { get; internal set; }
-    }
-
-    public class PrecoDeConsignacao
-    {
-        public decimal Valor { get; internal set; }
+        public string ModeloCodigo { get; set; }
     }
 
     public interface IRepositorioDePlanosComerciais

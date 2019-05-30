@@ -1,42 +1,107 @@
-﻿using Atelie.Cadastro.Modelos.Investimentos;
-using Atelie.Cadastro.Modelos.Producao;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Atelie.Cadastro.Modelos
 {
     public class Modelo
     {
-        public string Codigo { get; internal set; }
+        public string Codigo { get; set; }
 
-        public string Nome { get; internal set; }
+        public string Nome { get; set; }
 
-        public decimal Preco { get; internal set; }
+        public decimal CustoDeProducao
+        {
+            get
+            {
+                var total = Recursos.Sum(p => p.CustoPorUnidade);
 
-        public virtual IEnumerable<NecessidadeDeMaterial> MateriaisNecessarios { get; internal set; }
+                return total;
+            }
+        }
 
-        public virtual ICollection<EtapaDeProducao> EtapasDeProducao { get; internal set; }
+        public virtual ICollection<Recurso> Recursos { get; set; }
 
-        public virtual IEnumerable<AplicacaoDeInvestimento> Investimentos { get; internal set; }
-
-        public Modelo(string codigo)
+        public Modelo(string codigo, string nome)
         {
             Codigo = codigo;
 
-            MateriaisNecessarios = new HashSet<NecessidadeDeMaterial>();
+            Nome = nome;
 
-            EtapasDeProducao = new HashSet<EtapaDeProducao>();
+            Recursos = new HashSet<Recurso>();
+        }
 
-            Investimentos = new HashSet<AplicacaoDeInvestimento>();
+        public void DefineCodigo(string codigo)
+        {
+            Codigo = codigo;
+        }
+
+        public void DefineNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public Recurso AdicionaRecurso(TipoDeRecurso tipo, string descricao, decimal custo, int quantidade)
+        {
+            var recurso = new Recurso(this, tipo, descricao, custo, quantidade);
+
+            Recursos.Add(recurso);
+
+            return recurso;
         }
 
         public Modelo()
         {
-            MateriaisNecessarios = new HashSet<NecessidadeDeMaterial>();
-
-            EtapasDeProducao = new HashSet<EtapaDeProducao>();
-
-            Investimentos = new HashSet<AplicacaoDeInvestimento>();
+            Recursos = new HashSet<Recurso>();
         }
+    }
+
+    public enum TipoDeRecurso
+    {
+        Material,
+        Transporte,
+        Humano
+    }
+
+    public class Recurso
+    {
+        public virtual Modelo Modelo { get; set; }
+
+        public virtual TipoDeRecurso Tipo { get; set; }
+
+        public virtual string Descricao { get; set; }
+
+        public decimal Custo { get; set; }
+
+        public int Unidades { get; set; }
+
+        public decimal CustoPorUnidade
+        {
+            get
+            {
+                var custoPorUnidade = Custo / Unidades;
+
+                return custoPorUnidade;
+            }
+        }
+
+        public Recurso(Modelo modelo, TipoDeRecurso tipo, string descricao, decimal custo, int quantiade)
+        {
+            Modelo = modelo;
+
+            Tipo = tipo;
+
+            Descricao = descricao;
+
+            Custo = custo;
+
+            Unidades = quantiade;
+        }
+
+        public Recurso()
+        {
+
+        }
+
+        public string ModeloCodigo { get; set; }
     }
 }

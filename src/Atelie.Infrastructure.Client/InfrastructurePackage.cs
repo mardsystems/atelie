@@ -5,6 +5,7 @@ using System;
 using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Atelie
@@ -28,11 +29,22 @@ namespace Atelie
 
             //
 
-            var connectionString = ConfigurationManager.ConnectionStrings["Atelie"].ToString();
+            //var connectionString = ConfigurationManager.ConnectionStrings["Atelie"].ToString();
 
-            var builder = new DbContextOptionsBuilder<AtelieDbContext>();
+            //var builder = new DbContextOptionsBuilder<AtelieDbContext>();
 
-            container.Register(() => new AtelieDbContext(builder.UseSqlite(connectionString).Options), Lifestyle.Singleton);
+            //container.Register(() => new AtelieDbContext(builder.UseSqlite(connectionString).Options), Lifestyle.Singleton);
+
+            container.Register<AtelieDbContext>(Lifestyle.Singleton);
+        }
+
+        public async Task EnsureDatabaseCreatedAsync(Container container)
+        {
+            var context = container.GetInstance<AtelieDbContext>();
+
+            await context.Database.MigrateAsync();
+
+            //await context.Database.EnsureCreatedAsync();
         }
     }
 }

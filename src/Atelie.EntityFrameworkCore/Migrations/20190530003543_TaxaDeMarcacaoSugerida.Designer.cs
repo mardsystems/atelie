@@ -3,14 +3,16 @@ using System;
 using Atelie;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Atelie.Migrations
 {
     [DbContext(typeof(AtelieDbContext))]
-    partial class AtelieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190530003543_TaxaDeMarcacaoSugerida")]
+    partial class TaxaDeMarcacaoSugerida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -349,8 +351,6 @@ namespace Atelie.Migrations
 
                     b.Property<decimal>("MargemPercentual");
 
-                    b.Property<decimal>("MargemPercentual2");
-
                     b.Property<string>("Nome");
 
                     b.Property<decimal>("RendaBrutaMensal");
@@ -368,7 +368,6 @@ namespace Atelie.Migrations
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Margem = 0m,
                             MargemPercentual = 1.93m,
-                            MargemPercentual2 = 0m,
                             Nome = "Normal",
                             RendaBrutaMensal = 6000m
                         },
@@ -378,7 +377,6 @@ namespace Atelie.Migrations
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Margem = 0m,
                             MargemPercentual = 0m,
-                            MargemPercentual2 = 0m,
                             Nome = "Moderado",
                             RendaBrutaMensal = 0m
                         },
@@ -388,7 +386,6 @@ namespace Atelie.Migrations
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Margem = 0m,
                             MargemPercentual = 0m,
-                            MargemPercentual2 = 0m,
                             Nome = "Ousado",
                             RendaBrutaMensal = 0m
                         });

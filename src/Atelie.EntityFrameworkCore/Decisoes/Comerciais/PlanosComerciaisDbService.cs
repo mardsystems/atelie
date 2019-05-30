@@ -40,7 +40,7 @@ namespace Atelie.Decisoes.Comerciais
             {
                 // TODO: Tratar erros de persistência aqui.
 
-                throw new ApplicationException($"Erro ao adicionar planoComercial '{planoComercial.Id}'.", ex);
+                throw new ApplicationException($"Erro ao adicionar planoComercial '{planoComercial.Codigo}'.", ex);
             }
         }
 
@@ -70,7 +70,7 @@ namespace Atelie.Decisoes.Comerciais
             {
                 // TODO: Tratar erros de persistência aqui.
 
-                throw new ApplicationException($"Erro ao excluir planoComercial '{planoComercial.Id}'.", ex);
+                throw new ApplicationException($"Erro ao excluir planoComercial '{planoComercial.Codigo}'.", ex);
             }
         }
 
@@ -95,10 +95,10 @@ namespace Atelie.Decisoes.Comerciais
             try
             {
                 var planosComerciais = await db.PlanosComerciais
-                    .Include(p => p.CustosFixos)
-                    .Include(p => p.CustosVariaveis)
+                    .Include(p => p.Custos)
                     .Include(p => p.Itens)
                         .ThenInclude(p => p.Modelo)
+                            .ThenInclude(p => p.Recursos)
                     .ToListAsync();
 
                 //var observable = planosComerciais.ToObservable();

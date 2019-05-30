@@ -1,7 +1,4 @@
-﻿using Atelie.Cadastro.Materiais;
-using Atelie.Cadastro.Materiais.Componentes;
-using Atelie.Cadastro.Materiais.Fabricantes;
-using Atelie.Decisoes.Comerciais;
+﻿using Atelie.Decisoes.Comerciais;
 using MahApps.Metro.Controls;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
@@ -27,13 +24,15 @@ namespace Atelie
     /// </summary>
     public partial class MainWindow
     {
+        readonly InfrastructurePackage infrastructurePackage;
+
         readonly Container container;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            var package = new InfrastructurePackage();
+            infrastructurePackage = new InfrastructurePackage();
 
             container = new Container();
 
@@ -67,6 +66,11 @@ namespace Atelie
             //}
         }
 
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await infrastructurePackage.EnsureDatabaseCreatedAsync(container);
+        }
+
         private void CadastroDeFabricantesMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
@@ -75,13 +79,13 @@ namespace Atelie
 
             //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
 
-            var fabricantesWindow = new FabricantesWindow(
-            //cadastroDeFabricantes,
-            //consultaDeComponentes,
-            //consultaDeFabricantes
-            );
+            //var fabricantesWindow = new FabricantesWindow(
+            ////cadastroDeFabricantes,
+            ////consultaDeComponentes,
+            ////consultaDeFabricantes
+            //);
 
-            fabricantesWindow.Show();
+            //fabricantesWindow.Show();
         }
 
         private void PlanejamentoComercialMenuItem_Click(object sender, RoutedEventArgs e)

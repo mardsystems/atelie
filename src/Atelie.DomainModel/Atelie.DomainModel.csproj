@@ -12,11 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Cadastro\Materiais\Fabricantes\Catalogo.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\CorDeFabricante.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\DisponibilidadeDeEmbalagem.cs" />
-    <Compile Remove="Cadastro\Materiais\Fabricantes\Embalagem.cs" />
-    <Compile Remove="Cadastro\Unidades\Tamanho.cs" />
     <Compile Remove="Decisoes\Comerciais\PlanoComercial2.cs" />
     <Compile Remove="Decisoes\Comerciais\TabelaDePreco2.cs" />
   </ItemGroup>
