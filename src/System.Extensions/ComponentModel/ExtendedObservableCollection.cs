@@ -44,11 +44,16 @@ namespace System.ComponentModel
         {
             var item = this[index];
 
-            item.State = ObjectState.Deleted;
-
-            deletedItems.Add(item);
+            OnRemoveItem(item);
 
             base.RemoveItem(index);
+        }
+
+        protected virtual void OnRemoveItem(T viewModel)
+        {
+            viewModel.State = ObjectState.Deleted;
+
+            deletedItems.Add(viewModel);
         }
 
         public IEnumerable<T> GetItemsBy(ObjectState state)

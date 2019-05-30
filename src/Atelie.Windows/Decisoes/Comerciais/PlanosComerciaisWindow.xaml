@@ -1,19 +1,20 @@
 ﻿<Window
+        x:Class="Atelie.Decisoes.Comerciais.PlanosComerciaisWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Atelie.Decisoes.Comerciais"
-        xmlns:planos="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI" x:Class="Atelie.Decisoes.Comerciais.PlanosComerciaisWindow"
+        xmlns:planos="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Planos Comerciais" Height="795" Width="1193" Loaded="Window_Loaded"
     >
     <Window.Resources>
         <ResourceDictionary>
-            <CollectionViewSource x:Key="planoComercialViewModelViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
-            <CollectionViewSource x:Key="planoComercialViewModelCustosViewSource" Source="{Binding Custos, Source={StaticResource planoComercialViewModelViewSource}}"/>
-            <CollectionViewSource x:Key="planoComercialViewModelItensViewSource" Source="{Binding Itens, Source={StaticResource planoComercialViewModelViewSource}}"/>
+            <CollectionViewSource x:Key="planosComerciaisViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
+            <CollectionViewSource x:Key="custosViewSource" Source="{Binding Custos, Source={StaticResource planosComerciaisViewSource}}"/>
+            <CollectionViewSource x:Key="itensViewSource" Source="{Binding Itens, Source={StaticResource planosComerciaisViewSource}}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -47,14 +48,14 @@
                 <materialDesign:PackIcon Kind="ContentSave" />
             </Button>
         </ToolBar>
-        <Grid Grid.Row="2" DataContext="{StaticResource planoComercialViewModelViewSource}" Margin="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="2" DataContext="{StaticResource planosComerciaisViewSource}" Margin="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <DataGrid 
-                x:Name="planoComercialViewModelDataGrid"
+                x:Name="planosComerciaisDataGrid"
                 ItemsSource="{Binding}"
                 RowDetailsVisibilityMode="VisibleWhenSelected"
                 EnableRowVirtualization="True"
@@ -91,7 +92,7 @@
                         </ToolBar>
                         <DataGrid
                             x:Name="custosDataGrid"
-                            ItemsSource="{Binding Source={StaticResource planoComercialViewModelCustosViewSource}}"
+                            ItemsSource="{Binding Source={StaticResource custosViewSource}}"
                             RowDetailsVisibilityMode="VisibleWhenSelected"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
@@ -99,12 +100,12 @@
                             AutoGenerateColumns="False"
                         >
                             <DataGrid.Columns>
-                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="SizeToHeader" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
-                                <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor}" Header="V (R$)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual}" Header="P (%)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado}" Header="VC (R$)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado}" Header="PC (%)" Width="SizeToHeader"/>
+                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
+                                <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="Auto"/>
+                                <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor}" Header="V (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual}" Header="P (%)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado}" Header="VC (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado}" Header="PC (%)" Width="Auto"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -117,21 +118,45 @@
                         </ToolBar>
                         <DataGrid
                             x:Name="itensDataGrid"
-                            ItemsSource="{Binding Source={StaticResource planoComercialViewModelItensViewSource}}"
+                            ItemsSource="{Binding Source={StaticResource itensViewSource}}"
                             RowDetailsVisibilityMode="VisibleWhenSelected"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             EnableRowVirtualization="True"
                             AutoGenerateColumns="False"
+                            CanUserAddRows="False"
                         >
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <GroupBox Header="Recursos" Style="{StaticResource GroupBoxSplit}">
+                                        <DataGrid
+                                            Height="Auto"
+                                            ItemsSource="{Binding ElementName=itensDataGrid, Path=SelectedItem.Modelo.Recursos}"
+                                            RowDetailsVisibilityMode="VisibleWhenSelected"
+                                            VerticalContentAlignment="Stretch"
+                                            HorizontalContentAlignment="Stretch"
+                                            EnableRowVirtualization="True"
+                                            AutoGenerateColumns="False"
+                                        >
+                                            <DataGrid.Columns>
+                                                <DataGridComboBoxColumn Header="Tipo" SelectedValueBinding="{Binding Tipo}" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeRecurso}, Mode=OneWay}"/>
+                                                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="Auto" />
+                                                <DataGridTextColumn Header="C (R$)" Binding="{Binding Custo}" Width="Auto" />
+                                                <DataGridTextColumn Header="Unidades" Binding="{Binding Unidades}" Width="Auto" />
+                                                <DataGridTextColumn Header="C/U (R$)" Binding="{Binding CustoPorUnidade, Mode=OneWay}" Width="Auto" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </GroupBox>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
-                                <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="SizeToHeader"/>-->
-                                <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay}" Header="CP (R$)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay}" Header="CPS (R$)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo, Mode=OneWay}" Header="Modelo" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay}" Header="PV (R$)" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado}" Header="PVD (R$)" Width="SizeToHeader"/>
-                                <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="SizeToHeader"/>-->
+                                <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="Auto"/>-->
+                                <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay}" Header="CP (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay}" Header="CPS (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo.Nome, Mode=OneWay}" Header="Modelo" Width="Auto"/>
+                                <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay}" Header="PV (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado}" Header="PVD (R$)" Width="Auto"/>
+                                <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="Auto"/>-->
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -139,7 +164,7 @@
             </Grid>
         </Grid>
         <StatusBar Grid.Row="3" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
-            <Label Content="Pronto."/>
+            <Label x:Name="statusBarLabel" Content="Pronto."/>
         </StatusBar>
     </Grid>
 </Window>

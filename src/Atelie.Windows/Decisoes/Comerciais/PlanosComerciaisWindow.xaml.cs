@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atelie.Cadastro.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -22,17 +23,22 @@ namespace Atelie.Decisoes.Comerciais
     {
         private readonly PlanosComerciaisLocalService planosComerciaisLocalService;
 
+        private readonly ModelosLocalService modelosLocalService;
+
         //private readonly IConsultaDePlanosComerciais consultaDePlanosComerciais;
 
         //private readonly IPlanejamentoComercial planejamentoComercial;
 
         public PlanosComerciaisWindow(
-            PlanosComerciaisLocalService planosComerciaisLocalService
+            PlanosComerciaisLocalService planosComerciaisLocalService,
+            ModelosLocalService modelosLocalService
         //IConsultaDePlanosComerciais consultaDePlanosComerciais,
         //IPlanejamentoComercial planejamentoComercial
         )
         {
             this.planosComerciaisLocalService = planosComerciaisLocalService;
+
+            this.modelosLocalService = modelosLocalService;
 
             //this.consultaDePlanosComerciais = consultaDePlanosComerciais;
 
@@ -58,39 +64,73 @@ namespace Atelie.Decisoes.Comerciais
 
             observableCollection.StatusChanged += SetStatusBar;
 
-            CollectionViewSource planoComercialViewModelViewSource = ((CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
+            CollectionViewSource planosComerciaisViewSource = ((CollectionViewSource)(this.FindResource("planosComerciaisViewSource")));
 
-            planoComercialViewModelViewSource.Source = observableCollection;
+            planosComerciaisViewSource.Source = observableCollection;
         }
 
         private void SetStatusBar(string value)
         {
-            //mainToolStripStatusLabel.Text = value;
+            statusBarLabel.Content = value;
 
             //statusBarTimer.Enabled = true;
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            CollectionViewSource planoComercialViewModelViewSource = ((CollectionViewSource)(this.FindResource("planoComercialViewModelViewSource")));
+            CollectionViewSource planosComerciaisViewSource = ((CollectionViewSource)(this.FindResource("planosComerciaisViewSource")));
 
-            var observableCollection = (PlanosComerciaisObservableCollection)planoComercialViewModelViewSource.Source;
+            var observableCollection = (PlanosComerciaisObservableCollection)planosComerciaisViewSource.Source;
 
             await observableCollection.SaveChanges();
         }
 
         private void AdicionarModeloButton_Click(object sender, RoutedEventArgs e)
         {
+            var consultaDeModelosWindow = new ConsultaDeModelosWindow(
+                modelosLocalService
+            );
 
+            var selecteds = GetSelectedItens();
+
+            consultaDeModelosWindow.SetSelecteds(selecteds);
+
+            consultaDeModelosWindow.ShowDialog();
+
+            var planoComercial = planosComerciaisDataGrid.CurrentItem as PlanoComercialViewModel;
+
+            var modelos = consultaDeModelosWindow.GetSelecteds();
+
+            foreach (var modelo in modelos)
+            {
+                if (!planoComercial.Itens.Contains(modelo))
+                {
+                    planoComercial.Itens.AdicionaItem(modelo);
+                }
+            }
+        }
+
+        private IEnumerable<ModeloViewModel> GetSelectedItens()
+        {
+            var list = new List<ModeloViewModel>();
+
+            foreach (var item in itensDataGrid.Items)
+            {
+                var viewModel = item as ItemDePlanoComercialViewModel;
+
+                list.Add(viewModel.Modelo);
+            }
+
+            return list;
         }
     }
 
     public class PlanoComercialValidationRule : ValidationRule
     {
-        public override ValidationResult Validate(object value,
-            System.Globalization.CultureInfo cultureInfo)
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
             PlanoComercialViewModel viewModel = (value as BindingGroup).Items[0] as PlanoComercialViewModel;
+
             if (viewModel.HasErrors)
             {
                 return new ValidationResult(false, viewModel.Error);

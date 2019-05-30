@@ -103,13 +103,7 @@
                     <MenuItem Header="Sair"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Cadastro">
-                    <MenuItem Header="Materiais"></MenuItem>
-                    <Separator></Separator>
-                    <MenuItem Header="Fabricantes" x:Name="cadastroDeFabricantesMenuItem" Click="CadastroDeFabricantesMenuItem_Click"></MenuItem>
-                    <MenuItem Header="Componentes"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Operações">
-                    <MenuItem Header="Compras"></MenuItem>
+                    <MenuItem Header="Modelos" x:Name="cadastroDeModelosMenuItem" Click="CadastroDeModelosMenuItem_Click"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Decisões">
                     <MenuItem Header="Comerciais">

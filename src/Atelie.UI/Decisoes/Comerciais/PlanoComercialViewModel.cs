@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atelie.Cadastro.Modelos;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -169,6 +170,10 @@ namespace Atelie.Decisoes.Comerciais
 
         public PlanoComercialViewModel()
         {
+            Custos = new CustosObservableCollection(new List<CustoViewModel>() { });
+
+            Custos.planoComercial = this;
+
             Itens = new ItensDePlanoComercialObservableCollection(new List<ItemDePlanoComercialViewModel>() { });
 
             Itens.planoComercial = this;
@@ -266,6 +271,18 @@ namespace Atelie.Decisoes.Comerciais
                 {
                     model.DefineTipo(value);
 
+                    OnPropertyChanged("ValorCalculado");
+
+                    OnPropertyChanged("PercentualCalculado");
+
+                    collection.planoComercial.OnPropertyChanged("CustoFixoTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoFixoPercentualTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelPercentualTotal");
+
                     ClearErrors("Tipo");
                 }
                 catch (Exception ex)
@@ -314,7 +331,17 @@ namespace Atelie.Decisoes.Comerciais
 
                     model.DefineValor(value2);
 
+                    OnPropertyChanged("ValorCalculado");
+
+                    OnPropertyChanged("PercentualCalculado");
+
                     collection.planoComercial.OnPropertyChanged("CustoFixoTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoFixoPercentualTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelPercentualTotal");
 
                     ClearErrors("Valor");
                 }
@@ -340,6 +367,18 @@ namespace Atelie.Decisoes.Comerciais
                     var value2 = Convert.ToDecimal(value);
 
                     model.DefinePercentual(value2);
+
+                    OnPropertyChanged("ValorCalculado");
+
+                    OnPropertyChanged("PercentualCalculado");
+
+                    collection.planoComercial.OnPropertyChanged("CustoFixoTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoFixoPercentualTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelTotal");
+
+                    collection.planoComercial.OnPropertyChanged("CustoVariavelPercentualTotal");
 
                     ClearErrors("Percentual");
                 }
@@ -389,9 +428,10 @@ namespace Atelie.Decisoes.Comerciais
             get { return model.PlanoComercial.Codigo; }
         }
 
-        public string Modelo
+        private ModeloViewModel modeloViewModel;
+        public ModeloViewModel Modelo
         {
-            get { return $"{model.Modelo.Nome} ({model.Modelo.Codigo})"; }
+            get { return modeloViewModel; }
         }
 
         public decimal CustoDeProducao
@@ -478,10 +518,13 @@ namespace Atelie.Decisoes.Comerciais
 
         public static ItemDePlanoComercialViewModel From(ItemDePlanoComercial itemDePlanoComercial)
         {
+            var modeloViewModel = ModeloViewModel.From(itemDePlanoComercial.Modelo);
+
             var viewModel = new ItemDePlanoComercialViewModel
             {
                 model = itemDePlanoComercial,
                 //PlanoComercialId = itemDePlanoComercial.PlanoComercial.Id,
+                modeloViewModel = modeloViewModel,
                 //ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
                 //ModeloNome = itemDePlanoComercial.Modelo.Nome,
                 //CustoDeProducaoSugerido = itemDePlanoComercial.CustoDeProducaoSugerido.ToString(),
@@ -543,7 +586,7 @@ namespace Atelie.Decisoes.Comerciais
         //    return viewModel;
         //}
 
-        protected override void OnAddNew(PlanoComercialViewModel viewModel)
+        protected override async void OnAddNew(PlanoComercialViewModel viewModel)
         {
             //item.BindingList = this;
 
@@ -556,9 +599,18 @@ namespace Atelie.Decisoes.Comerciais
 
             viewModel.model = model;
 
+            await planosComerciaisLocalService.Add(model);
+
             //viewModel.Itens.planoComercial = viewModel;
 
             base.OnAddNew(viewModel);
+        }
+
+        protected override async void OnRemoveItem(PlanoComercialViewModel viewModel)
+        {
+            await planosComerciaisLocalService.Remove(viewModel.model);
+
+            base.OnRemoveItem(viewModel);
         }
 
         public override async Task SaveChanges()
@@ -653,6 +705,13 @@ namespace Atelie.Decisoes.Comerciais
 
             base.OnAddNew(viewModel);
         }
+
+        protected override void OnRemoveItem(CustoViewModel viewModel)
+        {
+            planoComercial.model.RemoveCusto(viewModel.model);
+
+            base.OnRemoveItem(viewModel);
+        }
     }
 
     public class ItensDePlanoComercialObservableCollection : ExtendedObservableCollection<ItemDePlanoComercialViewModel>
@@ -665,15 +724,42 @@ namespace Atelie.Decisoes.Comerciais
 
         }
 
-        protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
+        public bool Contains(ModeloViewModel modelo)
         {
-            var model = planoComercial.model.AdicionaItem(null);
+            var contains = planoComercial.model.ExisteItemDoModelo(modelo.model);
+
+            return contains;
+        }
+
+        public ItemDePlanoComercialViewModel AdicionaItem(ModeloViewModel modelo)
+        {
+            var model = planoComercial.model.AdicionaItem(modelo.model);
+
+            var viewModel = ItemDePlanoComercialViewModel.From(model);
 
             viewModel.model = model;
+
+            Add(viewModel);
+
+            return viewModel;
+        }
+
+        protected override void OnAddNew(ItemDePlanoComercialViewModel viewModel)
+        {
+            //var model = planoComercial.model.AdicionaItem(null);
+
+            //viewModel.model = model;
 
             //viewModel.PlanoComercialId = planoComercial.Id;
 
             base.OnAddNew(viewModel);
+        }
+
+        protected override void OnRemoveItem(ItemDePlanoComercialViewModel viewModel)
+        {
+            planoComercial.model.RemoveItem(viewModel.model);
+
+            base.OnRemoveItem(viewModel);
         }
     }
 }

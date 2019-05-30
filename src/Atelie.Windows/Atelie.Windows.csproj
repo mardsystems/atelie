@@ -61,7 +61,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cadastro\Modelos\ConsultaDeModelosWindow.xaml.cs">
+      <DependentUpon>ConsultaDeModelosWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cadastro\Modelos\ModelosWindow.xaml.cs">
+      <DependentUpon>ModelosWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualToImageSourceConverter.cs" />
+    <Page Include="Cadastro\Modelos\ConsultaDeModelosWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cadastro\Modelos\ModelosWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,9 +128,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cadastro\Modelos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Atelie.DomainModel\Atelie.DomainModel.csproj">
       <Project>{18480afd-aa24-47d7-b2b6-a1922a39142e}</Project>

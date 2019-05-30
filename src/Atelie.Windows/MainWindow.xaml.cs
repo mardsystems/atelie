@@ -1,4 +1,5 @@
-﻿using Atelie.Decisoes.Comerciais;
+﻿using Atelie.Cadastro.Modelos;
+using Atelie.Decisoes.Comerciais;
 using MahApps.Metro.Controls;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
@@ -71,33 +72,30 @@ namespace Atelie
             await infrastructurePackage.EnsureDatabaseCreatedAsync(container);
         }
 
-        private void CadastroDeFabricantesMenuItem_Click(object sender, RoutedEventArgs e)
+        private void CadastroDeModelosMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //var cadastroDeFabricantes = container.GetInstance<ICadastroDeFabricantes>();
+            var modelosLocalService = container.GetInstance<ModelosLocalService>();
 
-            //var consultaDeComponentes = container.GetInstance<IConsultaDeComponentes>();
+            var modelosWindow = new ModelosWindow(
+                modelosLocalService
+            );
 
-            //var consultaDeFabricantes = container.GetInstance<IConsultaDeFabricantes>();
-
-            //var fabricantesWindow = new FabricantesWindow(
-            ////cadastroDeFabricantes,
-            ////consultaDeComponentes,
-            ////consultaDeFabricantes
-            //);
-
-            //fabricantesWindow.Show();
+            modelosWindow.Show();
         }
 
         private void PlanejamentoComercialMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var planosComerciaisLocalService = container.GetInstance<PlanosComerciaisLocalService>();
 
+            var modelosLocalService = container.GetInstance<ModelosLocalService>();
+
             //var consultaDePlanosComerciais = container.GetInstance<IConsultaDePlanosComerciais>();
 
             //var planejamentoComercial = container.GetInstance<IPlanejamentoComercial>();
 
             var planosComerciaisForm = new PlanosComerciaisWindow(
-                planosComerciaisLocalService
+                planosComerciaisLocalService,
+                modelosLocalService
             //consultaDePlanosComerciais,
             //planejamentoComercial
             );

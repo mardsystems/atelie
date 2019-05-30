@@ -180,6 +180,18 @@ namespace Atelie.Decisoes.Comerciais
             return model;
         }
 
+        public void RemoveCusto(Custo custo)
+        {
+            Custos.Remove(custo);
+        }
+
+        public bool ExisteItemDoModelo(Modelo modelo)
+        {
+            var existe = Itens.Any(p => p.Modelo.Codigo == modelo.Codigo);
+
+            return existe;
+        }
+
         public ItemDePlanoComercial AdicionaItem(Modelo modelo)
         {
             var max = Itens.Count;
@@ -191,6 +203,11 @@ namespace Atelie.Decisoes.Comerciais
             Itens.Add(model);
 
             return model;
+        }
+
+        public void RemoveItem(ItemDePlanoComercial item)
+        {
+            Itens.Remove(item);
         }
     }
 

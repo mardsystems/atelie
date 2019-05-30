@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Atelie"
+             xmlns:modelos="clr-namespace:Atelie.Cadastro.Modelos;assembly=Atelie.DomainModel"
              xmlns:comerciais="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.DomainModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -58,6 +59,11 @@
             <ObjectDataProvider x:Key="TipoDeCusto" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="comerciais:TipoDeCusto" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="TipoDeRecurso" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="modelos:TipoDeRecurso" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
         </ResourceDictionary>
