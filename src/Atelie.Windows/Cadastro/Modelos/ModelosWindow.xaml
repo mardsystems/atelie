@@ -60,9 +60,9 @@
                 EnableRowVirtualization="True"
                 AutoGenerateColumns="False"
             >
-                <DataGrid.RowValidationRules>
+                <!--<DataGrid.RowValidationRules>
                     <local:ModeloValidationRule ValidationStep="UpdatedValue"/>
-                </DataGrid.RowValidationRules>
+                </DataGrid.RowValidationRules>-->
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="codigoColumn" Header="Código" Binding="{Binding Codigo}"/>
                     <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome}"/>

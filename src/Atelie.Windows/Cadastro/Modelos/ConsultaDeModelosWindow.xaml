@@ -23,9 +23,9 @@
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
             >
-            <DataGrid.RowValidationRules>
+            <!--<DataGrid.RowValidationRules>
                 <local:ModeloValidationRule ValidationStep="UpdatedValue"/>
-            </DataGrid.RowValidationRules>
+            </DataGrid.RowValidationRules>-->
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn x:Name="selectedColumn" Header="" Binding="{Binding Selected}"/>
                 <DataGridTextColumn x:Name="codigoColumn" Header="Código" Binding="{Binding Modelo.Codigo, Mode=OneWay}"/>
