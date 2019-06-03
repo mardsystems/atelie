@@ -9,17 +9,17 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepOrange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepOrange.xaml" />-->
 
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />-->
 
-                <!--<ResourceDictionary Source="DataGrid.xaml"/>-->
+                <ResourceDictionary Source="DataGrid.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
+            <!--<SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
             <SolidColorBrush x:Key="AccentBaseColorBrush" Color="{DynamicResource Primary600}" />
             <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource Primary500}"/>
             <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource Primary400}"/>
@@ -36,9 +36,9 @@
             <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}"/>
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
 
-            <SolidColorBrush x:Key="DataGridColumnHeader" Color="{DynamicResource Primary500}" Opacity="0.4"/>
+            <SolidColorBrush x:Key="DataGridColumnHeader" Color="{DynamicResource Primary500}" Opacity="0.4"/>-->
 
-            <Style x:Key="GroupBoxSplit" TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <!--<Style x:Key="GroupBoxSplit" TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
                 <Setter Property="Margin" Value="4" />
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
@@ -47,15 +47,15 @@
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="BorderThickness" Value="5" />
+                --><!--<Setter Property="BorderThickness" Value="5" />
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>
                             <TextBlock Text="Hello World!!!!!!"/>
                         </DataTemplate>
                     </Setter.Value>
-                </Setter>-->
-            </Style>
+                </Setter>--><!--
+            </Style>-->
             <ObjectDataProvider x:Key="TipoDeCusto" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="comerciais:TipoDeCusto" />

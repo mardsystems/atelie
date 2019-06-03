@@ -71,7 +71,7 @@
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <Grid Grid.Column="2" Margin="0" Grid.ColumnSpan="2">
-                <GroupBox Header="Recursos" Style="{StaticResource GroupBoxSplit}">
+                <GroupBox Header="Recursos">
                     <StackPanel>
                         <ToolBar VerticalAlignment="Top">
                             <Button x:Name="adicionarRecursoButton" Content="Adicionar Recurso..." Click="AdicionarModeloButton_Click"/>

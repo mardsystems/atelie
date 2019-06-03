@@ -55,38 +55,40 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+    <!--<Style TargetType="DataGridRow">
         <Style.Triggers>
-            <!--Order of these triggers matter as the last one will take precedence-->
+            --><!--Order of these triggers matter as the last one will take precedence--><!--
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Background" Value="Black" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Background" Value="Yellow" />
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
     <!--When the cell is selected, switching to transparent to let the row's Background be visible-->
-    <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+    <!--<Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Transparent" />
             </Trigger>
-            <!--<Trigger Property="IsSelected" Value="True">
+            --><!--<Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
                                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>-->
+                            </Trigger>--><!--
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
-                <!--<Setter Property="BorderThickness" Value="1"/>-->
+                --><!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
+                <!--<Setter Property="BorderThickness" Value="1"/>--><!--
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#FF8EA9DB" />
+        <Setter Property="VerticalGridLinesBrush" Value="#FFD4D4D4" />
     </Style>
-    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+    <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontWeight"  Value="Bold" />
         <Setter Property="Background" Value="#FF4472C4" />
         <Setter Property="Foreground" Value="White"/>

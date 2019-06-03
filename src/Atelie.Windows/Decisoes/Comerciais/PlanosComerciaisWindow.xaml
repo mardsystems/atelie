@@ -60,6 +60,7 @@
                 RowDetailsVisibilityMode="VisibleWhenSelected"
                 EnableRowVirtualization="True"
                 AutoGenerateColumns="False"
+                SelectionUnit="FullRow"                
             >
                 <DataGrid.RowValidationRules>
                     <local:PlanoComercialValidationRule ValidationStep="UpdatedValue"/>
@@ -85,7 +86,7 @@
                     <RowDefinition Height="5" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <GroupBox Header="Custos" Style="{StaticResource GroupBoxSplit}">
+                <GroupBox Header="Custos">
                     <StackPanel>
                         <ToolBar VerticalAlignment="Top">
                             <Button x:Name="adicionarCustoButton" Content="Adicionar Custo..." Click="AdicionarModeloButton_Click"/>
@@ -98,20 +99,122 @@
                             HorizontalContentAlignment="Stretch"
                             EnableRowVirtualization="True"
                             AutoGenerateColumns="False"
+                            SelectionUnit="Cell"
                         >
+                            <!--<DataGrid.Resources>
+                                <Style x:Key="cellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Validation.ErrorTemplate">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <StackPanel>
+                                                    <AdornedElementPlaceholder x:Name="placeholder" />
+                                                    <Popup HorizontalAlignment="Left" PopupAnimation="Fade" Placement="Bottom" IsOpen="true">
+                                                        <Grid Background="White">
+                                                            <TextBlock Text="{Binding [0].ErrorContent}"/>
+                                                        </Grid>
+                                                    </Popup>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                                <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
+                                    <Setter Property="Validation.ErrorTemplate">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <StackPanel>
+                                                    <AdornedElementPlaceholder x:Name="placeholder" />
+                                                    <Popup HorizontalAlignment="Left" PopupAnimation="Fade" Placement="Bottom" IsOpen="true">
+                                                        <Grid Background="White">
+                                                            <TextBlock Text="{Binding [0].ErrorContent}"/>
+                                                        </Grid>
+                                                    </Popup>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    --><!--<Setter Property="Padding" Value="-2"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="True">
+                                                <Setter Property="Background" Value="Red"/>
+                                                <Setter Property="ToolTip" 
+                                                    Value="{Binding RelativeSource={RelativeSource Self},
+                                                    Path=(Validation.Errors)[0].ErrorContent.Message}"/>
+                                            </Trigger>
+                                        </Style.Triggers>--><!--
+                                </Style>
+                                <Style x:Key="error2Style" TargetType="{x:Type Label}">
+                                    <Setter Property="Padding" Value="-2"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="ToolTip" 
+                                                Value="{Binding RelativeSource={RelativeSource Self},
+                                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                    <Style.Triggers>
+                                        --><!--Order of these triggers matter as the last one will take precedence--><!--
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                --><!--When the cell is selected, switching to transparent to let the row's Background be visible--><!--
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Trigger>
+                                        --><!--<Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                                            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                        </Trigger>--><!--
+                                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                            --><!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
+                                            <!--<Setter Property="BorderThickness" Value="1"/>--><!--
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                    <Setter Property="FontWeight"  Value="Bold" />
+                                    <Setter Property="Background" Value="#FF4472C4" />
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                                <ControlTemplate x:Key="rowValidationErrorTemplate">
+                                    <Grid Margin="0,-2,0,-2"
+                                        ToolTip="{Binding RelativeSource={RelativeSource
+                                            FindAncestor, AncestorType={x:Type DataGridRow}},
+                                            Path=(Validation.Errors)[0].ErrorContent}">
+                                                    <Ellipse StrokeThickness="0" Fill="Red" 
+                                            Width="{TemplateBinding FontSize}" 
+                                            Height="{TemplateBinding FontSize}" />
+                                        <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
+                                            FontWeight="Bold" Foreground="White" 
+                                            HorizontalAlignment="Center" />
+                                    </Grid>
+                                </ControlTemplate>
+                                --><!--<SolidColorBrush x:Key="alternatingRowBackground" Color="#FFD9E1F2" Opacity="0.5"/>--><!--
+                            </DataGrid.Resources>-->
                             <DataGrid.Columns>
                                 <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
                                 <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="Auto"/>
                                 <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor}" Header="V (R$)" Width="Auto"/>
                                 <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual}" Header="P (%)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado}" Header="VC (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado}" Header="PC (%)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado, Mode=OneWay}" Header="VC (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado, Mode=OneWay}" Header="PC (%)" Width="Auto"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
                 </GroupBox>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                <GroupBox Grid.Row="2" Header="Tabela de Preços" Style="{StaticResource GroupBoxSplit}">
+                <GroupBox Grid.Row="2" Header="Tabela de Preços">
                     <StackPanel>
                         <ToolBar VerticalAlignment="Top">
                             <Button x:Name="adicionarModeloButton" Content="Adicionar Modelo..." Click="AdicionarModeloButton_Click"/>
@@ -128,7 +231,7 @@
                         >
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
-                                    <GroupBox Header="Recursos" Style="{StaticResource GroupBoxSplit}">
+                                    <GroupBox Header="Recursos">
                                         <DataGrid
                                             Height="Auto"
                                             ItemsSource="{Binding ElementName=itensDataGrid, Path=SelectedItem.Modelo.Recursos}"
