@@ -49,49 +49,103 @@
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="Background" Value="Red"/>
-                <Setter Property="ToolTip" 
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--<Style TargetType="DataGridRow">
+    <Style TargetType="DataGridRow">
+        <Setter Property="MinHeight" Value="20"/>
         <Style.Triggers>
-            --><!--Order of these triggers matter as the last one will take precedence--><!--
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Black" />
+                <!--<Setter Property="Background" Value="Black" />-->
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Yellow" />
+                <!--<Setter Property="Background" Value="Yellow" />-->
             </Trigger>
         </Style.Triggers>
-    </Style>-->
+    </Style>
+    <Style x:Key="SelectionStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <!--<Setter Property="Background" Value="Red"/>-->
+        <!--<Setter Property="BorderBrush" Value="Transparent"/>-->
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border x:Name="borderCell" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Rectangle x:Name="selectedCellVisual" Fill="#33000000" Visibility="Collapsed"/>
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="selectedCellVisual" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="borderCell" Property="BorderBrush" Value="#33000000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="RightStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource SelectionStyle}">
+        <Setter Property="TextBlock.TextAlignment" Value="Right" />
+    </Style>
     <!--When the cell is selected, switching to transparent to let the row's Background be visible-->
-    <!--<Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
-        <Style.Triggers>
-            <Trigger Property="IsSelected" Value="True">
+    <Style TargetType="DataGridCell" BasedOn="{StaticResource SelectionStyle}">
+        <!--<Style.Triggers>
+            -->
+        <!--<Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Transparent" />
+            </Trigger>-->
+        <!--
+
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#FF4472C4"/>
+                -->
+        <!--<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+        <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+        <!--
             </Trigger>
-            --><!--<Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>--><!--
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                --><!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
-                <!--<Setter Property="BorderThickness" Value="1"/>--><!--
-            </Trigger>
-        </Style.Triggers>
+
+            -->
+        <!--<Trigger Property="IsKeyboardFocusWithin" Value="True">
+
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+
+            </Trigger>-->
+        <!--
+        </Style.Triggers-->
+    </Style>
+    <!--<Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Right" />
+        <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="LeftAlignStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>-->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="AlternatingRowBackground" Value="#FFD9E1F2" />
         <Setter Property="HorizontalGridLinesBrush" Value="#FF8EA9DB" />
         <Setter Property="VerticalGridLinesBrush" Value="#FFD4D4D4" />
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="FontSize" Value="10.5pt"/>
     </Style>
     <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontWeight"  Value="Bold" />
         <Setter Property="Background" Value="#FF4472C4" />
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="MinHeight" Value="20"/>
+    </Style>
+    <Style TargetType="{x:Type Menu}">
+        <Setter Property="FontFamily" Value="Sergoe UI"/>
+        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="FontStretch" Value="UltraExpanded"/>
     </Style>
     <ControlTemplate x:Key="rowValidationErrorTemplate">
         <Grid Margin="0,-2,0,-2"
@@ -106,7 +160,6 @@
                                 HorizontalAlignment="Center" />
         </Grid>
     </ControlTemplate>
-    <SolidColorBrush x:Key="alternatingRowBackground" Color="#FFD9E1F2" Opacity="0.5"/>
-    <!--HorizontalGridLinesBrush="#FF8EA9DB" VerticalGridLinesBrush="#FFD4D4D4"-->
+    <!--<SolidColorBrush x:Key="alternatingRowBackground" Color="#FFD9E1F2" Opacity="0.5"/>-->
     <!--materialDesign:DataGridAssist.CellPadding="1 1 1 1"-->
 </ResourceDictionary>

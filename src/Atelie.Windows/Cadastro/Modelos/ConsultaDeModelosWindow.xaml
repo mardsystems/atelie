@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     Title="Consulta de Modelos" Height="450" Width="800"
     Loaded="Window_Loaded"
+    xml:lang="pt-BR"
 >
     <Window.Resources>
         <ResourceDictionary>

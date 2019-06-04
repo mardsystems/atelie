@@ -8,7 +8,8 @@
         xmlns:planos="clr-namespace:Atelie.Decisoes.Comerciais;assembly=Atelie.UI"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Planos Comerciais" Height="795" Width="1193" Loaded="Window_Loaded"
+        Title="Planos Comerciais" Height="795" Width="1193" Loaded="Window_Loaded"        
+        xml:lang="pt-BR"
     >
     <Window.Resources>
         <ResourceDictionary>
@@ -60,22 +61,23 @@
                 RowDetailsVisibilityMode="VisibleWhenSelected"
                 EnableRowVirtualization="True"
                 AutoGenerateColumns="False"
-                SelectionUnit="FullRow"                
+                SelectionUnit="FullRow"      
+                FontStretch="UltraExpanded"
             >
                 <DataGrid.RowValidationRules>
                     <local:PlanoComercialValidationRule ValidationStep="UpdatedValue"/>
                 </DataGrid.RowValidationRules>
                 <DataGrid.Columns>
                     <!--<DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Id" Binding="{Binding Id}"/>-->
-                    <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome, ValidatesOnExceptions=True}"/>
-                    <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="RBM (R$)" Binding="{Binding RendaBrutaMensal}"/>
-                    <DataGridTextColumn x:Name="custoFixoTotalColumn" Header="CF (R$)" Binding="{Binding CustoFixoTotal, Mode=OneWay}"/>
-                    <DataGridTextColumn x:Name="custoFixoPercentualTotalColumn" Header="CF (%)" Binding="{Binding CustoFixoPercentualTotal, Mode=OneWay}"/>
-                    <DataGridTextColumn x:Name="custoVariavelTotalColumn" Header="CV (R$)" Binding="{Binding CustoVariavelTotal, Mode=OneWay}"/>
-                    <DataGridTextColumn x:Name="custoVariavelPercentualTotalColumn" Header="CV (%)" Binding="{Binding CustoVariavelPercentualTotal, Mode=OneWay}"/>
-                    <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Binding="{Binding Margem}"/>
-                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Binding="{Binding MargemPercentual, ValidatesOnNotifyDataErrors=True}"/>
-                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Binding="{Binding TaxaDeMarcacao, Mode=OneWay, ValidatesOnNotifyDataErrors=True}"/>
+                    <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Width="*" MinWidth="72" Binding="{Binding Nome, ValidatesOnExceptions=True}"/>
+                    <DataGridTextColumn x:Name="rendaBrutaMensalColumn" Header="RBM (R$)" Width="72" Binding="{Binding RendaBrutaMensal, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="custoFixoTotalColumn" Header="CF (R$)" Width="72" Binding="{Binding CustoFixoTotal, StringFormat={}{0:n2}, Mode=OneWay}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="custoFixoPercentualTotalColumn" Header="CF (%)" Width="72" Binding="{Binding CustoFixoPercentualTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="custoVariavelTotalColumn" Header="CV (R$)" Width="72" Binding="{Binding CustoVariavelTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="custoVariavelPercentualTotalColumn" Header="CV (%)" Width="72" Binding="{Binding CustoVariavelPercentualTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Width="72" Binding="{Binding Margem, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Width="72" Binding="{Binding MargemPercentual, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
+                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Width="72" Binding="{Binding TaxaDeMarcacao, Mode=OneWay, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
                     <!--<DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>-->
                 </DataGrid.Columns>
             </DataGrid>
@@ -133,7 +135,8 @@
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
-                                    --><!--<Setter Property="Padding" Value="-2"/>
+                                    -->
+                            <!--<Setter Property="Padding" Value="-2"/>
                                         <Style.Triggers>
                                             <Trigger Property="Validation.HasError" Value="True">
                                                 <Setter Property="Background" Value="Red"/>
@@ -141,7 +144,8 @@
                                                     Value="{Binding RelativeSource={RelativeSource Self},
                                                     Path=(Validation.Errors)[0].ErrorContent.Message}"/>
                                             </Trigger>
-                                        </Style.Triggers>--><!--
+                                        </Style.Triggers>-->
+                            <!--
                                 </Style>
                                 <Style x:Key="error2Style" TargetType="{x:Type Label}">
                                     <Setter Property="Padding" Value="-2"/>
@@ -156,7 +160,9 @@
                                 </Style>
                                 <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
                                     <Style.Triggers>
-                                        --><!--Order of these triggers matter as the last one will take precedence--><!--
+                                        -->
+                            <!--Order of these triggers matter as the last one will take precedence-->
+                            <!--
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="Transparent" />
                                         </Trigger>
@@ -165,20 +171,26 @@
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
-                                --><!--When the cell is selected, switching to transparent to let the row's Background be visible--><!--
+                                -->
+                            <!--When the cell is selected, switching to transparent to let the row's Background be visible-->
+                            <!--
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                     <Style.Triggers>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="Transparent" />
                                         </Trigger>
-                                        --><!--<Trigger Property="IsSelected" Value="True">
+                                        -->
+                            <!--<Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
                                             <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                        </Trigger>--><!--
+                                        </Trigger>-->
+                            <!--
                                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                            --><!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
-                                            <!--<Setter Property="BorderThickness" Value="1"/>--><!--
+                                            -->
+                            <!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>-->
+                            <!--<Setter Property="BorderThickness" Value="1"/>-->
+                            <!--
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -200,15 +212,17 @@
                                             HorizontalAlignment="Center" />
                                     </Grid>
                                 </ControlTemplate>
-                                --><!--<SolidColorBrush x:Key="alternatingRowBackground" Color="#FFD9E1F2" Opacity="0.5"/>--><!--
+                                -->
+                            <!--<SolidColorBrush x:Key="alternatingRowBackground" Color="#FFD9E1F2" Opacity="0.5"/>-->
+                            <!--
                             </DataGrid.Resources>-->
                             <DataGrid.Columns>
-                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
-                                <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="Auto"/>
-                                <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor}" Header="V (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual}" Header="P (%)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado, Mode=OneWay}" Header="VC (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado, Mode=OneWay}" Header="PC (%)" Width="Auto"/>
+                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" MinWidth="72" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
+                                <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="*" MinWidth="72" />
+                                <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor, StringFormat={}{0:n2}}" Header="V (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual, StringFormat={}{0:n2}}" Header="P (%)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="valorCalculadoColumn" Binding="{Binding ValorCalculado, Mode=OneWay, StringFormat={}{0:n2}}" Header="VC (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado, Mode=OneWay, StringFormat={}{0:n2}}" Header="PC (%)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
@@ -242,11 +256,11 @@
                                             AutoGenerateColumns="False"
                                         >
                                             <DataGrid.Columns>
-                                                <DataGridComboBoxColumn Header="Tipo" SelectedValueBinding="{Binding Tipo}" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeRecurso}, Mode=OneWay}"/>
-                                                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="Auto" />
-                                                <DataGridTextColumn Header="C (R$)" Binding="{Binding Custo}" Width="Auto" />
-                                                <DataGridTextColumn Header="Unidades" Binding="{Binding Unidades}" Width="Auto" />
-                                                <DataGridTextColumn Header="C/U (R$)" Binding="{Binding CustoPorUnidade, Mode=OneWay}" Width="Auto" />
+                                                <DataGridComboBoxColumn Header="Tipo" SelectedValueBinding="{Binding Tipo}" Width="Auto" MinWidth="72" ItemsSource="{Binding Source={StaticResource TipoDeRecurso}, Mode=OneWay}"/>
+                                                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="*" MinWidth="72" />
+                                                <DataGridTextColumn Header="C (R$)" Binding="{Binding Custo, StringFormat={}{0:n2}}" Width="72" CellStyle="{StaticResource RightStyle}" />
+                                                <DataGridTextColumn Header="Unidades" Binding="{Binding Unidades}" Width="40" CellStyle="{StaticResource RightStyle}" />
+                                                <DataGridTextColumn Header="C/U (R$)" Binding="{Binding CustoPorUnidade, Mode=OneWay, StringFormat={}{0:n2}}" Width="72" CellStyle="{StaticResource RightStyle}" />
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </GroupBox>
@@ -254,11 +268,11 @@
                             </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="Auto"/>-->
-                                <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay}" Header="CP (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay}" Header="CPS (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo.Nome, Mode=OneWay}" Header="Modelo" Width="Auto"/>
-                                <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay}" Header="PV (R$)" Width="Auto"/>
-                                <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado}" Header="PVD (R$)" Width="Auto"/>
+                                <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay, StringFormat={}{0:n2}}" Header="CP (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay, StringFormat={}{0:n2}}" Header="CPS (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo.Nome, Mode=OneWay, StringFormat={}{0:n2}}" Header="Modelo" Width="*" MinWidth="72"/>
+                                <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay, StringFormat={}{0:n2}}" Header="PV (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado, StringFormat={}{0:n2}}" Header="PVD (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                                 <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="Auto"/>-->
                             </DataGrid.Columns>
                         </DataGrid>

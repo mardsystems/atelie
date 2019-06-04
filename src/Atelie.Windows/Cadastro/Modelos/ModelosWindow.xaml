@@ -9,6 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Modelos" Height="795" Width="1193" Loaded="Window_Loaded"
+        xml:lang="pt-BR"
     >
     <Window.Resources>
         <ResourceDictionary>
