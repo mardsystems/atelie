@@ -16,6 +16,7 @@
             <CollectionViewSource x:Key="planosComerciaisViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
             <CollectionViewSource x:Key="custosViewSource" Source="{Binding Custos, Source={StaticResource planosComerciaisViewSource}}"/>
             <CollectionViewSource x:Key="itensViewSource" Source="{Binding Itens, Source={StaticResource planosComerciaisViewSource}}"/>
+            <local:ConvertItemToIndex x:Key="IndexConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -58,12 +59,24 @@
             <DataGrid 
                 x:Name="planosComerciaisDataGrid"
                 ItemsSource="{Binding}"
-                RowDetailsVisibilityMode="VisibleWhenSelected"
                 EnableRowVirtualization="True"
                 AutoGenerateColumns="False"
-                SelectionUnit="FullRow"      
-                FontStretch="UltraExpanded"
+                SelectionUnit="FullRow"
+                Background="{x:Null}"
             >
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=., 
+                            RelativeSource={RelativeSource AncestorType=DataGridRow},
+                            Converter={StaticResource IndexConverter}}"></TextBlock>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+                <!--<DataGrid.RowHeaderStyle>
+                    <Style TargetType="{x:Type DataGridRowHeader}">
+                        <Setter Property="MinWidth" Value="30"/>
+                        <Setter Property="Content" Value="{Binding Converter={StaticResource IndexConverter}}" />
+                    </Style>
+                </DataGrid.RowHeaderStyle>-->
                 <DataGrid.RowValidationRules>
                     <local:PlanoComercialValidationRule ValidationStep="UpdatedValue"/>
                 </DataGrid.RowValidationRules>
@@ -89,20 +102,32 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <GroupBox Header="Custos">
-                    <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
                         <ToolBar VerticalAlignment="Top">
                             <Button x:Name="adicionarCustoButton" Content="Adicionar Custo..." Click="AdicionarModeloButton_Click"/>
                         </ToolBar>
                         <DataGrid
+                            Grid.Row="1"
                             x:Name="custosDataGrid"
                             ItemsSource="{Binding Source={StaticResource custosViewSource}}"
-                            RowDetailsVisibilityMode="VisibleWhenSelected"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             EnableRowVirtualization="True"
                             AutoGenerateColumns="False"
-                            SelectionUnit="Cell"
+                            Background="{x:Null}"
+                            
                         >
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=., 
+                                        RelativeSource={RelativeSource AncestorType=DataGridRow},
+                                        Converter={StaticResource IndexConverter}}"></TextBlock>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
                             <!--<DataGrid.Resources>
                                 <Style x:Key="cellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                     <Setter Property="Validation.ErrorTemplate">
@@ -217,7 +242,7 @@
                             <!--
                             </DataGrid.Resources>-->
                             <DataGrid.Columns>
-                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" MinWidth="72" ItemsSource="{Binding Source={StaticResource TipoDeCusto}, Mode=OneWay}"/>
+                                <DataGridComboBoxColumn x:Name="tipoColumn" SelectedValueBinding="{Binding Tipo}" Header="Tipo" Width="Auto" MinWidth="72" ItemsSource="{Binding Source={StaticResource TipoDeCusto}}"/>
                                 <DataGridTextColumn x:Name="descricaoColumn" Binding="{Binding Descricao}" Header="Descrição" Width="*" MinWidth="72" />
                                 <DataGridTextColumn x:Name="valorColumn" Binding="{Binding Valor, StringFormat={}{0:n2}}" Header="V (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                                 <DataGridTextColumn x:Name="percentualColumn" Binding="{Binding Percentual, StringFormat={}{0:n2}}" Header="P (%)" Width="72" CellStyle="{StaticResource RightStyle}"/>
@@ -225,25 +250,37 @@
                                 <DataGridTextColumn x:Name="percentualCalculadoColumn" Binding="{Binding PercentualCalculado, Mode=OneWay, StringFormat={}{0:n2}}" Header="PC (%)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </StackPanel>
+                    </Grid>
                 </GroupBox>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
                 <GroupBox Grid.Row="2" Header="Tabela de Preços">
-                    <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
                         <ToolBar VerticalAlignment="Top">
                             <Button x:Name="adicionarModeloButton" Content="Adicionar Modelo..." Click="AdicionarModeloButton_Click"/>
                         </ToolBar>
                         <DataGrid
+                            Grid.Row="1"
                             x:Name="itensDataGrid"
                             ItemsSource="{Binding Source={StaticResource itensViewSource}}"
-                            RowDetailsVisibilityMode="VisibleWhenSelected"
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             EnableRowVirtualization="True"
                             AutoGenerateColumns="False"
                             CanUserAddRows="False"
+                            Background="{x:Null}"
                         >
-                            <DataGrid.RowDetailsTemplate>
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=., 
+                                        RelativeSource={RelativeSource AncestorType=DataGridRow},
+                                        Converter={StaticResource IndexConverter}}"></TextBlock>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
+                            <!--<DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <GroupBox Header="Recursos">
                                         <DataGrid
@@ -265,7 +302,7 @@
                                         </DataGrid>
                                     </GroupBox>
                                 </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
+                            </DataGrid.RowDetailsTemplate>-->
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="Auto"/>-->
                                 <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay, StringFormat={}{0:n2}}" Header="CP (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
@@ -276,7 +313,7 @@
                                 <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="Auto"/>-->
                             </DataGrid.Columns>
                         </DataGrid>
-                    </StackPanel>
+                    </Grid>
                 </GroupBox>
             </Grid>
         </Grid>
