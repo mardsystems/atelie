@@ -26,9 +26,7 @@ namespace Atelie.Migrations
                     Codigo = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
                     Data = table.Column<DateTime>(nullable: false),
-                    RendaBrutaMensal = table.Column<decimal>(nullable: false),
-                    Margem = table.Column<decimal>(nullable: false),
-                    MargemPercentual = table.Column<decimal>(nullable: false)
+                    RendaBrutaMensal = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,6 +81,9 @@ namespace Atelie.Migrations
                 {
                     Id = table.Column<int>(nullable: false),
                     PlanoComercialCodigo = table.Column<string>(nullable: false),
+                    Margem = table.Column<decimal>(nullable: false),
+                    MargemPercentual = table.Column<decimal>(nullable: false),
+                    TaxaDeMarcacaoSugerida = table.Column<decimal>(nullable: true),
                     PrecoDeVendaDesejado = table.Column<decimal>(nullable: true),
                     ModeloCodigo = table.Column<string>(nullable: true)
                 },
@@ -155,18 +156,18 @@ namespace Atelie.Migrations
 
             migrationBuilder.InsertData(
                 table: "PlanosComerciais",
-                columns: new[] { "Codigo", "Data", "Margem", "MargemPercentual", "Nome", "RendaBrutaMensal" },
-                values: new object[] { "PC01.A", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1.93m, "Normal", 6000m });
+                columns: new[] { "Codigo", "Data", "Nome", "RendaBrutaMensal" },
+                values: new object[] { "PC01.A", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Normal", 6000m });
 
             migrationBuilder.InsertData(
                 table: "PlanosComerciais",
-                columns: new[] { "Codigo", "Data", "Margem", "MargemPercentual", "Nome", "RendaBrutaMensal" },
-                values: new object[] { "PC01.B", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 0m, "Moderado", 0m });
+                columns: new[] { "Codigo", "Data", "Nome", "RendaBrutaMensal" },
+                values: new object[] { "PC01.B", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Moderado", 0m });
 
             migrationBuilder.InsertData(
                 table: "PlanosComerciais",
-                columns: new[] { "Codigo", "Data", "Margem", "MargemPercentual", "Nome", "RendaBrutaMensal" },
-                values: new object[] { "PC01.C", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 0m, "Ousado", 0m });
+                columns: new[] { "Codigo", "Data", "Nome", "RendaBrutaMensal" },
+                values: new object[] { "PC01.C", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ousado", 0m });
 
             migrationBuilder.InsertData(
                 table: "Custo",
@@ -195,103 +196,103 @@ namespace Atelie.Migrations
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 6, "TM06", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 6, 0m, 0m, "TM06", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 7, "TM07", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 7, 0m, 0m, "TM07", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 8, "TM08", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 8, 0m, 0m, "TM08", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 9, "TM09", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 9, 0m, 0m, "TM09", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 10, "TM10", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 10, 0m, 0m, "TM10", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 1, "TM01", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 1, 0m, 0m, "TM01", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 5, "TM05", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 5, 0m, 0m, "TM05", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 6, "TM06", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 6, 0m, 0m, "TM06", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 7, "TM07", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 7, 0m, 0m, "TM07", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 8, "TM08", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 8, 0m, 0m, "TM08", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 5, "TM05", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 5, 0m, 0m, "TM05", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 4, "TM04", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 4, 0m, 0m, "TM04", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 10, "TM10", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 10, 0m, 0m, "TM10", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 2, "TM02", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 2, 0m, 0m, "TM02", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.C", 9, "TM09", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.C", 9, 0m, 0m, "TM09", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.A", 10, "TM10", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.A", 10, 0m, 0m, "TM10", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.A", 3, "TM03", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.A", 3, 0m, 0m, "TM03", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.A", 2, "TM02", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.A", 2, 0m, 0m, "TM02", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.A", 1, "TM01", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.A", 1, 0m, 1.93m, "TM01", null, null });
 
             migrationBuilder.InsertData(
                 table: "ItemDePlanoComercial",
-                columns: new[] { "PlanoComercialCodigo", "Id", "ModeloCodigo", "PrecoDeVendaDesejado" },
-                values: new object[] { "PC01.B", 3, "TM03", null });
+                columns: new[] { "PlanoComercialCodigo", "Id", "Margem", "MargemPercentual", "ModeloCodigo", "PrecoDeVendaDesejado", "TaxaDeMarcacaoSugerida" },
+                values: new object[] { "PC01.B", 3, 0m, 0m, "TM03", null, null });
 
             migrationBuilder.InsertData(
                 table: "Recurso",

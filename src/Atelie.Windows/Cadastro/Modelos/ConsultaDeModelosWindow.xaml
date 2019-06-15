@@ -28,10 +28,10 @@
                 <local:ModeloValidationRule ValidationStep="UpdatedValue"/>
             </DataGrid.RowValidationRules>-->
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn x:Name="selectedColumn" Header="" Binding="{Binding Selected}"/>
-                <DataGridTextColumn x:Name="codigoColumn" Header="Código" Binding="{Binding Modelo.Codigo, Mode=OneWay}"/>
-                <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Modelo.Nome, Mode=OneWay}"/>
-                <DataGridTextColumn x:Name="custoDeProducaoColumn" Header="CP (R$)" Binding="{Binding Modelo.CustoDeProducao, Mode=OneWay}"/>
+                <DataGridCheckBoxColumn x:Name="selectedColumn" Header="" Width="Auto" Binding="{Binding Selected}"/>
+                <DataGridTextColumn x:Name="codigoColumn" Header="Código" Width="72" Binding="{Binding Modelo.Codigo, Mode=OneWay}"/>
+                <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Width="*" Binding="{Binding Modelo.Nome, Mode=OneWay}"/>
+                <DataGridTextColumn x:Name="custoDeProducaoColumn" Header="CP (R$)" Width="72" Binding="{Binding Modelo.CustoDeProducao, Mode=OneWay}" CellStyle="{StaticResource RightStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

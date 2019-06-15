@@ -50,7 +50,7 @@
         </ToolBar>
         <Grid Grid.Row="2" DataContext="{StaticResource modelosViewSource}" Margin="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
@@ -65,9 +65,9 @@
                     <local:ModeloValidationRule ValidationStep="UpdatedValue"/>
                 </DataGrid.RowValidationRules>-->
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="codigoColumn" Header="Código" Binding="{Binding Codigo}"/>
-                    <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Binding="{Binding Nome}"/>
-                    <DataGridTextColumn x:Name="custoDeProducaoColumn" Header="CP (R$)" Binding="{Binding CustoDeProducao, Mode=OneWay}"/>
+                    <DataGridTextColumn x:Name="codigoColumn" Header="Código" Width="72" Binding="{Binding Codigo}"/>
+                    <DataGridTextColumn x:Name="nomeColumn" Header="Nome" Width="*" Binding="{Binding Nome}"/>
+                    <DataGridTextColumn x:Name="custoDeProducaoColumn" Header="CP (R$)" Width="72" Binding="{Binding CustoDeProducao, Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
@@ -87,11 +87,11 @@
                             AutoGenerateColumns="False"
                         >
                             <DataGrid.Columns>
-                                <DataGridComboBoxColumn Header="Tipo" SelectedValueBinding="{Binding Tipo}" Width="Auto" ItemsSource="{Binding Source={StaticResource TipoDeRecurso}, Mode=OneWay}"/>
-                                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="Auto" />
-                                <DataGridTextColumn Header="C (R$)" Binding="{Binding Custo}" Width="Auto" />
-                                <DataGridTextColumn Header="Unidades" Binding="{Binding Unidades}" Width="Auto" />
-                                <DataGridTextColumn Header="C/U (R$)" Binding="{Binding CustoPorUnidade, Mode=OneWay}" Width="Auto" />
+                                <DataGridComboBoxColumn Header="Tipo" Width="Auto" SelectedValueBinding="{Binding Tipo}" ItemsSource="{Binding Source={StaticResource TipoDeRecurso}, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="Descrição" Width="*" Binding="{Binding Descricao}" />
+                                <DataGridTextColumn Header="C (R$)" Width="72" Binding="{Binding Custo, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}" />
+                                <DataGridTextColumn Header="Unidades" Width="72" Binding="{Binding Unidades}" CellStyle="{StaticResource RightStyle}" />
+                                <DataGridTextColumn Header="C/U (R$)" Width="72" Binding="{Binding CustoPorUnidade, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>

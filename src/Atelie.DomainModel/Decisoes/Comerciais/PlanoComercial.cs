@@ -83,51 +83,17 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
-        public decimal Margem { get; set; }
-
-        public decimal MargemPercentual { get; set; }
-
-        public decimal MargemCalculada
-        {
-            get
-            {
-                var valor = MargemPercentual * RendaBrutaMensal;
-
-                return valor;
-            }
-        }
-
-        public decimal MargemPercentualCalculada
-        {
-            get
-            {
-                return 0;
-            }
-        }
-
-        public decimal TaxaDeMarcacao
-        {
-            get
-            {
-                return 100 / (100 - (CustoFixoPercentualTotal + CustoVariavelPercentualTotal + MargemPercentual));
-            }
-        }
-
-        public decimal? TaxaDeMarcacaoSugerida { get; set; }
-
         public virtual ICollection<Custo> Custos { get; set; }
 
         public virtual ICollection<ItemDePlanoComercial> Itens { get; set; }
 
-        public PlanoComercial(string id, string nome, decimal rendaBrutaMensal, decimal margem)
+        public PlanoComercial(string id, string nome, decimal rendaBrutaMensal)
         {
             Codigo = id;
 
             Nome = nome;
 
             RendaBrutaMensal = rendaBrutaMensal;
-
-            Margem = margem;
 
             Custos = new HashSet<Custo>();
 
@@ -147,21 +113,6 @@ namespace Atelie.Decisoes.Comerciais
         public void DefineRendaBrutaMensal(decimal rendaBrutaMensal)
         {
             RendaBrutaMensal = rendaBrutaMensal;
-        }
-
-        public void DefineMargem(decimal margem)
-        {
-            Margem = margem;
-        }
-
-        public void DefineMargemPercentual(decimal margemPercentual)
-        {
-            MargemPercentual = margemPercentual;
-        }
-
-        public void SugereTaxaDeMarcacao(decimal? taxaDeMarcacaoSugerida)
-        {
-            TaxaDeMarcacaoSugerida = taxaDeMarcacaoSugerida;
         }
 
         public PlanoComercial()
@@ -338,13 +289,45 @@ namespace Atelie.Decisoes.Comerciais
             }
         }
 
+        public decimal Margem { get; set; }
+
+        public decimal MargemPercentual { get; set; }
+
+        public decimal MargemCalculada
+        {
+            get
+            {
+                var valor = MargemPercentual * PlanoComercial.RendaBrutaMensal;
+
+                return valor;
+            }
+        }
+
+        public decimal MargemPercentualCalculada
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public decimal TaxaDeMarcacao
+        {
+            get
+            {
+                return 100 / (100 - (PlanoComercial.CustoFixoPercentualTotal + PlanoComercial.CustoVariavelPercentualTotal + MargemPercentual));
+            }
+        }
+
+        public decimal? TaxaDeMarcacaoSugerida { get; set; }
+
         public decimal PrecoDeVenda
         {
             get
             {
                 decimal precoDeVenda;
 
-                var taxaDeMarcacao = PlanoComercial.TaxaDeMarcacao;
+                var taxaDeMarcacao = TaxaDeMarcacao;
 
                 var custoDeProducao = CustoDeProducao;
 
@@ -367,13 +350,33 @@ namespace Atelie.Decisoes.Comerciais
             Modelo = modelo;
         }
 
+        public ItemDePlanoComercial(decimal margem)
+        {
+            Margem = margem;
+        }
+
+        public void DefineMargem(decimal margem)
+        {
+            Margem = margem;
+        }
+
+        public void DefineMargemPercentual(decimal margemPercentual)
+        {
+            MargemPercentual = margemPercentual;
+        }
+
+        public void SugereTaxaDeMarcacao(decimal? taxaDeMarcacaoSugerida)
+        {
+            TaxaDeMarcacaoSugerida = taxaDeMarcacaoSugerida;
+        }
+
         public void DefinePrecoDeVendaDesejado(decimal valor)
         {
             PrecoDeVendaDesejado = valor;
 
             var taxaDeMarcacaoSugerida = PrecoDeVendaDesejado / CustoDeProducao;
 
-            PlanoComercial.SugereTaxaDeMarcacao(taxaDeMarcacaoSugerida);
+            SugereTaxaDeMarcacao(taxaDeMarcacaoSugerida);
         }
 
         public ItemDePlanoComercial()

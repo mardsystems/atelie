@@ -86,84 +86,6 @@ namespace Atelie.Decisoes.Comerciais
             get { return model.CustoPercentualTotal; }
         }
 
-        public decimal Margem
-        {
-            get { return model.Margem; }
-            set
-            {
-                model.DefineMargem(value);
-
-                OnPropertyChanged();
-            }
-        }
-
-        private string margemPercentual;
-        public string MargemPercentual
-        {
-            get { return margemPercentual; }
-            set
-            {
-                margemPercentual = value;
-
-                OnPropertyChanged();
-
-                try
-                {
-                    var value2 = Convert.ToDecimal(value);
-
-                    model.DefineMargemPercentual(value2);
-
-                    OnPropertyChanged("TaxaDeMarcacao");
-
-                    ClearErrors("MargemPercentual");
-
-                    ClearErrors("TaxaDeMarcacao");
-                }
-                catch (Exception ex)
-                {
-                    RaiseErrorsChanged("MargemPercentual", ex);
-
-                    RaiseErrorsChanged("TaxaDeMarcacao", ex);
-                }
-            }
-        }
-
-        public decimal TaxaDeMarcacao
-        {
-            get { return model.TaxaDeMarcacao; }
-        }
-
-        private string taxaDeMarcacaoSugerida;
-        public string TaxaDeMarcacaoSugerida
-        {
-            get { return (model.TaxaDeMarcacaoSugerida.HasValue ? model.TaxaDeMarcacaoSugerida.Value.ToString() : null); }
-            set
-            {
-                taxaDeMarcacaoSugerida = value;
-
-                OnPropertyChanged();
-
-                try
-                {
-                    var value2 = Convert.ToDecimal(value);
-
-                    model.DefineMargemPercentual(value2);
-
-                    //OnPropertyChanged("TaxaDeMarcacao");
-
-                    ClearErrors("TaxaDeMarcacaoSugerida");
-
-                    //ClearErrors("TaxaDeMarcacao");
-                }
-                catch (Exception ex)
-                {
-                    RaiseErrorsChanged("TaxaDeMarcacaoSugerida", ex);
-
-                    //RaiseErrorsChanged("TaxaDeMarcacao", ex);
-                }
-            }
-        }
-
         public CustosObservableCollection Custos { get; set; }
 
         public ItensDePlanoComercialObservableCollection Itens { get; set; }
@@ -195,9 +117,6 @@ namespace Atelie.Decisoes.Comerciais
                 //Id = planoComercial.Id,
                 nome = planoComercial.Nome,
                 RendaBrutaMensal = planoComercial.RendaBrutaMensal,
-                Margem = planoComercial.Margem,
-                margemPercentual = planoComercial.MargemPercentual.ToString(),
-                taxaDeMarcacaoSugerida = (planoComercial.TaxaDeMarcacaoSugerida.HasValue ? planoComercial.TaxaDeMarcacaoSugerida.Value.ToString() : null),
                 Custos = custosObservableCollection,
                 Itens = itensDePlanoComercialObservableCollection
             };
@@ -242,7 +161,7 @@ namespace Atelie.Decisoes.Comerciais
 
             nome = model.Nome;
 
-            margemPercentual = model.MargemPercentual.ToString();
+            //margemPercentual = model.MargemPercentual.ToString();
         }
     }
 
@@ -475,6 +394,84 @@ namespace Atelie.Decisoes.Comerciais
         //    }
         //}
 
+        public decimal Margem
+        {
+            get { return model.Margem; }
+            set
+            {
+                model.DefineMargem(value);
+
+                OnPropertyChanged();
+            }
+        }
+
+        private string margemPercentual;
+        public string MargemPercentual
+        {
+            get { return margemPercentual; }
+            set
+            {
+                margemPercentual = value;
+
+                OnPropertyChanged();
+
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefineMargemPercentual(value2);
+
+                    OnPropertyChanged("TaxaDeMarcacao");
+
+                    ClearErrors("MargemPercentual");
+
+                    ClearErrors("TaxaDeMarcacao");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("MargemPercentual", ex);
+
+                    RaiseErrorsChanged("TaxaDeMarcacao", ex);
+                }
+            }
+        }
+
+        public decimal TaxaDeMarcacao
+        {
+            get { return model.TaxaDeMarcacao; }
+        }
+
+        private string taxaDeMarcacaoSugerida;
+        public string TaxaDeMarcacaoSugerida
+        {
+            get { return (model.TaxaDeMarcacaoSugerida.HasValue ? model.TaxaDeMarcacaoSugerida.Value.ToString() : null); }
+            set
+            {
+                taxaDeMarcacaoSugerida = value;
+
+                OnPropertyChanged();
+
+                try
+                {
+                    var value2 = Convert.ToDecimal(value);
+
+                    model.DefineMargemPercentual(value2);
+
+                    //OnPropertyChanged("TaxaDeMarcacao");
+
+                    ClearErrors("TaxaDeMarcacaoSugerida");
+
+                    //ClearErrors("TaxaDeMarcacao");
+                }
+                catch (Exception ex)
+                {
+                    RaiseErrorsChanged("TaxaDeMarcacaoSugerida", ex);
+
+                    //RaiseErrorsChanged("TaxaDeMarcacao", ex);
+                }
+            }
+        }
+
         public decimal PrecoDeVenda
         {
             get { return model.PrecoDeVenda; }
@@ -528,6 +525,9 @@ namespace Atelie.Decisoes.Comerciais
                 //ModeloCodigo = itemDePlanoComercial.Modelo.Codigo,
                 //ModeloNome = itemDePlanoComercial.Modelo.Nome,
                 //CustoDeProducaoSugerido = itemDePlanoComercial.CustoDeProducaoSugerido.ToString(),
+                Margem = itemDePlanoComercial.Margem,
+                margemPercentual = itemDePlanoComercial.MargemPercentual.ToString(),
+                taxaDeMarcacaoSugerida = (itemDePlanoComercial.TaxaDeMarcacaoSugerida.HasValue ? itemDePlanoComercial.TaxaDeMarcacaoSugerida.Value.ToString() : null),
                 precoDeVendaDesejado = (itemDePlanoComercial.PrecoDeVendaDesejado.HasValue ? itemDePlanoComercial.PrecoDeVendaDesejado.Value.ToString() : null),
             };
 
@@ -593,8 +593,7 @@ namespace Atelie.Decisoes.Comerciais
             var model = new PlanoComercial(
                             Guid.NewGuid().ToString(),
                             null,
-                            6000,
-                            20
+                            6000
                         );
 
             viewModel.model = model;

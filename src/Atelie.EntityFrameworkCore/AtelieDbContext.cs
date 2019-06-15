@@ -214,7 +214,7 @@ namespace Atelie
             );
 
             modelBuilder.Entity<PlanoComercial>().HasData(
-                new PlanoComercial { Codigo = "PC01.A", Nome = "Normal", RendaBrutaMensal = 6000, MargemPercentual = 1.93m },
+                new PlanoComercial { Codigo = "PC01.A", Nome = "Normal", RendaBrutaMensal = 6000 },
                 new PlanoComercial { Codigo = "PC01.B", Nome = "Moderado" },
                 new PlanoComercial { Codigo = "PC01.C", Nome = "Ousado" }
             );
@@ -228,7 +228,7 @@ namespace Atelie
             );
 
             modelBuilder.Entity<ItemDePlanoComercial>().HasData(
-                new ItemDePlanoComercial { PlanoComercialCodigo = "PC01.A", Id = 1, ModeloCodigo = "TM01" },
+                new ItemDePlanoComercial { PlanoComercialCodigo = "PC01.A", Id = 1, ModeloCodigo = "TM01", MargemPercentual = 1.93m },
                 new ItemDePlanoComercial { PlanoComercialCodigo = "PC01.A", Id = 2, ModeloCodigo = "TM02" },
                 new ItemDePlanoComercial { PlanoComercialCodigo = "PC01.A", Id = 3, ModeloCodigo = "TM03" },
                 new ItemDePlanoComercial { PlanoComercialCodigo = "PC01.A", Id = 10, ModeloCodigo = "TM10" },

@@ -43,7 +43,7 @@
                 </Grid.ColumnDefinitions>-->
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <!--<RowDefinition Height="Auto"/>-->
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <materialDesign:ColorZone
+            <!--<materialDesign:ColorZone
                         Mode="Dark"
                         Padding="16"                        
                         Grid.ColumnSpan="3"
@@ -92,7 +92,7 @@
                         </Button>
                     </StackPanel>
                 </DockPanel>
-            </materialDesign:ColorZone>
+            </materialDesign:ColorZone>-->
             <Menu IsMainMenu="True" Grid.Row="1" Grid.ColumnSpan="3">
                 <MenuItem Header="Sistema">
                     <MenuItem Header="Trocar de Usuário"></MenuItem>

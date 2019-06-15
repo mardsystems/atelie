@@ -38,24 +38,41 @@
 
             <SolidColorBrush x:Key="DataGridColumnHeader" Color="{DynamicResource Primary500}" Opacity="0.4"/>-->
 
-            <!--<Style x:Key="GroupBoxSplit" TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                <Setter Property="Margin" Value="4" />
+            <Style TargetType="{x:Type Menu}">
+                <Setter Property="FontFamily" Value="Sergoe UI"/>
+                <Setter Property="FontSize" Value="10pt"/>
+                <Setter Property="Background" Value="#FFF"/>
+            </Style>
+            <Style TargetType="ToolBar">
+                <Setter Property="FontFamily" Value="Sergoe UI"/>
+                <Setter Property="Background" Value="#FFF"/>
+                
+                <!--<Setter Property="Background" Value="#FFF3F2F1"/>-->
+                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Margin" Value="-2,0,0,0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                <Setter Property="FontFamily" Value="Sergoe UI"/>
+                <Setter Property="Margin" Value="0,-2,0,0" />
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <ContentControl Content="{Binding}" Margin="-4" />
+                            <ContentControl Content="{Binding}" Margin="-4,0,-4,-4" FontWeight="Bold" />
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
-                --><!--<Setter Property="BorderThickness" Value="5" />
+                <!--<Setter Property="BorderThickness" Value="1" />-->
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <TextBlock Text="Hello World!!!!!!"/>
+                            <ContentControl Content="{Binding}" Margin="0,0,0,0" />
+                            <!--<TextBlock Text="Hello World!!!!!!"/>-->
                         </DataTemplate>
                     </Setter.Value>
-                </Setter>--><!--
-            </Style>-->
+                </Setter>
+            </Style>
             <ObjectDataProvider x:Key="TipoDeCusto" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="comerciais:TipoDeCusto" />

@@ -16,7 +16,6 @@
             <CollectionViewSource x:Key="planosComerciaisViewSource" d:DesignSource="{d:DesignInstance {x:Type planos:PlanoComercialViewModel}, CreateList=True}"/>
             <CollectionViewSource x:Key="custosViewSource" Source="{Binding Custos, Source={StaticResource planosComerciaisViewSource}}"/>
             <CollectionViewSource x:Key="itensViewSource" Source="{Binding Itens, Source={StaticResource planosComerciaisViewSource}}"/>
-            <local:ConvertItemToIndex x:Key="IndexConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -52,9 +51,9 @@
         </ToolBar>
         <Grid Grid.Row="2" DataContext="{StaticResource planosComerciaisViewSource}" Margin="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="7*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="9*" />
             </Grid.ColumnDefinitions>
             <DataGrid 
                 x:Name="planosComerciaisDataGrid"
@@ -64,13 +63,27 @@
                 SelectionUnit="FullRow"
                 Background="{x:Null}"
             >
-                <DataGrid.RowHeaderTemplate>
+                <DataGrid.Resources>
+                    <local:ConvertItemToIndex x:Key="IndexConverter"/>
+                </DataGrid.Resources>
+                <!--<DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel HorizontalAlignment="Right">
+                            <TextBlock
+                                Width="Auto"
+                                HorizontalAlignment="Right"
+                                Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=Header}"
+                            />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>-->
+                <!--<DataGrid.RowHeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=., 
                             RelativeSource={RelativeSource AncestorType=DataGridRow},
                             Converter={StaticResource IndexConverter}}"></TextBlock>
                     </DataTemplate>
-                </DataGrid.RowHeaderTemplate>
+                </DataGrid.RowHeaderTemplate>-->
                 <!--<DataGrid.RowHeaderStyle>
                     <Style TargetType="{x:Type DataGridRowHeader}">
                         <Setter Property="MinWidth" Value="30"/>
@@ -88,9 +101,6 @@
                     <DataGridTextColumn x:Name="custoFixoPercentualTotalColumn" Header="CF (%)" Width="72" Binding="{Binding CustoFixoPercentualTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
                     <DataGridTextColumn x:Name="custoVariavelTotalColumn" Header="CV (R$)" Width="72" Binding="{Binding CustoVariavelTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
                     <DataGridTextColumn x:Name="custoVariavelPercentualTotalColumn" Header="CV (%)" Width="72" Binding="{Binding CustoVariavelPercentualTotal, Mode=OneWay, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
-                    <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Width="72" Binding="{Binding Margem, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
-                    <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Width="72" Binding="{Binding MargemPercentual, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
-                    <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Width="72" Binding="{Binding TaxaDeMarcacao, Mode=OneWay, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
                     <!--<DataGridTextColumn x:Name="stateColumn" IsReadOnly="True" Header="State" Binding="{Binding State}"/>-->
                 </DataGrid.Columns>
             </DataGrid>
@@ -121,11 +131,14 @@
                             Background="{x:Null}"
                             
                         >
+                            <DataGrid.Resources>
+                                <local:ConvertItemToIndex x:Key="IndexConverter2"/>
+                            </DataGrid.Resources>
                             <DataGrid.RowHeaderTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=., 
                                         RelativeSource={RelativeSource AncestorType=DataGridRow},
-                                        Converter={StaticResource IndexConverter}}"></TextBlock>
+                                        Converter={StaticResource IndexConverter2}}"></TextBlock>
                                 </DataTemplate>
                             </DataGrid.RowHeaderTemplate>
                             <!--<DataGrid.Resources>
@@ -273,11 +286,14 @@
                             CanUserAddRows="False"
                             Background="{x:Null}"
                         >
+                            <DataGrid.Resources>
+                                <local:ConvertItemToIndex x:Key="IndexConverter3"/>
+                            </DataGrid.Resources>
                             <DataGrid.RowHeaderTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=., 
                                         RelativeSource={RelativeSource AncestorType=DataGridRow},
-                                        Converter={StaticResource IndexConverter}}"></TextBlock>
+                                        Converter={StaticResource IndexConverter3}}"></TextBlock>
                                 </DataTemplate>
                             </DataGrid.RowHeaderTemplate>
                             <!--<DataGrid.RowDetailsTemplate>
@@ -305,9 +321,12 @@
                             </DataGrid.RowDetailsTemplate>-->
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn x:Name="planoComercialIdColumn" Binding="{Binding PlanoComercialId}" Header="PCI" Width="Auto"/>-->
+                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo.Nome, Mode=OneWay, StringFormat={}{0:n2}}" Header="Modelo" Width="*" MinWidth="72"/>
                                 <DataGridTextColumn x:Name="custoDeProducaoColumn" Binding="{Binding CustoDeProducao, Mode=OneWay, StringFormat={}{0:n2}}" Header="CP (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                                 <DataGridTextColumn x:Name="CustoDeProducaoSugeridoColumn" Binding="{Binding CustoDeProducaoSugerido, Mode=OneWay, StringFormat={}{0:n2}}" Header="CPS (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
-                                <DataGridTextColumn x:Name="modeloColumn" Binding="{Binding Modelo.Nome, Mode=OneWay, StringFormat={}{0:n2}}" Header="Modelo" Width="*" MinWidth="72"/>
+                                <DataGridTextColumn x:Name="margemColumn" Header="M (R$)" Width="72" Binding="{Binding Margem, StringFormat={}{0:n2}}" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="margemPercentualColumn" Header="M (%)" Width="72" Binding="{Binding MargemPercentual, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
+                                <DataGridTextColumn x:Name="taxaDeMarcacaoColumn" Header="TM" Width="72" Binding="{Binding TaxaDeMarcacao, Mode=OneWay, StringFormat={}{0:n2}, ValidatesOnNotifyDataErrors=True}" CellStyle="{StaticResource RightStyle}"/>
                                 <DataGridTextColumn x:Name="precoDeVendaColumn" Binding="{Binding PrecoDeVenda, Mode=OneWay, StringFormat={}{0:n2}}" Header="PV (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                                 <DataGridTextColumn x:Name="PrecoDeVendaDesejadoColumn" Binding="{Binding PrecoDeVendaDesejado, StringFormat={}{0:n2}}" Header="PVD (R$)" Width="72" CellStyle="{StaticResource RightStyle}"/>
                                 <!--<DataGridTextColumn x:Name="stateColumn1" Binding="{Binding State}" Header="State" IsReadOnly="True" Width="Auto"/>-->

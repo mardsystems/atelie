@@ -206,9 +206,15 @@ namespace Atelie.Migrations
 
                     b.Property<int>("Id");
 
+                    b.Property<decimal>("Margem");
+
+                    b.Property<decimal>("MargemPercentual");
+
                     b.Property<string>("ModeloCodigo");
 
                     b.Property<decimal?>("PrecoDeVendaDesejado");
+
+                    b.Property<decimal?>("TaxaDeMarcacaoSugerida");
 
                     b.HasKey("PlanoComercialCodigo", "Id");
 
@@ -221,120 +227,160 @@ namespace Atelie.Migrations
                         {
                             PlanoComercialCodigo = "PC01.A",
                             Id = 1,
+                            Margem = 0m,
+                            MargemPercentual = 1.93m,
                             ModeloCodigo = "TM01"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.A",
                             Id = 2,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM02"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.A",
                             Id = 3,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM03"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.A",
                             Id = 10,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM10"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 1,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM01"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 2,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM02"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 3,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM03"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 4,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM04"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 5,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM05"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 6,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM06"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 7,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM07"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 8,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM08"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 9,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM09"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.B",
                             Id = 10,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM10"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 5,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM05"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 6,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM06"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 7,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM07"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 8,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM08"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 9,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM09"
                         },
                         new
                         {
                             PlanoComercialCodigo = "PC01.C",
                             Id = 10,
+                            Margem = 0m,
+                            MargemPercentual = 0m,
                             ModeloCodigo = "TM10"
                         });
                 });
@@ -345,17 +391,9 @@ namespace Atelie.Migrations
 
                     b.Property<DateTime>("Data");
 
-                    b.Property<decimal>("Margem");
-
-                    b.Property<decimal>("MargemPercentual");
-
-                    b.Property<decimal>("MargemPercentual2");
-
                     b.Property<string>("Nome");
 
                     b.Property<decimal>("RendaBrutaMensal");
-
-                    b.Property<decimal?>("TaxaDeMarcacaoSugerida");
 
                     b.HasKey("Codigo");
 
@@ -366,9 +404,6 @@ namespace Atelie.Migrations
                         {
                             Codigo = "PC01.A",
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Margem = 0m,
-                            MargemPercentual = 1.93m,
-                            MargemPercentual2 = 0m,
                             Nome = "Normal",
                             RendaBrutaMensal = 6000m
                         },
@@ -376,9 +411,6 @@ namespace Atelie.Migrations
                         {
                             Codigo = "PC01.B",
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Margem = 0m,
-                            MargemPercentual = 0m,
-                            MargemPercentual2 = 0m,
                             Nome = "Moderado",
                             RendaBrutaMensal = 0m
                         },
@@ -386,9 +418,6 @@ namespace Atelie.Migrations
                         {
                             Codigo = "PC01.C",
                             Data = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Margem = 0m,
-                            MargemPercentual = 0m,
-                            MargemPercentual2 = 0m,
                             Nome = "Ousado",
                             RendaBrutaMensal = 0m
                         });
